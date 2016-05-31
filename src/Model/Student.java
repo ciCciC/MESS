@@ -5,10 +5,53 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Joep
  */
-public class Student {
+public abstract class Student {
     
+    private String studentNummer;
+    private String naam;
+    private char geslacht;
+    private String email;
+    private ArrayList<String> telefoonNummers;
+    
+    public Student(String studentNr, String naam, char geslacht, String email, String telNr) {
+        this.studentNummer = studentNr;
+        this.naam = naam;
+        this.geslacht = geslacht;
+        this.email = email;
+        telefoonNummers = new ArrayList<String>();
+        telefoonNummers.add(telNr);
+    }
+    
+    public String getStudentNummer() {
+        return this.studentNummer;
+    }
+    
+    public String getNaam() {
+        return this.naam;
+    }
+    
+    public char getGeslacht() {
+        return this.geslacht;
+    }
+    
+    public String getEmail() {
+        return this.email;
+    }
+    public ArrayList<String> getTelefoonNummers() {
+        return this.telefoonNummers;
+    }
+    
+    public String InsertStudentSQL() {
+        return "INSERT INTO Student VALUES('" + 
+                this.getStudentNummer() + "', '" +
+                this.getNaam() + "', '" +
+                this.getGeslacht() + "', '" +
+                this.getEmail() + "');";
+    }
 }
