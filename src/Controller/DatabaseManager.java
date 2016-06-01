@@ -1,35 +1,82 @@
 package Controller;
 
+import Libraries.ResultToTable;
 import java.sql.*;
 import Model.*;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Joep
  */
 public class DatabaseManager {
+    ResultToTable conv = new ResultToTable();
     
-     
+    //Arrays to store table attributes, these are used for the UPDATE method
+    String[] studentAttributes = new String[] {"studentnummer", "naam", "geslacht", "emailadres"};
+    String[] buitenlandsAttributes = new String[] {"studentnummer", "adres", "land", "herkomst_uni"};
+    
+    //Constructor
     public DatabaseManager() {
+        
         try {
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.jdbc.Driver"); //Load MySQL driver
 	} catch (ClassNotFoundException e) {
 		System.out.println("Driver not found");
 		e.printStackTrace();		
 	}
     }
     
+    //Maakt verbinding met database indien mogelijk   
     public Connection getConnection() throws SQLException {
         
-	String url    = "jdbc:mysql://meru.hhs.nl:3306/15132390";
-	String username = "15132390";
-	String password = "zaiquai4Xi";
+	String url    = "jdbc:mysql://localhost:3306/15132390"; //meru.hhs.nl
+	String username = "root";                             //15132390
+	String password = "root";                           //zaiquai4Xi
         
         return DriverManager.getConnection(url, username, password);
     }
     
-    public void addBuitenlandseStudent(BuitenlandseStudent buiStudent) throws SQLException {
+    public void addRecord(String tableName, String[] values) throws SQLException {
+        Connection con = this.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = this.buildInsertSQL(tableName, values);
+        stmt.executeUpdate(sql);
+        
+        System.out.println("Added!");
+        
+        con.close();
+        stmt.close();
+    }
+    
+    public void updateRecord(String tableName, String[] values) throws SQLException {
+        Connection con = this.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = this.buildUpdateSQL(tableName, values);
+        stmt.executeUpdate(sql);
+        
+        System.out.println("UPDATED!");
+        
+        con.close();
+        stmt.close();
+    }
+    
+    public void deleteRecord(String tableName, String key) throws SQLException{
+        Connection con = this.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = this.buildDeleteSQL(tableName, key);
+        stmt.executeUpdate(sql);
+        
+        System.out.println("DELETED");
+        
+        con.close();
+        stmt.close();
+    }
+    
+    //Voeg BuitenlandseStudent toe aan database
+    //SHOULD BE UNNECESAIRY
+    /*public void addBuitenlandseStudent(BuitenlandseStudent buiStudent) throws SQLException {
         
         Connection con = this.getConnection();
         Statement stmt = con.createStatement();
@@ -41,22 +88,67 @@ public class DatabaseManager {
         
         con.close();
         stmt.close();
-    }
+    }*/
 
-    /*public JTable getBuitenlandseStudenten() throws SQLException{
+    public DefaultTableModel getBuitenlandseStudenten() throws SQLException{
         
         
-        /*Connection con = this.getConnection();
+        Connection con = this.getConnection();
         Statement stmt = con.createStatement();
         String sql = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres,"
-                + "B.adres, B.land, B.herkomst_uni"
-                + "FROM Student S JOIN BuitenlandseStudent B"
+                + "B.adres, B.land, B.herkomst_uni "
+                + "FROM Student S JOIN BuitenlandseStudent B "
                 + "ON S.studentnummer = B.studentnummer";
+        
+        
         ResultSet rs = stmt.executeQuery(sql);
-        JTable table = new JTable(buildTableModel(rs));
-        System.out.println("Student Added!");
+        DefaultTableModel res = conv.buildTableModel(rs);
         
         con.close();
-        stmt.close();
-    }*/
+        stmt.close();     
+                
+        return res;       
+    }
+    
+    public String buildInsertSQL(String tableName, String[] values) {
+        String SQL = "INSERT INTO " + tableName + " VALUES('";
+        for(int i=0; i<values.length -1; i++) {
+            SQL += values[i] + "', '";
+        }
+        SQL += values[values.length -1] + "')";
+        return SQL;           
+    }
+    
+    public String buildUpdateSQL(String tableName, String[] values) {
+        String[] attributes = this.getTableAttributes(tableName);
+        
+        String SQL = "UPDATE " + tableName + " SET ";
+        for(int i=1; i<values.length; i++) {
+            
+            if(i == values.length - 1) {
+                SQL += attributes[i] + "='" + values[i] + "'";
+            } else {
+                SQL += attributes[i] + "='" + values[i] + "',";
+            }            
+        }
+        SQL += " WHERE " + attributes[0] + " ='" + values[0] + "'";
+        return SQL;
+                
+    }
+    
+    public String buildDeleteSQL(String tableName, String key) {
+        String keyAttribute = this.getTableAttributes(tableName)[0];
+        String SQL = "DELETE FROM " + tableName + " WHERE " +
+                keyAttribute + " ='" + key + "'";
+        return SQL;
+    }
+    
+    public String[] getTableAttributes(String tableName) {
+        if(tableName.toLowerCase().equals("student")) {
+            return this.studentAttributes;
+        } else if(tableName.toLowerCase().equals("buitenlands")) {
+            return this.buitenlandsAttributes;
+        }
+        else return new String[]{};
+    }
 }

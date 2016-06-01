@@ -37,6 +37,10 @@ public class BuitenlandseStudent extends Student {
         return this.herkomstUni;
     }
     
+    public String[] getAttributen() {
+        return new String[]{"adres", "land", "herkomst_uni"};   
+    }
+    
     public String insertBuitenlandseStudentSQL() {
         return "INSERT INTO BuitenlandseStudent VALUES('" + 
                 this.getStudentNummer() + "', '" +                
@@ -46,13 +50,9 @@ public class BuitenlandseStudent extends Student {
             
     }
     
-    public String selectAllBuitenlandseStudentSQL() {
-        return "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres,"
-                + "B.adres, B.land, B.herkomst_uni"
-                + "FROM Student S JOIN BuitenlandseStudent B"
-                + "ON S.studentnummer = B.studentnummer";
-                
-    }
+    
+    
+    
     
    
     

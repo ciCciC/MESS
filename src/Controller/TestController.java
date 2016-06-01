@@ -6,7 +6,11 @@
 package Controller;
 
 import Model.BuitenlandseStudent;
+import java.awt.*;
+
 import java.sql.SQLException;
+import javax.swing.*;
+
 
 /**
  *
@@ -16,20 +20,32 @@ public class TestController {
     
     public static void main(String[] args) {      
     
-        BuitenlandseStudent student = new BuitenlandseStudent("15132392", "Joep Mulder", 'm', "joep1995@gmail.com", 
-                "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
+        //BuitenlandseStudent student = new BuitenlandseStudent("15132392", "Joep Mulder", 'm', "joep1995@gmail.com", 
+        //       "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
+        
         DatabaseManager DBM = new DatabaseManager();
         
-        try { 
-            DBM.addBuitenlandseStudent(student);
-        } catch(SQLException e) {
+        //System.out.println(DBM.buildDeleteSQL("student", "15132392"));
+        //System.out.println(DBM.buildDeleteSQL("buitenlands", "15132392"));
+                
+        
+        try {
+            //DBM.addRecord("Student", new String[] {"15132392", "Joep", "M", "joepmulder1995@gmail.com"});
+            //DBM.addRecord("Buitenlands", new String[] {"15132392", "Vinkelaan 54", "Nederland", "University of Queensland"});
+            //DBM.updateRecord("Student", new String[] {"15132392", "Kees", "M", "kees1995@gmail.com"});
+            //DBM.updateRecord("Buitenlands", new String[] {"15132392", "Bloemenlaan", "Duitsland", "HHS"});
+            DBM.deleteRecord("buitenlands", "15132392");
+            DBM.deleteRecord("student", "15132392");
+            
+        } catch(Exception e) {
             if(e.getMessage().startsWith("Duplicate")) {
                 System.out.println("studentnummer bestaat al! gebruik andere");
             } else {
                 System.out.println("SQL error");
+                e.printStackTrace();
             }
             
-        }
-        
+        }     
     }
+    
 }
