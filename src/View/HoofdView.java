@@ -16,6 +16,9 @@ public class HoofdView extends javax.swing.JFrame {
     
     private String nieuwGekozen;
     private String geselecteerdeVak;
+    private String gekozenTabel;
+    private String gekozenAttribuut;
+    private String [] alleAttributen;
     
     /**
      * Creates new form HoofdView
@@ -73,14 +76,14 @@ public class HoofdView extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable_resultaat.setCellSelectionEnabled(true);
+        jTable_resultaat.setColumnSelectionAllowed(false);
         jTable_resultaat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable_resultaat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable_resultaat.setShowGrid(false);
@@ -229,21 +232,21 @@ public class HoofdView extends javax.swing.JFrame {
 
     private void jComboBox_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_tabelActionPerformed
         JComboBox tabel = (JComboBox) evt.getSource();
-        String gekozenTabel = (String) tabel.getSelectedItem();
+        this.gekozenTabel = (String) tabel.getSelectedItem();
         System.out.println("tabel: " + gekozenTabel);
         // Deze methode is voor de zoekfunctie.
     }//GEN-LAST:event_jComboBox_tabelActionPerformed
 
     private void jComboBox_attribuutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_attribuutActionPerformed
         JComboBox attribuut = (JComboBox) evt.getSource();
-        String gekozenAttribuut = "" + attribuut.getSelectedItem();
+        this.gekozenAttribuut = "" + attribuut.getSelectedItem();
         System.out.println("attribuut: " + gekozenAttribuut);
         
-        String [] allesGeselecteerd = new String[attribuut.getItemCount()];
+        alleAttributen = new String[attribuut.getItemCount()];
         if(gekozenAttribuut.equals("Alles selecteren")){
             for (int i = 0; i < attribuut.getItemCount(); i++) {
-                allesGeselecteerd[i] = "" + attribuut.getItemAt(i);
-                System.out.println("Test alles selecteren: " + allesGeselecteerd[i]);
+                alleAttributen[i] = "" + attribuut.getItemAt(i);
+                System.out.println("Test alles selecteren: " + alleAttributen[i]);
             }
         }
         // Hiermee kan je alle attribuutnamen selecteren. Deze methode is voor de zoekfunctie.
@@ -257,7 +260,10 @@ public class HoofdView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_resultaatMousePressed
 
     private void jButton_zoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_zoekenActionPerformed
-        // TODO add your handling code here:
+        System.out.println("Zoeken op tabel: " + gekozenTabel);
+        System.out.println("Zoeken onder attribuut: " + gekozenAttribuut);
+        System.out.println("Zoeken naar: " + this.zoekveld.getText());
+        
     }//GEN-LAST:event_jButton_zoekenActionPerformed
 
     private void jButton_nieuwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nieuwActionPerformed
@@ -268,6 +274,12 @@ public class HoofdView extends javax.swing.JFrame {
         }else if(this.nieuwGekozen.equals("Buitenlandse student")){
             StudentView buiten_student = new StudentView(this.nieuwGekozen);
             buiten_student.setVisible(true);
+        }else if(this.nieuwGekozen.equals("Bedrijf")){
+            BedrijfView bedrijf = new BedrijfView();
+            bedrijf.setVisible(true);
+        }else if(this.nieuwGekozen.equals("Periode")){
+            PeriodeView periode = new PeriodeView();
+            periode.setVisible(true);
         }
     }//GEN-LAST:event_jButton_nieuwActionPerformed
 

@@ -22,14 +22,14 @@ public class StudentView extends javax.swing.JFrame {
      * Creates new form StudentView
      */
     public StudentView() {
-        super("Nieuwe hhs student");
+        super("Nieuwe binnenlandse student");
         this.studentType = true;
         initComponents();
         setLocationRelativeTo(null);
     }
     
     public StudentView(String exchangeStudent){
-        super("Nieuwe exchange student");
+        super("Nieuwe buitenlandse student");
         this.studentType = false;
         initComponentsExchangeStudent();
         setLocationRelativeTo(null);
@@ -285,29 +285,19 @@ public class StudentView extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton_vrouw);
         jRadioButton_vrouw.setText("V");
 
-        naam.setText("naam");
-
         jLabel5_opleiding.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5_opleiding.setText("Opleiding");
 
         jLabel6_universiteit.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6_universiteit.setText("Uitgaans Uni");
 
-        universiteit.setText("naam universiteit");
-
         jLabel7_telefoonnummer1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7_telefoonnummer1.setText("Telefoonnum. 1");
-
-        telnr1.setText("telefoonnum1");
 
         jLabel8_telefoonnummer2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8_telefoonnummer2.setText("Telefoonnum. 2");
 
-        telnr2.setText("telefoonnum2");
-
         jComboBox1_opleiding.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "hbo-ICT", "CMD", "Bedrijfskunde", "Wiskunde" }));
-
-        emailadres.setText("emailadres");
 
         jButton_annuleren.setText("Annuleren");
         jButton_annuleren.addActionListener(new java.awt.event.ActionListener() {

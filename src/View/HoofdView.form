@@ -132,13 +132,13 @@
                       <Data value="123123"/>
                       <Data value="234324"/>
                     </Column>
-                    <Column editable="true" title="naam" type="java.lang.Object">
+                    <Column editable="false" title="naam" type="java.lang.Object">
                       <Data value="Koray Poyraz"/>
                       <Data value="Joep Mulder"/>
                       <Data value="Ruben Schaafsma"/>
                       <Data value="Ruben v den Engel"/>
                     </Column>
-                    <Column editable="true" title="studie" type="java.lang.Object">
+                    <Column editable="false" title="studie" type="java.lang.Object">
                       <Data value="hbo-ICT"/>
                       <Data value="hbo-ICT"/>
                       <Data value="hbo-ICT"/>
@@ -146,7 +146,6 @@
                     </Column>
                   </Table>
                 </Property>
-                <Property name="cellSelectionEnabled" type="boolean" value="true"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -166,6 +165,7 @@
                     </Column>
                   </TableColumnModel>
                 </Property>
+                <Property name="columnSelectionAllowed" type="boolean" value="false"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Default Cursor"/>
                 </Property>

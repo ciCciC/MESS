@@ -216,9 +216,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="naam">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="naam"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5_opleiding">
           <Properties>
@@ -237,9 +234,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="universiteit">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="naam universiteit"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7_telefoonnummer1">
           <Properties>
@@ -250,9 +244,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="telnr1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="telefoonnum1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8_telefoonnummer2">
           <Properties>
@@ -263,9 +254,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="telnr2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="telefoonnum2"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1_opleiding">
           <Properties>
@@ -280,9 +268,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="emailadres">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="emailadres"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton_annuleren">
           <Properties>
