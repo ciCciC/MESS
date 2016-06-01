@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/koray/Desktop/SE/MESS/src/Model/BuitenlandseStudent.java</file>
             <file>file:/Users/koray/Desktop/SE/MESS/src/View/HoofdView.java</file>
             <file>file:/Users/koray/Desktop/SE/MESS/src/View/StudentView.java</file>
+            <file>file:/Users/koray/Desktop/SE/MESS/src/Controller/TestController.java</file>
+            <file>file:/Users/koray/Desktop/SE/MESS/src/Model/Student.java</file>
+            <file>file:/Users/koray/Desktop/SE/MESS/src/Controller/DatabaseManager.java</file>
         </group>
     </open-files>
 </project-private>

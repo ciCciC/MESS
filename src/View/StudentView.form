@@ -55,23 +55,23 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton_toevoegen" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton_annuleren" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jTextField6_telefoonnum2" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="telnr2" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jLabel1_persoonsgegevens" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel7_telefoonnummer1" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField5_telefoonnum1" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="telnr1" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel4_emailadres" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField3_emailadres" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="emailadres" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -81,11 +81,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jRadioButton1_man" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButton_man" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jRadioButton2_vrouw" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButton_vrouw" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jTextField1_naam" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="naam" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -96,7 +96,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel6_universiteit" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField4_universiteit" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="universiteit" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -111,18 +111,18 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3_geslacht" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1_man" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2_vrouw" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButton_man" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButton_vrouw" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2_naam" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jTextField1_naam" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="naam" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4_emailadres" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jTextField3_emailadres" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="emailadres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -132,22 +132,22 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6_universiteit" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jTextField4_universiteit" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="universiteit" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7_telefoonnummer1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jTextField5_telefoonnum1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="telnr1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8_telefoonnummer2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jTextField6_telefoonnum2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="telnr2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton_annuleren" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton_toevoegen" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="33" max="32767" attributes="0"/>
               </Group>
@@ -190,29 +190,32 @@
             <Property name="text" type="java.lang.String" value="E-mailadres"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1_man">
+        <Component class="javax.swing.JRadioButton" name="jRadioButton_man">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Man"/>
+            <Property name="text" type="java.lang.String" value="M"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jRadioButton1_man.setSelected(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jRadioButton_man.setSelected(false);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton2_vrouw">
+        <Component class="javax.swing.JRadioButton" name="jRadioButton_vrouw">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Vrouw"/>
+            <Property name="text" type="java.lang.String" value="V"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jRadioButton2_vrouw.setSelected(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jRadioButton_vrouw.setSelected(false);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1_naam">
+        <Component class="javax.swing.JTextField" name="naam">
           <Properties>
             <Property name="text" type="java.lang.String" value="naam"/>
           </Properties>
@@ -233,7 +236,7 @@
             <Property name="text" type="java.lang.String" value="Uitgaans Uni"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4_universiteit">
+        <Component class="javax.swing.JTextField" name="universiteit">
           <Properties>
             <Property name="text" type="java.lang.String" value="naam universiteit"/>
           </Properties>
@@ -246,7 +249,7 @@
             <Property name="text" type="java.lang.String" value="Telefoonnum. 1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5_telefoonnum1">
+        <Component class="javax.swing.JTextField" name="telnr1">
           <Properties>
             <Property name="text" type="java.lang.String" value="telefoonnum1"/>
           </Properties>
@@ -259,7 +262,7 @@
             <Property name="text" type="java.lang.String" value="Telefoonnum. 2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6_telefoonnum2">
+        <Component class="javax.swing.JTextField" name="telnr2">
           <Properties>
             <Property name="text" type="java.lang.String" value="telefoonnum2"/>
           </Properties>
@@ -276,20 +279,26 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3_emailadres">
+        <Component class="javax.swing.JTextField" name="emailadres">
           <Properties>
             <Property name="text" type="java.lang.String" value="emailadres"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jButton_annuleren">
           <Properties>
             <Property name="text" type="java.lang.String" value="Annuleren"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_annulerenActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="jButton_toevoegen">
           <Properties>
             <Property name="text" type="java.lang.String" value="Toevoegen"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_toevoegenActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

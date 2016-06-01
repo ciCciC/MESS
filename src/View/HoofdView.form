@@ -26,12 +26,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="739" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="734" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" pref="445" max="-2" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="457" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -49,26 +49,27 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1_titel" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel_titel" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane2" min="-2" pref="533" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jComboBox1_nieuw" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                              <Component id="jLabel3_toevoegen" alignment="0" max="-2" attributes="0"/>
-                              <Component id="zoekveld" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                              <Component id="jLabel3_zoekveld" alignment="0" max="-2" attributes="0"/>
-                              <Component id="jComboBox1_attribuut" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                              <Component id="jLabel2_selecteer_attribuut" alignment="0" max="-2" attributes="0"/>
-                              <Component id="jComboBox2_tabel" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                              <Component id="jLabel1_selecteer_tabel" alignment="0" max="-2" attributes="0"/>
-                              <Component id="jButton1_zoeken" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                              <Component id="jButton1_nieuw" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                              <Component id="jSeparator1" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jComboBox_nieuw" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_toevoegen" alignment="0" max="-2" attributes="0"/>
+                              <Component id="zoekveld" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_zoekveld" alignment="0" max="-2" attributes="0"/>
+                              <Component id="jComboBox_attribuut" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_selecteer_attribuut" alignment="0" max="-2" attributes="0"/>
+                              <Component id="jComboBox_tabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_selecteer_tabel" alignment="0" max="-2" attributes="0"/>
+                              <Component id="jButton_zoeken" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButton_nieuw" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="34" pref="39" max="32767" attributes="0"/>
+                  <EmptySpace min="34" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -76,32 +77,34 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1_titel" min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="jLabel_titel" min="-2" pref="18" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jLabel1_selecteer_tabel" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabel_selecteer_tabel" min="-2" pref="24" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBox2_tabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBox_tabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel2_selecteer_attribuut" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabel_selecteer_attribuut" min="-2" pref="24" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBox1_attribuut" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBox_attribuut" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel3_zoekveld" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="jLabel_zoekveld" min="-2" pref="20" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="zoekveld" min="-2" pref="26" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton1_zoeken" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_zoeken" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel3_toevoegen" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="jLabel_toevoegen" min="-2" pref="20" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBox1_nieuw" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBox_nieuw" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton1_nieuw" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="74" max="32767" attributes="0"/>
+                          <Component id="jButton_nieuw" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -118,8 +121,9 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1_resultaat">
+            <Component class="javax.swing.JTable" name="jTable_resultaat">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="4">
                     <Column editable="false" title="student_id" type="java.lang.Object">
@@ -142,6 +146,7 @@
                     </Column>
                   </Table>
                 </Property>
+                <Property name="cellSelectionEnabled" type="boolean" value="true"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -174,12 +179,12 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1_resultaatMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable_resultaatMousePressed"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel1_selecteer_tabel">
+        <Component class="javax.swing.JLabel" name="jLabel_selecteer_tabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="1"/>
@@ -187,17 +192,17 @@
             <Property name="text" type="java.lang.String" value="Selecteer tabel:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1_attribuut">
+        <Component class="javax.swing.JComboBox" name="jComboBox_attribuut">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1_attribuutActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_attribuutActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2_selecteer_attribuut">
+        <Component class="javax.swing.JLabel" name="jLabel_selecteer_attribuut">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="1"/>
@@ -205,19 +210,19 @@
             <Property name="text" type="java.lang.String" value="Selecteer attribuut:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2_tabel">
+        <Component class="javax.swing.JComboBox" name="jComboBox_tabel">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2_tabelActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_tabelActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="zoekveld">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3_zoekveld">
+        <Component class="javax.swing.JLabel" name="jLabel_zoekveld">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="1"/>
@@ -225,7 +230,7 @@
             <Property name="text" type="java.lang.String" value="Zoekveld:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1_titel">
+        <Component class="javax.swing.JLabel" name="jLabel_titel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
@@ -233,7 +238,7 @@
             <Property name="text" type="java.lang.String" value="Welkom bij International MESS"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3_toevoegen">
+        <Component class="javax.swing.JLabel" name="jLabel_toevoegen">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="1"/>
@@ -241,7 +246,7 @@
             <Property name="text" type="java.lang.String" value="Toevoegen..."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1_nieuw">
+        <Component class="javax.swing.JComboBox" name="jComboBox_nieuw">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
@@ -252,22 +257,34 @@
                 <StringItem index="4" value="Onderwijseenheid"/>
               </StringArray>
             </Property>
+            <Property name="selectedIndex" type="int" value="-1"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1_nieuwActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_nieuwActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1_zoeken">
+        <Component class="javax.swing.JButton" name="jButton_zoeken">
           <Properties>
             <Property name="text" type="java.lang.String" value="Zoeken"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_zoekenActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1_nieuw">
+        <Component class="javax.swing.JButton" name="jButton_nieuw">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nieuw"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_nieuwActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="verwijderen"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
