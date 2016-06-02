@@ -5,7 +5,10 @@
  */
 package View;
 
+import Controller.DatabaseManager;
 import Model.*;
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -442,8 +445,18 @@ public class StudentView extends javax.swing.JFrame {
                 
                 BuitenlandseStudent buiten_student = new BuitenlandseStudent("0000000", naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), adres.getText(), land, universiteit.getText());
                 
-                System.out.println("Buitenlandse student: " + buiten_student.getNaam() + ", " + buiten_student.getEmail() + ", " + buiten_student.getAdres() + ", " + buiten_student.getTelefoonNummers());
-                JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                /*
+                DatabaseManager dm = new DatabaseManager();
+                try {
+                    dm.addBuitenlandseStudent(buiten_student);
+                    JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                } catch (SQLException ex) {
+                    System.out.println("Student is niet toegevoegd in database!");    
+                    ex.printStackTrace();
+                }
+                */
+                //System.out.println("Buitenlandse student: " + buiten_student.getNaam() + ", " + buiten_student.getEmail() + ", " + buiten_student.getAdres() + ", " + buiten_student.getTelefoonNummers());
+                //JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                 this.dispose();
             }
         }

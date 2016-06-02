@@ -5,6 +5,8 @@
  */
 package View;
 
+import Controller.DatabaseManager;
+import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
@@ -26,7 +28,14 @@ public class HoofdView extends javax.swing.JFrame {
     public HoofdView() {
         super("International MESS");
         this.setSize(729, 700);
+        
         initComponents();
+        try {
+            genereerTable();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         genereerTabelNamenInComboBox();
         genereerAttribuutNamenInComboBox();
         setLocationRelativeTo(null);
@@ -66,24 +75,15 @@ public class HoofdView extends javax.swing.JFrame {
         jTable_resultaat.setAutoCreateRowSorter(true);
         jTable_resultaat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"123456", "Koray Poyraz", "hbo-ICT"},
-                {"654321", "Joep Mulder", "hbo-ICT"},
-                {"123123", "Ruben Schaafsma", "hbo-ICT"},
-                {"234324", "Ruben v den Engel", "hbo-ICT"}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "student_id", "naam", "studie"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
-        jTable_resultaat.setColumnSelectionAllowed(false);
+        ));
         jTable_resultaat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable_resultaat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable_resultaat.setShowGrid(false);
@@ -203,7 +203,7 @@ public class HoofdView extends javax.swing.JFrame {
                         .addComponent(jButton_nieuw)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addGap(0, 44, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -306,6 +306,11 @@ public class HoofdView extends javax.swing.JFrame {
         }
         jComboBox_attribuut.addItem("Alles selecteren");
         //In deze methode komen de attribuutnamen!!!
+    }
+    
+    private void genereerTable() throws SQLException{
+        DatabaseManager dm = new DatabaseManager();
+        jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
     }
     
     /**
