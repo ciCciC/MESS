@@ -31,9 +31,9 @@ public class DatabaseManager {
     //Maakt verbinding met database indien mogelijk   
     public Connection getConnection() throws SQLException {
         
-	String url    = "jdbc:mysql://meru.hhs.nl:3306/15132390"; //meru.hhs.nl
-	String username = "15132390";                             //15132390
-	String password = "zaiquai4Xi";                           //zaiquai4Xi
+	String url    = "jdbc:mysql://meru.hhs.nl:3306/15068145"; //meru.hhs.nl
+	String username = "15068145";                             //15132390
+	String password = "aehaePoo3o";                           //zaiquai4Xi
         
         return DriverManager.getConnection(url, username, password);
     }
@@ -100,7 +100,7 @@ public class DatabaseManager {
                 + "B.adres, B.land, B.herkomst_uni "
                 + "FROM Student S JOIN Buitenlands B "
                 + "ON S.studentnummer = B.studentnummer";
-        
+        }
         
         ResultSet rs = stmt.executeQuery(sql);
         DefaultTableModel res = conv.buildTableModel(rs);
@@ -135,7 +135,7 @@ public class DatabaseManager {
     }
     
     //Builds SQL to insert record in Table
-    public String buildInsertSQL(String tableName, String[] values) {
+    public String buildInsertSQL(String tableName, String[] values){
         String SQL = "INSERT INTO " + tableName + " VALUES('";
         for(int i=0; i<values.length -1; i++) {
             SQL += values[i] + "', '";
@@ -168,6 +168,13 @@ public class DatabaseManager {
         String keyAttribute = this.getTableAttributes(tableName)[0];
         String SQL = "DELETE FROM " + tableName + " WHERE " +
                 keyAttribute + " ='" + key + "'";
+        return SQL;
+    }
+    
+    //Builds SQL to Delete record from Table
+    public String buildSearchSQL(String tableName, String columnName, String columnValue) {
+        String SQL = "SELECT * FROM " + tableName + " WHERE " +
+                columnName + " ='" + columnValue + "'";
         return SQL;
     }
     
