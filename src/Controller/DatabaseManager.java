@@ -123,7 +123,7 @@ public class DatabaseManager {
                 + "B.adres, B.land, B.herkomst_uni "
                 + "FROM Student S JOIN Buitenlands B "
                 + "ON S.studentnummer = B.studentnummer";
-        
+        }
         
         ResultSet rs = stmt.executeQuery(sql);
         DefaultTableModel res = conv.buildTableModel(rs);
@@ -143,6 +143,7 @@ public class DatabaseManager {
         SQL += values[values.length -1] + "')";
         return SQL;           
     }
+    
     
     //Builds SQL to update record in Table
     public String buildUpdateSQL(String tableName, String[] values) {

@@ -31,7 +31,7 @@ public class StudentView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
-    public StudentView(String exchangeStudent){
+    public StudentView(String buitenlands){
         super("Nieuwe buitenlandse student");
         this.studentType = false;
         initComponentsExchangeStudent();
@@ -106,7 +106,9 @@ public class StudentView extends javax.swing.JFrame {
         jLabel8_telefoonnummer2.setText("Land");
         telnr2.setText("Land");
         
-        jComboBox1_opleiding.setEnabled(false);
+        //jComboBox1_opleiding.setEnabled(false);
+        jComboBox1_opleiding.setVisible(false);
+        
 
         jButton_annuleren.setText("Annuleren");
         jButton_annuleren.addActionListener(new java.awt.event.ActionListener() {
@@ -445,16 +447,21 @@ public class StudentView extends javax.swing.JFrame {
                 
                 BuitenlandseStudent buiten_student = new BuitenlandseStudent("0000000", naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), adres.getText(), land, universiteit.getText());
                 
-                /*
+                String [] sql1 = new String[]{"1222", naam.getText(), "" + geslacht, emailadres.getText()}; 
+                String [] sql = new String[]{"1222", adres.getText(), land, universiteit.getText()};
+                
                 DatabaseManager dm = new DatabaseManager();
+                
                 try {
-                    dm.addBuitenlandseStudent(buiten_student);
+                    dm.addRecord("Student", sql1);
+                    dm.addRecord("Buitenlands", sql);
+                    //dm.addBuitenlandseStudent(buiten_student);
                     JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                 } catch (SQLException ex) {
                     System.out.println("Student is niet toegevoegd in database!");    
                     ex.printStackTrace();
                 }
-                */
+                
                 //System.out.println("Buitenlandse student: " + buiten_student.getNaam() + ", " + buiten_student.getEmail() + ", " + buiten_student.getAdres() + ", " + buiten_student.getTelefoonNummers());
                 //JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                 this.dispose();
