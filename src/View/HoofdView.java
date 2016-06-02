@@ -6,6 +6,7 @@
 package View;
 
 import Controller.DatabaseManager;
+import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -27,7 +28,9 @@ public class HoofdView extends javax.swing.JFrame {
      */
     public HoofdView() {
         super("International MESS");
-        this.setSize(729, 700);
+        //this.setSize(800, 600);
+        //this.setPreferredSize(new Dimension(800, 600));
+        
         
         initComponents();
         try {
@@ -38,6 +41,7 @@ public class HoofdView extends javax.swing.JFrame {
         
         genereerTabelNamenInComboBox();
         genereerAttribuutNamenInComboBox();
+        
         setLocationRelativeTo(null);
     }
 
@@ -65,12 +69,15 @@ public class HoofdView extends javax.swing.JFrame {
         jButton_zoeken = new javax.swing.JButton();
         jButton_nieuw = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        jButton_verwijderen = new javax.swing.JButton();
+        jButton_wijzigen = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(729, 500));
+        setPreferredSize(new java.awt.Dimension(1080, 820));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(650, 385));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1096, 804));
+        jPanel1.setSize(1096, 804);
 
         jTable_resultaat.setAutoCreateRowSorter(true);
         jTable_resultaat.setModel(new javax.swing.table.DefaultTableModel(
@@ -84,10 +91,10 @@ public class HoofdView extends javax.swing.JFrame {
 
             }
         ));
+        jTable_resultaat.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         jTable_resultaat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable_resultaat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable_resultaat.setShowGrid(false);
-        jTable_resultaat.setShowVerticalLines(true);
+        jTable_resultaat.setShowGrid(true);
         jTable_resultaat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable_resultaatMousePressed(evt);
@@ -144,7 +151,19 @@ public class HoofdView extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("verwijderen");
+        jButton_verwijderen.setText("Verwijderen");
+        jButton_verwijderen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_verwijderenActionPerformed(evt);
+            }
+        });
+
+        jButton_wijzigen.setText("Wijzigen");
+        jButton_wijzigen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_wijzigenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,7 +174,7 @@ public class HoofdView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_titel)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -169,8 +188,10 @@ public class HoofdView extends javax.swing.JFrame {
                             .addComponent(jButton_zoeken, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton_nieuw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton_verwijderen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton_wijzigen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addGap(34, 43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,10 +222,14 @@ public class HoofdView extends javax.swing.JFrame {
                         .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_nieuw)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_wijzigen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_verwijderen)
+                        .addGap(0, 338, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
 
@@ -212,11 +237,15 @@ public class HoofdView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -283,8 +312,24 @@ public class HoofdView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_nieuwActionPerformed
 
+    private void jButton_wijzigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_wijzigenActionPerformed
+        if(gekozenTabel.equals("Buitenlands")){
+            StudentView buitenandse_student = new StudentView("Buitenlands");
+            buitenandse_student.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton_wijzigenActionPerformed
+
+    private void jButton_verwijderenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_verwijderenActionPerformed
+        try {
+            DatabaseManager dm = new DatabaseManager();
+            dm.deleteRecord("Buitenlands", geselecteerdeVak);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton_verwijderenActionPerformed
+
     private void genereerTabelNamenInComboBox(){
-        String tabellen [] = {"vb nationaal student", "vb exchange student", "vb bedrijf", "vb opleiding"}; // Dit is een voorbeeld.
+        String tabellen [] = {"Binnenlands", "Buitenlands", "Bedrijf", "Opleiding", "Onderwijseenheid", "Contactpersoon"}; // Dit is een voorbeeld.
 
         for (String tabellen1 : tabellen) {
             jComboBox_tabel.addItem(tabellen1);
@@ -350,8 +395,9 @@ public class HoofdView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_nieuw;
+    private javax.swing.JButton jButton_verwijderen;
+    private javax.swing.JButton jButton_wijzigen;
     private javax.swing.JButton jButton_zoeken;
     private javax.swing.JComboBox jComboBox_attribuut;
     private javax.swing.JComboBox jComboBox_nieuw;
@@ -364,6 +410,7 @@ public class HoofdView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable_resultaat;
     private javax.swing.JTextField zoekveld;
     // End of variables declaration//GEN-END:variables

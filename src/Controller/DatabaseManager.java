@@ -100,7 +100,7 @@ public class DatabaseManager {
                 + "B.adres, B.land, B.herkomst_uni "
                 + "FROM Student S JOIN Buitenlands B "
                 + "ON S.studentnummer = B.studentnummer";
-        }
+        
         
         ResultSet rs = stmt.executeQuery(sql);
         DefaultTableModel res = conv.buildTableModel(rs);

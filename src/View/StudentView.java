@@ -244,6 +244,7 @@ public class StudentView extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1_persoonsgegevens = new javax.swing.JLabel();
         jLabel2_naam = new javax.swing.JLabel();
@@ -263,6 +264,11 @@ public class StudentView extends javax.swing.JFrame {
         emailadres = new javax.swing.JTextField();
         jButton_annuleren = new javax.swing.JButton();
         jButton_toevoegen = new javax.swing.JButton();
+        jLabel_studentnummer = new javax.swing.JLabel();
+        studentnummer = new javax.swing.JTextField();
+        jButton_toevoegen1 = new javax.swing.JButton();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -318,51 +324,66 @@ public class StudentView extends javax.swing.JFrame {
             }
         });
 
+        jLabel_studentnummer.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel_studentnummer.setText("Studentnummer");
+
+        jButton_toevoegen1.setText("Wijzigen");
+        jButton_toevoegen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_toevoegen1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8_telefoonnummer2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton_toevoegen)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton_annuleren))
-                            .addComponent(telnr2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1_persoonsgegevens)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7_telefoonnummer1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telnr1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4_emailadres, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emailadres, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton_toevoegen)
+                        .addGap(9, 9, 9)
+                        .addComponent(jButton_toevoegen1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_annuleren))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1_persoonsgegevens)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel3_geslacht, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2_naam, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton_man)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton_vrouw))
-                            .addComponent(naam, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5_opleiding, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1_opleiding, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6_universiteit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(universiteit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioButton_man)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioButton_vrouw))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel8_telefoonnummer2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(telnr2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel7_telefoonnummer1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(telnr1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel4_emailadres, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(emailadres, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2_naam, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(naam, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel5_opleiding, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBox1_opleiding, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel6_universiteit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(universiteit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel_studentnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(studentnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +395,11 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(jLabel3_geslacht, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButton_man)
                     .addComponent(jRadioButton_vrouw))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_studentnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(studentnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2_naam, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(naam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -398,11 +423,12 @@ public class StudentView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8_telefoonnummer2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(telnr2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_annuleren)
-                    .addComponent(jButton_toevoegen))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(jButton_toevoegen)
+                    .addComponent(jButton_toevoegen1))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -413,7 +439,9 @@ public class StudentView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -430,23 +458,30 @@ public class StudentView extends javax.swing.JFrame {
         char geslacht = '?';
         if(jRadioButton_man.isSelected()){geslacht = 'M';}else if(jRadioButton_vrouw.isSelected()){geslacht = 'V';}
         
-        if(this.studentType){   //Toevoegen hhs student
+        if(this.studentType){   //Toevoegen binnenlands student
             
             if(alleVakkenControleren(studentType)){
 
-                Student binnen_student = new Student("15132392", naam.getText(), geslacht, emailadres.getText(), telnr1.getText()){};
+                String [] sql1 = new String[]{"1223", naam.getText(), "" + geslacht, emailadres.getText()}; 
+                String [] sql = new String[]{"1223", telnr1.getText(), land, universiteit.getText()};
                 
-                System.out.println("Binnenlandse student: " + binnen_student.getNaam() + ", " + binnen_student.getEmail() + ", " + binnen_student.getGeslacht() + ", " + binnen_student.getTelefoonNummers().get(0));
-                JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                DatabaseManager dm = new DatabaseManager();
+                
+                try {
+                    dm.addRecord("Student", sql1);
+                    dm.addRecord("Binnenlands", sql);
+                    JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                } catch (SQLException ex) {
+                    System.out.println("Student is niet toegevoegd in database!");    
+                    ex.printStackTrace();
+                }
                 this.dispose();
             }
             
-        }else{  //toevoegen buitenlandse student
+        }else{  //toevoegen buitenlands student
             
             if(alleVakkenControleren(studentType)){
-                
-                BuitenlandseStudent buiten_student = new BuitenlandseStudent("0000000", naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), adres.getText(), land, universiteit.getText());
-                
+
                 String [] sql1 = new String[]{"1222", naam.getText(), "" + geslacht, emailadres.getText()}; 
                 String [] sql = new String[]{"1222", adres.getText(), land, universiteit.getText()};
                 
@@ -455,19 +490,19 @@ public class StudentView extends javax.swing.JFrame {
                 try {
                     dm.addRecord("Student", sql1);
                     dm.addRecord("Buitenlands", sql);
-                    //dm.addBuitenlandseStudent(buiten_student);
                     JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                 } catch (SQLException ex) {
                     System.out.println("Student is niet toegevoegd in database!");    
                     ex.printStackTrace();
                 }
-                
-                //System.out.println("Buitenlandse student: " + buiten_student.getNaam() + ", " + buiten_student.getEmail() + ", " + buiten_student.getAdres() + ", " + buiten_student.getTelefoonNummers());
-                //JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                 this.dispose();
             }
         }
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
+
+    private void jButton_toevoegen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_toevoegen1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_toevoegen1ActionPerformed
 
     private boolean alleVakkenControleren(boolean studentType){
 
@@ -536,7 +571,9 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JTextField emailadres;
     private javax.swing.JButton jButton_annuleren;
     private javax.swing.JButton jButton_toevoegen;
+    private javax.swing.JButton jButton_toevoegen1;
     private javax.swing.JComboBox jComboBox1_opleiding;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel1_persoonsgegevens;
     private javax.swing.JLabel jLabel2_naam;
     private javax.swing.JLabel jLabel3_geslacht;
@@ -545,10 +582,12 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6_universiteit;
     private javax.swing.JLabel jLabel7_telefoonnummer1;
     private javax.swing.JLabel jLabel8_telefoonnummer2;
+    private javax.swing.JLabel jLabel_studentnummer;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton_man;
     private javax.swing.JRadioButton jRadioButton_vrouw;
     private javax.swing.JTextField naam;
+    private javax.swing.JTextField studentnummer;
     private javax.swing.JTextField telnr1;
     private javax.swing.JTextField telnr2;
     private javax.swing.JTextField universiteit;
