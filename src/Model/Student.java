@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Joep
  */
-public abstract class Student implements Entiteit{
+public abstract class Student {
     
     private String studentNummer;
     private String naam;

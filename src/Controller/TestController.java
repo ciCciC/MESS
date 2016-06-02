@@ -18,7 +18,7 @@ import javax.swing.*;
  */
 public class TestController {
     
-    public static void main(String[] args) {      
+    /*public static void main(String[] args) {      
     
         //BuitenlandseStudent student = new BuitenlandseStudent("15132392", "Joep Mulder", 'm', "joep1995@gmail.com", 
         //       "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
@@ -29,7 +29,7 @@ public class TestController {
         //System.out.println(DBM.buildDeleteSQL("buitenlands", "15132392"));
                 
         
-        try {
+        /*try {
             //DBM.addRecord("Student", new String[] {"15132392", "Joep", "M", "joepmulder1995@gmail.com"});
             //DBM.addRecord("Buitenlands", new String[] {"15132392", "Vinkelaan 54", "Nederland", "University of Queensland"});
             //DBM.updateRecord("Student", new String[] {"15132392", "Kees", "M", "kees1995@gmail.com"});
@@ -46,6 +46,6 @@ public class TestController {
             }
             
         }     
-    }
+    }*/
     
 }
