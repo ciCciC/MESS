@@ -18,7 +18,7 @@ import javax.swing.*;
  */
 public class TestController {
     
-    public static void main(String[] args) {      
+    /*public static void main(String[] args) {      
     
         //BuitenlandseStudent student = new BuitenlandseStudent("15132392", "Joep Mulder", 'm', "joep1995@gmail.com", 
         //       "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
@@ -47,5 +47,5 @@ public class TestController {
             
         }     
     }
-    
+    */
 }

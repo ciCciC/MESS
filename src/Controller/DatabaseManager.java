@@ -119,10 +119,9 @@ public class DatabaseManager {
         String sql = "";
         
         if(columnValue != "") {
-            sql = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres,"
-                + "B.adres, B.land, B.herkomst_uni "
-                + "FROM Student S JOIN Buitenlands B "
-                + "ON S.studentnummer = B.studentnummer";
+            sql = this.buildSearchSQL(tableName, columnName, columnValue);
+        } else {
+            sql = "SELECT * FROM " + tableName;
         }
         
         ResultSet rs = stmt.executeQuery(sql);

@@ -24,7 +24,7 @@ public class testTable extends javax.swing.JFrame {
         initComponents();
         DatabaseManager DBM = new DatabaseManager();
         try { 
-            jTable1.setModel(DBM.getBuitenlandseStudenten());
+            jTable1.setModel(DBM.search("Student", "naam", "joep"));
             
             jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (int i = 0; i < jTable1.getColumnCount(); i++) {
