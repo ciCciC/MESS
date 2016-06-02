@@ -138,17 +138,15 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTable_resultaat">
               <Properties>
-                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="0" rowCount="4"/>
-                </Property>
-                <Property name="autoResizeMode" type="int" value="3"/>
+                <Property name="autoCreateRowSorter" type="boolean" value="true" postCode="DatabaseManager dm = new DatabaseManager();&#xa;try{&#xa;    jTable_resultaat.setModel(dm.getBuitenlandseStudenten());&#xa;} catch(SQLException ex){&#xa;    ex.printStackTrace();&#xa;}"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Default Cursor"/>
                 </Property>
+                <Property name="editingColumn" type="int" value="0"/>
+                <Property name="editingRow" type="int" value="0"/>
                 <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
                   <JTableSelectionModel selectionMode="0"/>
                 </Property>
