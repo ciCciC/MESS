@@ -6,11 +6,10 @@
 package View;
 
 import Controller.DatabaseManager;
-import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -18,6 +17,7 @@ import javax.swing.table.TableColumn;
  */
 public class HoofdView extends javax.swing.JFrame {
     
+    private DatabaseManager dm;
     private String nieuwGekozen;
     private String geselecteerdeVak;
     private String gekozenTabel;
@@ -30,13 +30,8 @@ public class HoofdView extends javax.swing.JFrame {
      */
     public HoofdView() {
         super("International MESS");
-        
+        dm = new DatabaseManager();
         initComponents();
-        try {
-            genereerTable();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         
         genereerTabelNamenInComboBox();
         genereerAttribuutNamenInComboBox();
@@ -54,8 +49,6 @@ public class HoofdView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable_resultaat = new javax.swing.JTable();
         jLabel_selecteer_tabel = new javax.swing.JLabel();
         jComboBox_attribuut = new javax.swing.JComboBox();
         jLabel_selecteer_attribuut = new javax.swing.JLabel();
@@ -71,31 +64,14 @@ public class HoofdView extends javax.swing.JFrame {
         jButton_verwijderen = new javax.swing.JButton();
         jButton_wijzigen = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable_resultaat = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1080, 820));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1096, 804));
         jPanel1.setSize(1096, 804);
-
-        jTable_resultaat.setAutoCreateRowSorter(true);
-        DatabaseManager dm = new DatabaseManager();
-        try{
-            jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
-        } catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        jTable_resultaat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable_resultaat.setEditingColumn(0);
-        jTable_resultaat.setEditingRow(0);
-        jTable_resultaat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable_resultaat.setShowGrid(true);
-        jTable_resultaat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable_resultaatMousePressed(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTable_resultaat);
 
         jLabel_selecteer_tabel.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel_selecteer_tabel.setText("Selecteer tabel:");
@@ -124,8 +100,6 @@ public class HoofdView extends javax.swing.JFrame {
         jLabel_toevoegen.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel_toevoegen.setText("Toevoegen...");
 
-        jComboBox_nieuw.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Binnenlandse student", "Buitenlandse student", "Bedrijf", "Periode", "Onderwijseenheid" }));
-        jComboBox_nieuw.setSelectedIndex(-1);
         jComboBox_nieuw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_nieuwActionPerformed(evt);
@@ -160,6 +134,29 @@ public class HoofdView extends javax.swing.JFrame {
             }
         });
 
+        DatabaseManager dm = new DatabaseManager();
+        try{
+            jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
+        }catch(SQLException e){
+            System.out.println("Fout bij de constructie jTable_resultaat");
+            e.printStackTrace();
+        }
+        jTable_resultaat.setAutoCreateRowSorter(true);
+        /*
+        jTable_resultaat.setModel(null);
+        */
+        jTable_resultaat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable_resultaat.setEditingColumn(0);
+        jTable_resultaat.setEditingRow(0);
+        jTable_resultaat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable_resultaat.setShowGrid(false);
+        jTable_resultaat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable_resultaatMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable_resultaat);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,10 +166,9 @@ public class HoofdView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_titel)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel_toevoegen, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(zoekveld, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel_zoekveld, javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,11 +177,12 @@ public class HoofdView extends javax.swing.JFrame {
                             .addComponent(jComboBox_tabel, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel_selecteer_tabel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_zoeken, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton_nieuw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_verwijderen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton_wijzigen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_nieuw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(34, 43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -224,7 +221,7 @@ public class HoofdView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_verwijderen)
                         .addGap(0, 338, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
 
@@ -276,64 +273,111 @@ public class HoofdView extends javax.swing.JFrame {
         // Hiermee kan je alle attribuutnamen selecteren. Deze methode is voor de zoekfunctie.
     }//GEN-LAST:event_jComboBox_attribuutActionPerformed
 
-    private void jTable_resultaatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_resultaatMousePressed
-        selectie = (JTable) evt.getSource();
-        geselecteerdeVak = "" + selectie.getValueAt(selectie.getSelectedRow(), selectie.getSelectedColumn());
-        System.out.println("Je hebt geselecteerd: " + geselecteerdeVak);
-
-        //Test om de selectie te zien, vervolgens wordt dit gebruikt voor verwijderen en wijzigen.
-    }//GEN-LAST:event_jTable_resultaatMousePressed
-
     private void jButton_zoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_zoekenActionPerformed
-        System.out.println("Zoeken op tabel: " + gekozenTabel);
-        System.out.println("Zoeken onder attribuut: " + gekozenAttribuut);
-        System.out.println("Zoeken naar: " + this.zoekveld.getText());
+
+        try {
+            if(zoekveld.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Graag het zoekveld invullen.");
+            }else{
+              jTable_resultaat.setModel(dm.search(gekozenTabel, gekozenAttribuut, zoekveld.getText()));
+            }
+            System.out.println("werkt wel");
+        } catch (Exception e) {
+            System.out.println("werkt niet");
+            e.printStackTrace();
+        }
         
     }//GEN-LAST:event_jButton_zoekenActionPerformed
 
     private void jButton_nieuwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nieuwActionPerformed
         System.out.println("geklikt: " + "nieuw");
-        if(this.nieuwGekozen.equals("Binnenlandse student")){
-            StudentView binnen_student = new StudentView();
-            binnen_student.setVisible(true);
-        }else if(this.nieuwGekozen.equals("Buitenlandse student")){
-            StudentView buiten_student = new StudentView(this.nieuwGekozen);
-            buiten_student.setVisible(true);
-        }else if(this.nieuwGekozen.equals("Bedrijf")){
-            BedrijfView bedrijf = new BedrijfView();
-            bedrijf.setVisible(true);
-        }else if(this.nieuwGekozen.equals("Periode")){
-            PeriodeView periode = new PeriodeView();
-            periode.setVisible(true);
+        switch (this.nieuwGekozen) {
+            case "Binnenlands":
+                StudentView binnen_student = new StudentView();
+                binnen_student.setVisible(true);
+                break;
+            case "Buitenlands":
+                StudentView buiten_student = new StudentView(this.nieuwGekozen);
+                buiten_student.setVisible(true);
+                break;
+            case "Bedrijf":
+                BedrijfView bedrijf = new BedrijfView();
+                bedrijf.setVisible(true);
+                break;
+            case "Periode":
+                PeriodeView periode = new PeriodeView();
+                periode.setVisible(true);
+                break;
+            case "Opleiding":
+                OpleidingView opleiding = new OpleidingView();
+                opleiding.setVisible(true);
+                break;
+            case "Contactpersoon":
+                ContactpersoonView Contactpersoon = new ContactpersoonView();
+                Contactpersoon.setVisible(true);
+                break;
         }
     }//GEN-LAST:event_jButton_nieuwActionPerformed
 
     private void jButton_wijzigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_wijzigenActionPerformed
         
-        if(gekozenTabel.equals("Buitenlands")){
-            StudentView buitenandse_student = new StudentView("Buitenlands");
-            buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat, true);
-            buitenandse_student.setVisible(true);
+        if(geselecteerdeVak == null){
+            JOptionPane.showMessageDialog(null, "Graag eerst een vak selecteren.");
+        }else{
+            switch (gekozenTabel) {
+                case "Buitenlands":
+                    {
+                        StudentView buitenandse_student = new StudentView(gekozenTabel);
+                        buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat, true);
+                        buitenandse_student.setVisible(true);
+                        break;
+                    }
+                case "Binnenlands":
+                    {
+                        StudentView buitenandse_student = new StudentView();
+                        buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat, true);
+                        buitenandse_student.setVisible(true);
+                        break;
+                    }
+            }
         }
     }//GEN-LAST:event_jButton_wijzigenActionPerformed
 
     private void jButton_verwijderenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_verwijderenActionPerformed
         try {
-            DatabaseManager dm = new DatabaseManager();
-            dm.deleteRecord("Buitenlands", geselecteerdeVak);
-        } catch (Exception e) {
+            dm = new DatabaseManager();
+            if(geselecteerdeVak == null){
+                JOptionPane.showMessageDialog(this, "Graag eerst een vak selecteren!");
+            }else{
+                int keuze = JOptionPane.showConfirmDialog(null, "Wilt u, " + geselecteerdeVak + ", verwijderen?", "Verwijderen", JOptionPane.YES_NO_OPTION);
+                if(keuze == 1){
+                    System.out.println("niet verwijderd");
+                }else{
+                    System.out.println("verwijderd");
+                    dm.deleteRecord(gekozenTabel, geselecteerdeVak);
+                    JOptionPane.showMessageDialog(this, "Met succes verwijderd.");
+                    genereerTable();
+                }    
+            }
+        } catch (SQLException | ArrayIndexOutOfBoundsException e) {           
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton_verwijderenActionPerformed
+
+    private void jTable_resultaatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_resultaatMousePressed
+        selectie = (JTable) evt.getSource();
+        geselecteerdeVak = "" + selectie.getValueAt(selectie.getSelectedRow(), selectie.getSelectedColumn());
+        System.out.println("Je hebt geselecteerd: " + geselecteerdeVak);
+    }//GEN-LAST:event_jTable_resultaatMousePressed
 
     private void genereerTabelNamenInComboBox(){
         String tabellen [] = {"Binnenlands", "Buitenlands", "Bedrijf", "Opleiding", "Onderwijseenheid", "Contactpersoon"}; // Dit is een voorbeeld.
 
         for (String tabellen1 : tabellen) {
             jComboBox_tabel.addItem(tabellen1);
+            jComboBox_nieuw.addItem(tabellen1);
         }
         //In deze methode komen de tabelnamen!!!
-        
     }
     
     private void genereerAttribuutNamenInComboBox(){
@@ -351,18 +395,22 @@ public class HoofdView extends javax.swing.JFrame {
         //In deze methode komen de attribuutnamen!!!
     }
     
-    private void genereerTable() throws SQLException{
-        DatabaseManager dm = new DatabaseManager();
-        jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
+    
+    private void genereerTable() {
+        try {
+            jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
-    public void updateJTable(String tabelNaam){
-        DatabaseManager dm = new DatabaseManager();
+    public void getRefreshJTable(String tabelNaam){
+
         try {
             jTable_resultaat.setModel(dm.search(tabelNaam, "", ""));
         } catch (Exception e) {
-            
-        }
+            e.printStackTrace();
+        } 
     }
     
     /**
@@ -415,7 +463,7 @@ public class HoofdView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_toevoegen;
     private javax.swing.JLabel jLabel_zoekveld;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable_resultaat;

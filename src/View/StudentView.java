@@ -7,8 +7,6 @@ package View;
 
 import Controller.DatabaseManager;
 import java.sql.SQLException;
-import java.util.Arrays;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -22,6 +20,7 @@ public class StudentView extends javax.swing.JFrame {
     private boolean knopType;
     private javax.swing.JLabel jLabel7_adres;
     private javax.swing.JTextField adres;
+    private DatabaseManager dm;
 
     /**
      * Creates new form StudentView
@@ -67,7 +66,7 @@ public class StudentView extends javax.swing.JFrame {
         jButton_annuleren = new javax.swing.JButton();
         jButton_toevoegen = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 366));
 
@@ -269,7 +268,7 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 366));
 
@@ -452,9 +451,9 @@ public class StudentView extends javax.swing.JFrame {
             if(alleVakkenControleren(studentType)){
                 
                     String [] sqlBinnenStudent1 = new String[]{studentnummer.getText(), naam.getText(), "" + geslacht, emailadres.getText()}; 
-                    String [] sqlBinnenStudent = new String[]{studentnummer.getText(), telnr1.getText(), land, universiteit.getText()};
+                    String [] sqlBinnenStudent = new String[]{studentnummer.getText(), telnr1.getText(), telnr2.getText(), universiteit.getText()};
 
-                    DatabaseManager dm = new DatabaseManager();
+                    dm = new DatabaseManager();
 
                     try {
                         if(!knopType){
@@ -469,14 +468,11 @@ public class StudentView extends javax.swing.JFrame {
                             
                             JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
                         }
-                        //dm.addRecord("Student", sql1);
-                        //dm.addRecord("Binnenlands", sql);
-                        //JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                     } catch (SQLException ex) {
                         System.out.println("Student is niet toegevoegd in database!");    
                         ex.printStackTrace();
-                    }
-                    this.dispose(); 
+                    } 
+                    this.dispose();
             }
             
         }else{  //toevoegen buitenlands student
@@ -486,7 +482,7 @@ public class StudentView extends javax.swing.JFrame {
                 String [] sql1 = new String[]{studentnummer.getText(), naam.getText(), "" + geslacht, emailadres.getText()}; 
                 String [] sql = new String[]{studentnummer.getText(), adres.getText(), land, universiteit.getText()};
                 
-                DatabaseManager dm = new DatabaseManager();
+                dm = new DatabaseManager();
                 
                 try {
                     if(knopType){
@@ -501,9 +497,6 @@ public class StudentView extends javax.swing.JFrame {
                         dm.addRecord("Buitenlands", sql);
                         JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                     }
-                    //dm.addRecord("Student", sql1);
-                    //dm.addRecord("Buitenlands", sql);
-                    //JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                 } catch (SQLException ex) {
                     System.out.println("Student is niet toegevoegd in database!");    
                     ex.printStackTrace();
@@ -511,6 +504,7 @@ public class StudentView extends javax.swing.JFrame {
                 this.dispose();
             }
         }
+        hv.getRefreshJTable("Buitenlands");
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 
     private boolean alleVakkenControleren(boolean studentType){
@@ -524,7 +518,7 @@ public class StudentView extends javax.swing.JFrame {
             if(!(jRadioButton_man.isSelected() || jRadioButton_vrouw.isSelected()) || (studentnummer.getText().isEmpty() || naam.getText().isEmpty() || emailadres.getText().isEmpty() || telnr1.getText().isEmpty())){
                 JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
             }else{
-                System.out.println("Vakken zijn ingevuld."); // controle of studentnummer cijfers zijn of letters.
+                System.out.println("Vakken zijn ingevuld."); // controleren!! of studentnummer cijfers zijn of letters. <-- MOET NOG AAN WERKEN!!
                 status = true;
             }
         }else if(!studentType){
@@ -539,7 +533,7 @@ public class StudentView extends javax.swing.JFrame {
         return status;
     }
     
-    public void studentWijzigen(String wijzigen, JTable studentTable, boolean knopType){
+    public void studentWijzigen(String tabel, JTable studentTable, boolean knopType){
         this.knopType = knopType;
         String row [] = new String[studentTable.getColumnCount()];
         
@@ -554,18 +548,20 @@ public class StudentView extends javax.swing.JFrame {
             }
         } 
         
-        if(studentType && wijzigen.equals("Binnenlands")){
+        if(tabel.equals("Binnenlands")){
             System.out.println("Binnenlands test");
             jButton_toevoegen.setText("Wijzigen");
             studentnummer.setEnabled(false);
 
-        }else if((!studentType) && wijzigen.equals("Buitenlands")){
+        }else if(tabel.equals("Buitenlands")){
             jButton_toevoegen.setText("Wijzigen");
             System.out.println("Buitenlands test");
             studentnummer.setEnabled(false);
             
             studentnummer.setText(row[0]); naam.setText(row[1]); emailadres.setText(row[3]); universiteit.setText(row[6]); 
             adres.setText(row[4]); telnr1.setText(row[0]); telnr2.setText(row[5]);
+        }else{
+            System.out.println("Werkt niet, zie studentView onder studentWijzigen methode!");
         }
     }
     
