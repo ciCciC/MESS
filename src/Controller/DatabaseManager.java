@@ -118,12 +118,28 @@ public class DatabaseManager {
         Statement stmt = con.createStatement();
         String sql = "";
         
-        if(columnValue != "") {
+        if(!columnValue.equals("")) {
             sql = this.buildSearchSQL(tableName, columnName, columnValue);
         } else {
             sql = "SELECT * FROM " + tableName;
         }
         
+        ResultSet rs = stmt.executeQuery(sql);
+        DefaultTableModel res = conv.buildTableModel(rs);
+        
+        con.close();
+        stmt.close();     
+                
+        return res;       
+    }
+    
+    public DefaultTableModel searchStudent(String columnName, String columnValue) throws SQLException{
+        
+        
+        Connection con = this.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = this.buildSearchBuitenlandseStudentSQL(columnName, columnValue);
+       
         ResultSet rs = stmt.executeQuery(sql);
         DefaultTableModel res = conv.buildTableModel(rs);
         
@@ -175,6 +191,16 @@ public class DatabaseManager {
         String SQL = "SELECT * FROM " + tableName + " WHERE " +
                 columnName + " ='" + columnValue + "'";
         return SQL;
+    }
+    
+    public String buildSearchBuitenlandseStudentSQL(String columnName, String columnValue) {
+        String SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres,"
+                + "B.adres, B.land, B.herkomst_uni "
+                + "FROM Student S JOIN Buitenlands B "
+                + "ON S.studentnummer = B.studentnummer"
+                + " WHERE " + columnName + " ='" + columnValue + "'";
+        return SQL;
+        
     }
     
     //Returns all attributes from given Table

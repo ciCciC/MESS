@@ -23,18 +23,29 @@ public class testTable extends javax.swing.JFrame {
     public testTable() {
         initComponents();
         DatabaseManager DBM = new DatabaseManager();
-        try { 
-            jTable1.setModel(DBM.search("Student", "naam", "joep"));
+        
+        
+            try { 
+                jTable1.setModel(DBM.searchStudent("herkomst_uni", "Zweinstein"));
+                
+                /*String[] student = new String[jTable1.getColumnCount()];
+                for(int i=0; i<jTable1.getColumnCount(); i++) {
+                    student[i] = "" + jTable1.getValueAt(jTable1.getSelectedRow(), i);
+                    System.out.println(student[i]);
+                }*/
+                
+        
             
-            jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < jTable1.getColumnCount(); i++) {
+            //jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        /*for (int i = 0; i < jTable1.getColumnCount(); i++) {
             TableColumn col = jTable1.getColumnModel().getColumn(i);
             col.setPreferredWidth(WIDE);
             col.setMaxWidth(WIDE * 5);
-        }
+        }*/
         } catch(Exception e) {
             e.printStackTrace();
         }
+        
     }
 
     /**
@@ -87,7 +98,7 @@ public class testTable extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    /*public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -112,12 +123,12 @@ public class testTable extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new testTable().setVisible(true);
             }
         });
-    }*/
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
