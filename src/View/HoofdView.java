@@ -312,7 +312,7 @@ public class HoofdView extends javax.swing.JFrame {
         
         if(gekozenTabel.equals("Buitenlands")){
             StudentView buitenandse_student = new StudentView("Buitenlands");
-            buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat);
+            buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat, true);
             buitenandse_student.setVisible(true);
         }
     }//GEN-LAST:event_jButton_wijzigenActionPerformed
@@ -354,6 +354,15 @@ public class HoofdView extends javax.swing.JFrame {
     private void genereerTable() throws SQLException{
         DatabaseManager dm = new DatabaseManager();
         jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
+    }
+    
+    public void updateJTable(String tabelNaam){
+        DatabaseManager dm = new DatabaseManager();
+        try {
+            jTable_resultaat.setModel(dm.search(tabelNaam, "", ""));
+        } catch (Exception e) {
+            
+        }
     }
     
     /**
