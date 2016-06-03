@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -22,15 +23,13 @@ public class HoofdView extends javax.swing.JFrame {
     private String gekozenTabel;
     private String gekozenAttribuut;
     private String [] alleAttributen;
+    private JTable selectie;
     
     /**
      * Creates new form HoofdView
      */
     public HoofdView() {
         super("International MESS");
-        //this.setSize(800, 600);
-        //this.setPreferredSize(new Dimension(800, 600));
-        
         
         initComponents();
         try {
@@ -80,19 +79,15 @@ public class HoofdView extends javax.swing.JFrame {
         jPanel1.setSize(1096, 804);
 
         jTable_resultaat.setAutoCreateRowSorter(true);
-        jTable_resultaat.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jTable_resultaat.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        DatabaseManager dm = new DatabaseManager();
+        try{
+            jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
         jTable_resultaat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable_resultaat.setEditingColumn(0);
+        jTable_resultaat.setEditingRow(0);
         jTable_resultaat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable_resultaat.setShowGrid(true);
         jTable_resultaat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -282,9 +277,10 @@ public class HoofdView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox_attribuutActionPerformed
 
     private void jTable_resultaatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_resultaatMousePressed
-        JTable selectie = (JTable) evt.getSource();
+        selectie = (JTable) evt.getSource();
         geselecteerdeVak = "" + selectie.getValueAt(selectie.getSelectedRow(), selectie.getSelectedColumn());
         System.out.println("Je hebt geselecteerd: " + geselecteerdeVak);
+
         //Test om de selectie te zien, vervolgens wordt dit gebruikt voor verwijderen en wijzigen.
     }//GEN-LAST:event_jTable_resultaatMousePressed
 
@@ -313,8 +309,10 @@ public class HoofdView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_nieuwActionPerformed
 
     private void jButton_wijzigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_wijzigenActionPerformed
+        
         if(gekozenTabel.equals("Buitenlands")){
             StudentView buitenandse_student = new StudentView("Buitenlands");
+            buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat);
             buitenandse_student.setVisible(true);
         }
     }//GEN-LAST:event_jButton_wijzigenActionPerformed
