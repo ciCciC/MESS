@@ -14,14 +14,20 @@ import java.sql.*;
 public interface Entiteit {
     
     public String getInsertSQL();
-    public String getUpdateSQL();
-    public String getDeleteSQL();
-    public String getSelectSQL();
-    
     public PreparedStatement getInsertStatement(PreparedStatement stmt) throws SQLException;
+    
+    public String getUpdateSQL();
     public PreparedStatement getUpdateStatement(PreparedStatement stmt) throws SQLException;
+    
+    public String getDeleteSQL();
     public PreparedStatement getDeleteStatement(PreparedStatement stmt) throws SQLException;
-    public PreparedStatement getSelectStatement(PreparedStatement stmt) throws SQLException;
+    
+    public String getSelectSQL(String columnName);
+    public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException;
+    
+    
+   
+   
     
     
 }

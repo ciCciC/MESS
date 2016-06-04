@@ -7,6 +7,7 @@
 // !!
 package Controller;
 
+import Model.Bedrijf;
 import static com.sun.org.apache.bcel.internal.Constants.WIDE;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -25,8 +26,9 @@ public class testTable extends javax.swing.JFrame {
         DatabaseManager DBM = new DatabaseManager();
         
         
-            try { 
-                jTable1.setModel(DBM.searchStudent("herkomst_uni", "Zweinstein"));
+            try {
+                Bedrijf bedrijf = new Bedrijf(2, "Dunder Mifflin", " 13927 Saticoy", "Panorama City", "USA");
+                jTable1.setModel(DBM.selectEntity(bedrijf, "stad", "city"));
                 
                 /*String[] student = new String[jTable1.getColumnCount()];
                 for(int i=0; i<jTable1.getColumnCount(); i++) {

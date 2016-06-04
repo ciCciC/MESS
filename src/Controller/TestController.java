@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.*;
 import Model.BuitenlandseStudent;
 import java.awt.*;
 
@@ -22,7 +23,7 @@ public class TestController {
     
         BuitenlandseStudent student = new BuitenlandseStudent("15132335", "Joep Mulder", 'm', "joep1995@gmail.com", 
               "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
-        
+        Bedrijf bedrijf = new Bedrijf(2, "Dunder Mifflin", " 13927 Saticoy", "Panorama City", "USA");
         DatabaseManager DBM = new DatabaseManager();
         
         //System.out.println(DBM.buildDeleteSQL("student", "15132392"));
@@ -37,7 +38,7 @@ public class TestController {
             //DBM.deleteRecord("buitenlands", "15132392");
             //DBM.deleteRecord("student", "15132392");
             
-            DBM.insertEntity(student);
+            DBM.insertEntity(bedrijf);
             
         } catch(Exception e) {
             if(e.getMessage().startsWith("Duplicate")) {

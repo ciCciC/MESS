@@ -3,6 +3,7 @@ package Controller;
 import Libraries.ResultToTable;
 import java.sql.*;
 import Model.*;
+import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,12 +12,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Joep
  */
 public class DatabaseManager {
-    ResultToTable conv = new ResultToTable();
-    
-    //Arrays to store table attributes, these are used for the UPDATE method
-    String[] studentAttributes = new String[] {"studentnummer", "naam", "geslacht", "emailadres"};
-    String[] buitenlandsAttributes = new String[] {"studentnummer", "adres", "land", "herkomst_uni"};
-    String[] binnenlandsAttributes = new String[] {"studentnummer", "uitgaans_uni", "opleiding_id"};
+    ResultToTable conv = new ResultToTable();  
+   
     
     
     //Constructor
@@ -33,9 +30,9 @@ public class DatabaseManager {
     //Maakt verbinding met database indien mogelijk   
     public Connection getConnection() throws SQLException {
         
-	String url    = "jdbc:mysql://meru.hhs.nl:3306/15068145"; //meru.hhs.nl
-	String username = "15068145";                             //15132390
-	String password = "aehaePoo3o";                           //zaiquai4Xi
+	String url    = "jdbc:mysql://localhost:3306/15132390"; //meru.hhs.nl
+	String username = "root";                             //15068145
+	String password = "root";                           //aehaePoo3o
         
         return DriverManager.getConnection(url, username, password);
     }
@@ -50,6 +47,71 @@ public class DatabaseManager {
         con.close();
         stmt.close();
     }
+    
+    public void updateEntity(Entiteit entiteit) throws SQLException { 
+        Connection con = this.getConnection();
+        PreparedStatement stmt = con.prepareStatement(entiteit.getUpdateSQL());
+        stmt = entiteit.getUpdateStatement(stmt);
+        System.out.println(stmt.toString());
+        stmt.execute();      
+        
+        con.close();
+        stmt.close();
+    }
+     
+    public void deleteEntity(Entiteit entiteit) throws SQLException { 
+        Connection con = this.getConnection();
+        PreparedStatement stmt = con.prepareStatement(entiteit.getDeleteSQL());
+        stmt = entiteit.getDeleteStatement(stmt);
+        System.out.println(stmt.toString());
+        stmt.execute();      
+        
+        con.close();
+        stmt.close();
+    }
+    
+    public DefaultTableModel selectEntity(Entiteit entiteit, String columnName, String columnInput) throws SQLException { 
+        Connection con = this.getConnection();
+        PreparedStatement stmt = con.prepareStatement(entiteit.getSelectSQL(columnName));
+        stmt = entiteit.getSelectStatement(stmt, columnInput);
+        System.out.println(stmt.toString());
+        
+        ResultSet rs = stmt.executeQuery();
+        DefaultTableModel table = this.buildTableModel(rs);
+        
+        con.close();
+        stmt.close();
+        
+        
+        return table;
+       
+    }
+    
+    public DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
+        
+
+        ResultSetMetaData metaData = rs.getMetaData();
+        
+        // names of columns
+        Vector<String> columnNames = new Vector<>();
+        int columnCount = metaData.getColumnCount();
+        for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }
+
+        // data of the table
+        Vector<Vector<Object>> data = new Vector<>();
+        while (rs.next()) {
+            Vector<Object> vector = new Vector<>();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                vector.add(rs.getObject(columnIndex));
+            }
+            data.add(vector);
+        }
+
+        return new DefaultTableModel(data, columnNames);
+    }
+    
     
 }
     
