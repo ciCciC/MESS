@@ -16,6 +16,8 @@ public class DatabaseManager {
     //Arrays to store table attributes, these are used for the UPDATE method
     String[] studentAttributes = new String[] {"studentnummer", "naam", "geslacht", "emailadres"};
     String[] buitenlandsAttributes = new String[] {"studentnummer", "adres", "land", "herkomst_uni"};
+    String[] binnenlandsAttributes = new String[] {"studentnummer", "uitgaans_uni", "opleiding_id"};
+    
     
     //Constructor
     public DatabaseManager() {
@@ -38,7 +40,23 @@ public class DatabaseManager {
         return DriverManager.getConnection(url, username, password);
     }
     
-    public void addRecord(String tableName, String[] values) throws SQLException {
+    public void insertEntity(Entiteit entiteit) throws SQLException { 
+        Connection con = this.getConnection();
+        PreparedStatement stmt = con.prepareStatement(entiteit.getInsertSQL());
+        stmt = entiteit.getInsertStatement(stmt);
+        System.out.println(stmt.toString());
+        stmt.execute();      
+        
+        con.close();
+        stmt.close();
+    }
+    
+}
+    
+
+    /*
+    
+    public void addRecord(String tableName, String[] values) 
         Connection con = this.getConnection();
         Statement stmt = con.createStatement();
         String sql = this.buildInsertSQL(tableName, values);
@@ -149,59 +167,7 @@ public class DatabaseManager {
         return res;       
     }
     
-    //Builds SQL to insert record in Table
-    public String buildInsertSQL(String tableName, String[] values){
-        String SQL = "INSERT INTO " + tableName + " VALUES('";
-        for(int i=0; i<values.length -1; i++) {
-            SQL += values[i] + "', '";
-        }
-        SQL += values[values.length -1] + "')";
-        return SQL;           
-    }
     
-    
-    //Builds SQL to update record in Table
-    public String buildUpdateSQL(String tableName, String[] values) {
-        String[] attributes = this.getTableAttributes(tableName);
-        
-        String SQL = "UPDATE " + tableName + " SET ";
-        for(int i=1; i<values.length; i++) {
-            
-            if(i == values.length - 1) {
-                SQL += attributes[i] + "='" + values[i] + "'";
-            } else {
-                SQL += attributes[i] + "='" + values[i] + "',";
-            }            
-        }
-        SQL += " WHERE " + attributes[0] + " ='" + values[0] + "'";
-        return SQL;
-                
-    }
-    
-    //Builds SQL to Delete record from Table
-    public String buildDeleteSQL(String tableName, String key) {
-        String keyAttribute = this.getTableAttributes(tableName)[0];
-        String SQL = "DELETE FROM " + tableName + " WHERE " +
-                keyAttribute + " ='" + key + "'";
-        return SQL;
-    }
-    
-    //Builds SQL to Delete record from Table
-    public String buildSearchSQL(String tableName, String columnName, String columnValue) {
-        String SQL = "SELECT * FROM " + tableName + " WHERE " +
-                columnName + " ='" + columnValue + "'";
-        return SQL;
-    }
-    
-    public String buildSearchBuitenlandseStudentSQL(String columnName, String columnValue) {
-        String SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres,"
-                + "B.adres, B.land, B.herkomst_uni "
-                + "FROM Student S JOIN Buitenlands B "
-                + "ON S.studentnummer = B.studentnummer"
-                + " WHERE " + columnName + " ='" + columnValue + "'";
-        return SQL;
-        
-    }
     
     //Returns all attributes from given Table
     public String[] getTableAttributes(String tableName) {
@@ -212,4 +178,4 @@ public class DatabaseManager {
         }
         else return new String[]{};
     }
-}
+}*/

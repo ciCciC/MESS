@@ -5,13 +5,17 @@
  */
 package Model;
 
+import Controller.DatabaseManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  *
  * @author Joep
  */
-public abstract class Student {
+public abstract class Student{
     
     private String studentNummer;
     private String naam;
@@ -47,11 +51,27 @@ public abstract class Student {
         return this.telefoonNummers;
     }
     
-    public String InsertStudentSQL() {
-        return "INSERT INTO Student VALUES('" + 
-                this.getStudentNummer() + "', '" +
-                this.getNaam() + "', '" +
-                this.getGeslacht() + "', '" +
-                this.getEmail() + "');";
+    public String getInsertSQL() {
+        return "INSERT INTO Student VALUES (?, ?, ?, ?); ";
+       
     }
+    
+    public PreparedStatement getInsertStatement(PreparedStatement stmt) throws SQLException {
+        stmt.setString(1, this.getStudentNummer());
+        stmt.setString(2, this.getNaam());
+        stmt.setString(3, "" + this.getGeslacht());
+        stmt.setString(4, this.getEmail());
+        return stmt;
+    }
+    
+    /*public void insertStudent(DatabaseManager DBM, Connection con) throws SQLException {
+        System.out.println("Student");
+        DBM = new DatabaseManager();        
+        PreparedStatement stmt = con.prepareStatement(this.getInsertSQL());
+        stmt = this.getInsertStatement(stmt);
+        stmt.execute();
+        System.out.println("Student added");
+        con.close();       
+        stmt.close();
+    }*/
 }
