@@ -47,19 +47,14 @@ public class BedrijfView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1_bedrijfsgegevens.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel1_bedrijfsgegevens.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1_bedrijfsgegevens.setText("Bedrijfsgegevens");
 
-        jLabel2_bedrijfsnaam.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2_bedrijfsnaam.setText("Bedrijfsnaam");
 
-        jLabel4_stad.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4_stad.setText("Stad");
 
-        jLabel6_adres.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6_adres.setText("Adres");
 
-        jLabel7_land.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7_land.setText("Land");
 
         jButton_annuleren.setText("Annuleren");
@@ -97,8 +92,8 @@ public class BedrijfView extends javax.swing.JFrame {
                             .addComponent(bedrijfsnaam, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(adres, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton_toevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jButton_toevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton_annuleren, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
