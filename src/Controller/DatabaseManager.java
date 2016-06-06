@@ -68,9 +68,17 @@ public class DatabaseManager {
     
     public DefaultTableModel selectEntity(String tableName, String columnName, String columnInput) throws SQLException { 
         Connection con = this.getConnection();
-        String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " LIKE  ?";       
-        PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(1, "%" + columnInput + "%");        
+        String sql = "";
+        PreparedStatement stmt = null;
+        if(columnName.isEmpty() || columnInput.isEmpty()) {
+            sql = "SELECT * FROM " + tableName;
+            stmt = con.prepareStatement(sql);
+        } else {
+            sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " LIKE  ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%" + columnInput + "%");
+        }        
+        
         System.out.println(stmt.toString());
         
         ResultSet rs = stmt.executeQuery();
