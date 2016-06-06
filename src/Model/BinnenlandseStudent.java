@@ -5,11 +5,14 @@
  */
 package Model;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Ruben
  */
-public class BinnenlandseStudent extends Student{
+public class BinnenlandseStudent extends Student implements Entiteit{
     
     private String uitgaansUni;
 
@@ -31,5 +34,35 @@ public class BinnenlandseStudent extends Student{
                 this.getStudentNummer() + "', '" +                
                 this.getUitgaansUni() + "')";               
             
+    }
+
+    @Override
+    public String getUpdateSQL() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PreparedStatement getUpdateStatement(PreparedStatement stmt) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getDeleteSQL() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PreparedStatement getDeleteStatement(PreparedStatement stmt) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getSelectSQL(String columnName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

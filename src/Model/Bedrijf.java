@@ -28,6 +28,14 @@ public class Bedrijf implements Entiteit{
         this.land = land;
     }
     
+    public Bedrijf(String naam, String adres, String stad, String land) {
+        this.naam = naam;
+        this.adres = adres;
+        this.stad = stad;
+        this.land = land;
+    }
+    
+    
     public int getBedrijfID() {
         return ID;
     }
@@ -57,7 +65,7 @@ public class Bedrijf implements Entiteit{
                 this.getBedrijfLand() + "');";
     }
 
-    
+
     public String getInsertSQL() {
         return "INSERT INTO Bedrijf (bedrijfsnaam, adres, stad, land) VALUES (?, ?, ?, ?);";
     }

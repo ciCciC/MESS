@@ -6,6 +6,10 @@
 package View;
 
 import Controller.DatabaseManager;
+import Model.Bedrijf;
+import Model.BinnenlandseStudent;
+import Model.Entiteit;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -24,6 +28,7 @@ public class HoofdView extends javax.swing.JFrame {
     private String gekozenAttribuut;
     private String [] alleAttributen;
     private JTable selectie;
+    private Entiteit entiteit;
     
     /**
      * Creates new form HoofdView
@@ -136,7 +141,7 @@ public class HoofdView extends javax.swing.JFrame {
 
         DatabaseManager dm = new DatabaseManager();
         try{
-            jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
+            jTable_resultaat.setModel(dm.selectEntity("Bedrijf", "", ""));
         }catch(SQLException e){
             System.out.println("Fout bij de constructie jTable_resultaat");
             e.printStackTrace();
@@ -279,7 +284,8 @@ public class HoofdView extends javax.swing.JFrame {
             if(zoekveld.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Graag het zoekveld invullen.");
             }else{
-              jTable_resultaat.setModel(dm.search(gekozenTabel, gekozenAttribuut, zoekveld.getText()));
+                
+              jTable_resultaat.setModel(dm.selectEntity(null, gekozenAttribuut, zoekveld.getText()));
             }
             System.out.println("werkt wel");
         } catch (Exception e) {
@@ -339,6 +345,13 @@ public class HoofdView extends javax.swing.JFrame {
                         buitenandse_student.setVisible(true);
                         break;
                     }
+                case "Bedrijf":
+                    {
+                        BedrijfView bedrijf = new BedrijfView("Wijzigen");
+                        bedrijf.bedrijfWijzigen(gekozenTabel, jTable_resultaat);
+                        bedrijf.setVisible(true);
+                        break;
+                    }
             }
         }
     }//GEN-LAST:event_jButton_wijzigenActionPerformed
@@ -354,7 +367,14 @@ public class HoofdView extends javax.swing.JFrame {
                     System.out.println("niet verwijderd");
                 }else{
                     System.out.println("verwijderd");
-                    dm.deleteRecord(gekozenTabel, geselecteerdeVak);
+                    if(gekozenTabel.equals("Bedrijf")){
+                        String [] attributen = new String [jTable_resultaat.getColumnCount()];
+                        for (int i = 0; i < attributen.length; i++) {
+                            attributen[i] = "" + jTable_resultaat.getValueAt(jTable_resultaat.getSelectedRow(), i);
+                        }
+                        entiteit = new Bedrijf(Integer.parseInt(attributen[0]), attributen[1], attributen[2], attributen[3], attributen[4]);
+                    }
+                    dm.deleteEntity(entiteit);
                     JOptionPane.showMessageDialog(this, "Met succes verwijderd.");
                     genereerTable();
                 }    
@@ -398,12 +418,13 @@ public class HoofdView extends javax.swing.JFrame {
     
     private void genereerTable() {
         try {
-            jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
+            jTable_resultaat.setModel(dm.selectEntity("Bedrijf", "", ""));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
+    /*
     public void getRefreshJTable(String tabelNaam){
 
         try {
@@ -412,6 +433,7 @@ public class HoofdView extends javax.swing.JFrame {
             e.printStackTrace();
         } 
     }
+    */
     
     /**
      * @param args the command line arguments

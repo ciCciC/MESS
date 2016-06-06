@@ -44,7 +44,7 @@ public class ContactpersoonView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1_periodegegevens.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel1_periodegegevens.setText("Opleidinggegevens");
+        jLabel1_periodegegevens.setText("Contactpersoon gegevens");
 
         naamText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +88,7 @@ public class ContactpersoonView extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(naamText)
                     .addComponent(emailText)
@@ -165,7 +165,7 @@ public class ContactpersoonView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private boolean alleVakkenControleren(){
-        return !this.naamText.getText().isEmpty() || this.emailText.getText().isEmpty() || this.telText.getText().isEmpty();
+        return !(this.naamText.getText().isEmpty() || this.emailText.getText().isEmpty() || this.telText.getText().isEmpty());
     }
     
     public static void main(String args[]) {
