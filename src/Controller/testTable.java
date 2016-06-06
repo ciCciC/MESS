@@ -28,7 +28,7 @@ public class testTable extends javax.swing.JFrame {
         
             try {
                 Bedrijf bedrijf = new Bedrijf(2, "Dunder Mifflin", " 13927 Saticoy", "Panorama City", "USA");
-                jTable1.setModel(DBM.selectEntity(bedrijf, "stad", "city"));
+                jTable1.setModel(DBM.selectEntity("Bedrijf", "stad", "city"));
                 
                 /*String[] student = new String[jTable1.getColumnCount()];
                 for(int i=0; i<jTable1.getColumnCount(); i++) {

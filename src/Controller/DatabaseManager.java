@@ -26,9 +26,9 @@ public class DatabaseManager {
     //Maakt verbinding met database indien mogelijk   
     public Connection getConnection() throws SQLException {
         
-	String url    = "jdbc:mysql://localhost:3306/15132390"; //meru.hhs.nl
-	String username = "root";                             //15068145
-	String password = "root";                           //aehaePoo3o
+	String url    = "jdbc:mysql://meru.hhs.nl:3306/15068145"; //meru.hhs.nl
+	String username = "15068145";                             //15068145
+	String password = "aehaePoo3o";                           //aehaePoo3o
         
         return DriverManager.getConnection(url, username, password);
     }
@@ -66,10 +66,11 @@ public class DatabaseManager {
         stmt.close();
     }
     
-    public DefaultTableModel selectEntity(Entiteit entiteit, String columnName, String columnInput) throws SQLException { 
+    public DefaultTableModel selectEntity(String tableName, String columnName, String columnInput) throws SQLException { 
         Connection con = this.getConnection();
-        PreparedStatement stmt = con.prepareStatement(entiteit.getSelectSQL(columnName));
-        stmt = entiteit.getSelectStatement(stmt, columnInput);
+        String sql = "SELECT * FROM " + tableName + " WHERE " + columnName + " LIKE  ?";       
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, "%" + columnInput + "%");        
         System.out.println(stmt.toString());
         
         ResultSet rs = stmt.executeQuery();
