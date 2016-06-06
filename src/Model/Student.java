@@ -26,7 +26,7 @@ public abstract class Student{
     public Student(String studentNr, String naam, char geslacht, String email, String telNr) {
         this.studentNummer = studentNr;
         this.naam = naam;
-        this.geslacht = geslacht;
+        this.geslacht = Character.toUpperCase(geslacht);
         this.email = email;
         telefoonNummers = new ArrayList<String>();
         telefoonNummers.add(telNr);
@@ -62,16 +62,5 @@ public abstract class Student{
         stmt.setString(3, "" + this.getGeslacht());
         stmt.setString(4, this.getEmail());
         return stmt;
-    }
-    
-    /*public void insertStudent(DatabaseManager DBM, Connection con) throws SQLException {
-        System.out.println("Student");
-        DBM = new DatabaseManager();        
-        PreparedStatement stmt = con.prepareStatement(this.getInsertSQL());
-        stmt = this.getInsertStatement(stmt);
-        stmt.execute();
-        System.out.println("Student added");
-        con.close();       
-        stmt.close();
-    }*/
+    } 
 }

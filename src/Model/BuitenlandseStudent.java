@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Joep
  */
-public class BuitenlandseStudent extends Student{
+public class BuitenlandseStudent extends Student implements Entiteit{
     
 
     private String adres;

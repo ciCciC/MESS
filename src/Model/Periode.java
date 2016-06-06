@@ -9,7 +9,7 @@ package Model;
  *
  * @author Ruben
  */
-public class Periode {
+public class Periode implements Entiteit {
     
     private int ID;
     private String beginDatum;
