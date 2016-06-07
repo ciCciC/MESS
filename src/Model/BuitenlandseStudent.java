@@ -20,10 +20,6 @@ public class BuitenlandseStudent extends Student implements Entiteit{
     private String land;
     private String herkomstUni;
     
-    public BuitenlandseStudent(String studentNr, String naam, char geslacht, String email, String telNr) {
-        super(studentNr, naam, geslacht, email, telNr);
-    }
-        
     public BuitenlandseStudent(String studentNr, String naam, char geslacht, String email, String telNr, String adres, String land, String herkomstUni) {
         
         super(studentNr, naam, geslacht, email, telNr);
@@ -44,84 +40,40 @@ public class BuitenlandseStudent extends Student implements Entiteit{
         return this.herkomstUni;
     }
     
-    
     public String getInsertSQL() {        
-        return "INSERT INTO Buitenlands VALUES (?, ?, ?, ?);";            
+        return super.getInsertSQL() + "INSERT INTO Buitenlands VALUES (?, ?, ?, ?);";            
     }
     
     
-    public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException{        
+    public PreparedStatement getInsertStatement(PreparedStatement stmt) throws SQLException{         
         
-        super.insertStudent(con);        
-        stmt.setString(1, super.getStudentNummer());
-        stmt.setString(2, this.adres);
-        stmt.setString(3, this.land);
-        stmt.setString(4, this.herkomstUni);
+        stmt = super.getInsertStatement(stmt);        
+        stmt.setString(5, super.getStudentNummer());
+        stmt.setString(6, this.adres);
+        stmt.setString(7, this.land);
+        stmt.setString(8, this.herkomstUni);
         
-        return stmt;
-    }
-    
-    public String getUpdateSQL() {        
-        return "UPDATE Buitenlands SET adres = ?, land = ?, herkomst_uni = ? WHERE studentnummer = ?";          
+        return stmt;        
     }
     
     
-    public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException{        
-        
-        super.updateStudent(con);        
-        stmt.setString(1, this.adres);
-        stmt.setString(2, this.land);
-        stmt.setString(3, this.herkomstUni);
-        stmt.setString(4, super.getStudentNummer());
-        
-        return stmt;
+    
+      /*
+    public String[] getAttributen() {
+        return new String[]{"adres", "land", "herkomst_uni"};   
     }
     
-    public String getDeleteSQL() {        
-        return "DELETE FROM Buitenlands WHERE studentnummer = ?";            
-    }
+    public String insertBuitenlandseStudentSQL() {
+        return "INSERT INTO BuitenlandseStudent VALUES('" + 
+                this.getStudentNummer() + "', '" +                
+                this.getAdres() + "', '" + 
+                this.getLand() + "', '" + 
+                this.getHerkomstUni() + "')";               
+            
+    }*/
+
     
     
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con) throws SQLException{                     
-        stmt.setString(1, super.getStudentNummer());     
-        return stmt;
-    }
-    
-    public void deleteStudent(Connection con) throws SQLException{
-        super.deleteStudent(con);
-    }
-    
-    public String getSelectSQL(String columnName) {
-        String SQL = "";
-        if(columnName.isEmpty()) {
-            SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                    "B.adres, B.land, B.herkomst_uni FROM Student S join Buitenlands B " + 
-                    "ON S.studentnummer = B.studentnummer";
-        } else {
-            columnName = columnName.toLowerCase();
-            if(columnName.equals("naam") || columnName.equals("geslacht") || columnName.equals("adres")) {
-                SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                        "B.adres, B.land, B.herkomst_uni FROM Student S join Buitenlands B " +
-                        "ON S.studentnummer = B.studentnummer WHERE S." + columnName + " LIKE ?";
-            } else 
-            {
-            SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                    "B.adres, B.land, B.herkomst_uni FROM Student S join Buitenlands B " + 
-                    "ON S.studentnummer = B.studentnummer WHERE B." + columnName + " LIKE ?";
-            }            
-        }        
-        return SQL;
-    }
-    
-    public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
-        stmt.setString(1, "%" + columnInput + "%");
-        return stmt;
-    }
-    
-    public String toString() {
-        return "buitenlands";
-    }
-    
+   
     
 }
-   
