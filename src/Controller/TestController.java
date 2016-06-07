@@ -21,25 +21,19 @@ public class TestController {
     
     public static void main(String[] args) {      
     
-        BuitenlandseStudent student = new BuitenlandseStudent("15132335", "Joep Mulder", 'm', "joep1995@gmail.com", 
-              "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
+        BuitenlandseStudent student = new BuitenlandseStudent("15132337", "Joep Mulder", 'm', "joep1995@gmail.com", 
+              "0610454701", "Vinkelaan 54", "Frankrijk", "University of Queensland");
         Bedrijf bedrijf = new Bedrijf(2, "Dunder Mifflin", " 13927 Saticoy", "Panorama City", "USA");
+        BinnenlandseStudent student2 = new BinnenlandseStudent("15132338", "Hans Mulder", 'm', "joep1995@gmail.com", 
+              "0610454701", "uitgaansUNI", 1);
         DatabaseManager DBM = new DatabaseManager();
         
-        //System.out.println(DBM.buildDeleteSQL("student", "15132392"));
-        //System.out.println(DBM.buildDeleteSQL("buitenlands", "15132392"));
+    
                 
         
-        try {
-            //DBM.addRecord("Student", new String[] {"15132395", "Joep", "M", "joepmulder1995@gmail.com"});
-            //DBM.addRecord("Buitenlands", new String[] {"15132395", "Vinkelaan 54", "Belgie", "HHS"});
-            //DBM.updateRecord("Student", new String[] {"15132392", "Kees", "M", "kees1995@gmail.com"});
-            //DBM.updateRecord("Buitenlands", new String[] {"15132392", "Bloemenlaan", "Duitsland", "HHS"});
-            //DBM.deleteRecord("buitenlands", "15132392");
-            //DBM.deleteRecord("student", "15132392");
-            
-            DBM.insertEntity(bedrijf);
-            
+        try {           
+            DBM.deleteEntity(student2);
+            System.out.println(DBM.getContactpersoonID("contactNaam"));           
         } catch(Exception e) {
             if(e.getMessage().startsWith("Duplicate")) {
                 System.out.println("studentnummer bestaat al! gebruik andere");

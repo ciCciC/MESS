@@ -11,37 +11,21 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Ruben
+ * @author Joep
  */
-public class Periode implements Entiteit {
+public class Onderwijseenheid implements Entiteit{
+    private String soort;
+    private int studiepunten; 
+    private String soort_studie;
+    private int bedrijf_id;
+    private String typeonderwijseenheid;
     
-    private int ID;
-    private String beginDatum;
-    private String eindDatum;
-    
-    public Periode(int ID, String beginDatum, String eindDatum) {
-        this.ID = ID;
-        this.beginDatum = beginDatum;
-        this.eindDatum = eindDatum;
-    }
-    
-    public int getPeriodeID() {
-        return ID;
-    }
-    
-    public String getBeginDatum() {
-        return beginDatum;
-    }
-    
-    public String getEindDatum() {
-        return eindDatum;
-    }
-    
-    public String insertPeriode() {
-        return "INSERT INTO Periode VALUES('" + 
-                this.getPeriodeID() + "', '" +
-                this.getBeginDatum() + "', '" +
-                this.getEindDatum() + "');";
+    public Onderwijseenheid(String soort, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid) {
+        this.soort = soort;
+        this.studiepunten = studiepunten;
+        this.soort_studie = soort_studie;
+        this.bedrijf_id = bedrijf_id;
+        this.typeonderwijseenheid = typeonderwijseenheid;
     }
 
     @Override
@@ -83,4 +67,5 @@ public class Periode implements Entiteit {
     public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
