@@ -40,7 +40,7 @@ public class PeriodeView extends javax.swing.JFrame {
         jButton_toevoegen = new javax.swing.JButton();
         jButton_annuleren = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1_periodegegevens.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1_periodegegevens.setForeground(new java.awt.Color(0, 0, 0));

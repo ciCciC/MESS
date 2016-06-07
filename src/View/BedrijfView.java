@@ -21,6 +21,7 @@ public class BedrijfView extends javax.swing.JFrame {
     private DatabaseManager dm;
     private String wijzigen;
     private String [] attributen;
+    private String bedrijfsId;
     
     /**
      * Creates new form BedrijfView
@@ -179,7 +180,7 @@ public class BedrijfView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
             }else{
                 System.out.println("HIER ZITTEN WE!");
-                Entiteit bedrijf = new Bedrijf(bedrijfsnaam.getText(), stad.getText(), adres.getText(), land.getText());
+                Entiteit bedrijf = new Bedrijf(Integer.parseInt(bedrijfsId), bedrijfsnaam.getText(), stad.getText(), adres.getText(), land.getText());
                 try {
                     dm.updateEntity(bedrijf);
                 } catch (SQLException ex) {
@@ -200,7 +201,7 @@ public class BedrijfView extends javax.swing.JFrame {
             attributen[i] = "" + table.getValueAt(table.getSelectedRow(), i);
         }
         
-        bedrijfsnaam.setText(attributen[1]); stad.setText(attributen[2]); adres.setText(attributen[3]); land.setText(attributen[4]);
+        bedrijfsId = attributen[0]; bedrijfsnaam.setText(attributen[1]); stad.setText(attributen[2]); adres.setText(attributen[3]); land.setText(attributen[4]);
     }
     
     private boolean alleVakkenControleren(){

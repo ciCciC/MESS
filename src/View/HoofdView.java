@@ -285,7 +285,7 @@ public class HoofdView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Graag het zoekveld invullen.");
             }else{
                 
-              jTable_resultaat.setModel(dm.selectEntity(null, gekozenAttribuut, zoekveld.getText()));
+              jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, zoekveld.getText()));
             }
             System.out.println("werkt wel");
         } catch (Exception e) {
