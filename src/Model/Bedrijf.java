@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -20,6 +21,8 @@ public class Bedrijf implements Entiteit{
     private String stad;
     private String land;
     
+    public Bedrijf() {};
+    
     public Bedrijf(int ID, String naam, String adres, String stad, String land) {
         this.ID = ID;
         this.naam = naam;
@@ -27,6 +30,8 @@ public class Bedrijf implements Entiteit{
         this.stad = stad;
         this.land = land;
     }
+    
+    
     
     public int getBedrijfID() {
         return ID;
@@ -62,7 +67,7 @@ public class Bedrijf implements Entiteit{
         return "INSERT INTO Bedrijf (bedrijfsnaam, adres, stad, land) VALUES (?, ?, ?, ?);";
     }
     
-    public PreparedStatement getInsertStatement(PreparedStatement stmt) throws SQLException {
+    public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException {
               
         stmt.setString(1, this.naam);
         stmt.setString(2, this.adres );
@@ -75,7 +80,7 @@ public class Bedrijf implements Entiteit{
         return "UPDATE Bedrijf SET bedrijfsnaam = ?, adres = ?, stad = ?, land = ? WHERE bedrijf_id = ?";
     }
     
-    public PreparedStatement getUpdateStatement(PreparedStatement stmt) throws SQLException {
+    public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException {
         stmt.setString(1, this.naam);
         stmt.setString(2, this.adres );
         stmt.setString(3, this.stad);
@@ -88,7 +93,7 @@ public class Bedrijf implements Entiteit{
         return "DELETE FROM Bedrijf WHERE bedrijf_id = ?";
     }
     
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt) throws SQLException {
+    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con) throws SQLException {
         stmt.setInt(1, this.ID);
         return stmt;
     }
