@@ -5,12 +5,7 @@
  */
 package View;
 
-import Controller.DatabaseManager;
-import Model.Bedrijf;
-import Model.Entiteit;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -18,27 +13,20 @@ import javax.swing.JTable;
  */
 public class BedrijfView extends javax.swing.JFrame {
 
+<<<<<<< HEAD
     private DatabaseManager dm;
     private String wijzigen;
     private String [] attributen;
     private String bedrijfsId;
     
+=======
+>>>>>>> origin/master
     /**
      * Creates new form BedrijfView
      */
     public BedrijfView() {
         super("Nieuwe bedrijf");
-        dm = new DatabaseManager();
         initComponents();
-        setLocationRelativeTo(null);
-    }
-    
-    public BedrijfView(String wijzigen) {
-        super("Wijzig bedrijf");
-        this.wijzigen = wijzigen;
-        dm = new DatabaseManager();
-        initComponents();
-        jButton_toevoegen.setText("Wijzigen");
         setLocationRelativeTo(null);
     }
 
@@ -64,7 +52,7 @@ public class BedrijfView extends javax.swing.JFrame {
         jButton_annuleren = new javax.swing.JButton();
         jButton_toevoegen = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1_bedrijfsgegevens.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1_bedrijfsgegevens.setText("Bedrijfsgegevens");
@@ -162,6 +150,7 @@ public class BedrijfView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_toevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_toevoegenActionPerformed
+<<<<<<< HEAD
         if(wijzigen.equals("")){
             if(alleVakkenControleren()){
                 JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
@@ -189,12 +178,22 @@ public class BedrijfView extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, "Met succes gewijzigd."); 
                this.dispose();
             }
+=======
+        if(alleVakkenControleren()){
+            System.out.println(bedrijfsnaam.getText()); // Dit wordt uiteindelijk in BedrijfsModel gestopt, die nog moet bestaan!
+            System.out.println(stad.getText());
+            System.out.println(adres.getText());
+            System.out.println(land.getText());
+            
+            JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+            this.dispose();
+>>>>>>> origin/master
         }else{
-            System.out.println("Werkt niet!!!");
+           JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden."); 
         }
-        
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 
+<<<<<<< HEAD
     public void bedrijfWijzigen(String tabel, JTable table){
         attributen = new String[table.getColumnCount()];
         for (int i = 0; i < attributen.length; i++) {
@@ -204,8 +203,10 @@ public class BedrijfView extends javax.swing.JFrame {
         bedrijfsId = attributen[0]; bedrijfsnaam.setText(attributen[1]); stad.setText(attributen[2]); adres.setText(attributen[3]); land.setText(attributen[4]);
     }
     
+=======
+>>>>>>> origin/master
     private boolean alleVakkenControleren(){
-        return this.bedrijfsnaam.getText().isEmpty() || this.stad.getText().isEmpty() || this.adres.getText().isEmpty() || this.land.getText().isEmpty();
+        return !this.bedrijfsnaam.getText().isEmpty() || this.stad.getText().isEmpty() || this.adres.getText().isEmpty() || this.land.getText().isEmpty();
     }
     
     private void jButton_annulerenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_annulerenActionPerformed

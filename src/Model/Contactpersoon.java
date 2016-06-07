@@ -5,9 +5,6 @@
  */
 package Model;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 /**
  *
  * @author Ruben
@@ -49,44 +46,4 @@ public class Contactpersoon implements Entiteit {
                 this.getContactEmail() + "', '" +
                 this.getContactTelNr() + "');";
 }
-
-    @Override
-    public String getInsertSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PreparedStatement getInsertStatement(PreparedStatement stmt) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getUpdateSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PreparedStatement getUpdateStatement(PreparedStatement stmt) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getDeleteSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getSelectSQL(String columnName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

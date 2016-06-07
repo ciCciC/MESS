@@ -269,7 +269,7 @@
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DatabaseManager dm = new DatabaseManager();&#xa;try{&#xa;    jTable_resultaat.setModel(dm.selectEntity(&quot;Bedrijf&quot;, &quot;&quot;, &quot;&quot;));&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij de constructie jTable_resultaat&quot;);&#xa;    e.printStackTrace();&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DatabaseManager dm = new DatabaseManager();&#xa;try{&#xa;    jTable_resultaat.setModel(dm.getBuitenlandseStudenten());&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij de constructie jTable_resultaat&quot;);&#xa;    e.printStackTrace();&#xa;}"/>
               </AuxValues>
             </Component>
           </SubComponents>

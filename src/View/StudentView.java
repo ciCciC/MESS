@@ -504,7 +504,7 @@ public class StudentView extends javax.swing.JFrame {
                 this.dispose();
             }
         }
-        
+        hv.getRefreshJTable("Buitenlands");
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 
     private boolean alleVakkenControleren(boolean studentType){
