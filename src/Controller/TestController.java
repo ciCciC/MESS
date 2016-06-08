@@ -25,20 +25,13 @@ public class TestController {
               "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
         Bedrijf bedrijf = new Bedrijf(2, "Dunder Mifflin", " 13927 Saticoy", "Panorama City", "USA");
         DatabaseManager DBM = new DatabaseManager();
-        
-        //System.out.println(DBM.buildDeleteSQL("student", "15132392"));
-        //System.out.println(DBM.buildDeleteSQL("buitenlands", "15132392"));
-                
-        
+        BinnenlandseStudent student2 = new BinnenlandseStudent("15132342", "Kees Mulder", 'm', "joep1995@gmail.com", 
+              "0610454701", "uitgaandeUni", 1);
+               
         try {
-            //DBM.addRecord("Student", new String[] {"15132395", "Joep", "M", "joepmulder1995@gmail.com"});
-            //DBM.addRecord("Buitenlands", new String[] {"15132395", "Vinkelaan 54", "Belgie", "HHS"});
-            //DBM.updateRecord("Student", new String[] {"15132392", "Kees", "M", "kees1995@gmail.com"});
-            //DBM.updateRecord("Buitenlands", new String[] {"15132392", "Bloemenlaan", "Duitsland", "HHS"});
-            //DBM.deleteRecord("buitenlands", "15132392");
-            //DBM.deleteRecord("student", "15132392");
             
-            DBM.insertEntity(bedrijf);
+            
+            DBM.updateEntity(student2);
             
         } catch(Exception e) {
             if(e.getMessage().startsWith("Duplicate")) {
