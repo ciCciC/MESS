@@ -82,13 +82,13 @@ public class BuitenlandseStudent extends Student implements Entiteit{
     }
     
     
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con) throws SQLException{                     
-        stmt.setString(1, super.getStudentNummer());     
+    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException{                     
+        stmt.setString(1, Integer.toString(keyValue));     
         return stmt;
     }
     
-    public void deleteStudent(Connection con) throws SQLException{
-        super.deleteStudent(con);
+    public void deleteStudent(Connection con, int keyValue) throws SQLException{
+        super.deleteStudent(con, keyValue);
     }
     
     public String getSelectSQL(String columnName) {

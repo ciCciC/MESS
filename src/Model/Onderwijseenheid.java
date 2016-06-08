@@ -11,47 +11,24 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Ruben
+ * @author Joep
  */
-public class Contactpersoon implements Entiteit {
+public class Onderwijseenheid implements Entiteit{
+    private String soort;
+    private int studiepunten; 
+    private String soort_studie;
+    private int bedrijf_id;
+    private String typeonderwijseenheid;
     
-    private int ID;
-    private String naam;
-    private String email;
-    private String telNr;
+    public Onderwijseenheid() {};
     
-    public Contactpersoon() {};
-    
-    public Contactpersoon(int ID, String naam, String email, String telNr) {
-        this.ID = ID;
-        this.naam = naam;
-        this.email = email;
-        this.telNr = telNr;
+    public Onderwijseenheid(String soort, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid) {
+        this.soort = soort;
+        this.studiepunten = studiepunten;
+        this.soort_studie = soort_studie;
+        this.bedrijf_id = bedrijf_id;
+        this.typeonderwijseenheid = typeonderwijseenheid;
     }
-    
-    public int getContactID() {
-        return ID;
-    }
-    
-    public String getContactNaam() {
-        return naam;
-    }
-    
-    public String getContactEmail() {
-        return email;
-    }
-    
-    public String getContactTelNr() {
-        return telNr;
-    }
-    
-    public String InsertContactpersoon() {
-        return "INSERT INTO Contactpersoon VALUES('" + 
-                this.getContactID() + "', '" +
-                this.getContactNaam() + "', '" +
-                this.getContactEmail() + "', '" +
-                this.getContactTelNr() + "');";
-}
 
     @Override
     public String getInsertSQL() {
@@ -92,4 +69,5 @@ public class Contactpersoon implements Entiteit {
     public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

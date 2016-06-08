@@ -21,7 +21,7 @@ public class TestController {
     
     public static void main(String[] args) {      
     
-        BuitenlandseStudent student = new BuitenlandseStudent("15132335", "Joep Mulder", 'm', "joep1995@gmail.com", 
+        BuitenlandseStudent student = new BuitenlandseStudent("15132345", "Joep Mulder", 'm', "joep1995@gmail.com", 
               "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
         Bedrijf bedrijf = new Bedrijf(2, "Dunder Mifflin", " 13927 Saticoy", "Panorama City", "USA");
         DatabaseManager DBM = new DatabaseManager();
@@ -31,7 +31,9 @@ public class TestController {
         try {
             
             
-            DBM.updateEntity(student2);
+            //DBM.updateEntity(student2);
+            DBM.deleteEntity("buitenlands", 15132345);
+            
             
         } catch(Exception e) {
             if(e.getMessage().startsWith("Duplicate")) {

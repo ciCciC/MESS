@@ -101,15 +101,15 @@ public class Student{
         return "DELETE FROM Student WHERE studentnummer = ?";       
     }
     
-    public PreparedStatement getDeleteStudentStatement(PreparedStatement stmt) throws SQLException {     
-        stmt.setString(1, this.studentNummer);
+    public PreparedStatement getDeleteStudentStatement(PreparedStatement stmt, int keyValue) throws SQLException {     
+        stmt.setString(1, Integer.toString(keyValue));
         return stmt;       
     }
     
-    public void deleteStudent(Connection con) throws SQLException {
+    public void deleteStudent(Connection con, int keyValue) throws SQLException {
         String SQL = this.getDeleteStudentSQL();
         PreparedStatement stmt = con.prepareStatement(SQL);
-        stmt = this.getDeleteStudentStatement(stmt);
+        stmt = this.getDeleteStudentStatement(stmt, keyValue);
         
         stmt.execute();
         

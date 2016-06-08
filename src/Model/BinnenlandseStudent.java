@@ -17,6 +17,10 @@ public class BinnenlandseStudent extends Student implements Entiteit{
     
     private String uitgaans_uni;
     private int opleiding_id;
+    
+    public BinnenlandseStudent(String studentNr, String naam, char geslacht, String email, String telNr) {
+        super(studentNr, naam, geslacht, email, telNr);
+    }
 
     public BinnenlandseStudent(String studentNr, String naam, char geslacht, String email, String telNr, 
             String uitgaans_uni, int opleiding_id) {
@@ -57,13 +61,13 @@ public class BinnenlandseStudent extends Student implements Entiteit{
         return "DELETE FROM Binnenlands WHERE studentnummer = ?";      
     }
 
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con) throws SQLException {                           
-        stmt.setString(1, super.getStudentNummer());     
+    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {                           
+        stmt.setString(1,  Integer.toString(keyValue));     
         return stmt;
     }
     
-    public void deleteStudent(Connection con) throws SQLException{
-        super.deleteStudent(con);
+    public void deleteStudent(Connection con, int keyValue) throws SQLException{
+        super.deleteStudent(con, keyValue);
     }
     
     public String getSelectSQL(String columnName) {

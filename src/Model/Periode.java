@@ -19,6 +19,8 @@ public class Periode implements Entiteit {
     private String beginDatum;
     private String eindDatum;
     
+    public Periode() {};
+    
     public Periode(int ID, String beginDatum, String eindDatum) {
         this.ID = ID;
         this.beginDatum = beginDatum;
@@ -70,7 +72,7 @@ public class Periode implements Entiteit {
     }
 
     @Override
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con) throws SQLException {
+    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -19,6 +19,8 @@ public class Opleiding implements Entiteit{
     private String naam;
     private int contact_id;
 
+    public Opleiding() {};
+    
     public Opleiding(int ID, int contact_id, String naam) {
         this.ID = ID;
         this.naam = naam;
@@ -65,7 +67,7 @@ public class Opleiding implements Entiteit{
     }
 
     @Override
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con) throws SQLException {
+    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

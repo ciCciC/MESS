@@ -93,13 +93,19 @@ public class Bedrijf implements Entiteit{
         return "DELETE FROM Bedrijf WHERE bedrijf_id = ?";
     }
     
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        stmt.setInt(1, this.ID);
+    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
+        stmt.setInt(1, keyValue);
         return stmt;
     }
     
     public String getSelectSQL(String columnName) {
-        return "SELECT * FROM Bedrijf WHERE " + columnName + " LIKE ?";        
+        String SQL = "";
+        if(columnName.isEmpty()) {
+            SQL = "SELECT * FROM Bedrijf";
+        }else{
+            SQL = "SELECT * FROM Bedrijf WHERE " + columnName + " LIKE ?";
+        }
+        return SQL;
     }
     
     @Override

@@ -20,7 +20,7 @@ public interface Entiteit {
     public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException;
     
     public String getDeleteSQL();
-    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con) throws SQLException;
+    public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException;
     
     public String getSelectSQL(String columnName);
     public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException;

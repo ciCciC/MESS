@@ -56,21 +56,24 @@ public class DatabaseManager {
         stmt.close();
     }
      
-    public void deleteEntity(Entiteit entiteit) throws SQLException { 
+    public void deleteEntity(String tableName, int keyValue) throws SQLException {
+        Entiteit entiteit = this.getEntity(tableName);
+        
         Connection con = this.getConnection();
         PreparedStatement stmt = con.prepareStatement(entiteit.getDeleteSQL());
-        stmt = entiteit.getDeleteStatement(stmt, con);
+        stmt = entiteit.getDeleteStatement(stmt, con, keyValue);
         System.out.println(stmt.toString());
         stmt.execute();      
         
         System.out.println(entiteit.getClass());
         if(entiteit.toString().equals("buitenlands")) {
+            System.out.println("aa");
             BuitenlandseStudent student = (BuitenlandseStudent) entiteit;
-            student.deleteStudent(con);
+            student.deleteStudent(con, keyValue);
         }
         if(entiteit.toString().equals("binnenlands")) {
             BinnenlandseStudent student = (BinnenlandseStudent) entiteit;
-            student.deleteStudent(con);
+            student.deleteStudent(con, keyValue);
         }
         con.close();
         stmt.close();
@@ -186,7 +189,17 @@ public class DatabaseManager {
             return new Bedrijf();
         } else if(entityStr.toLowerCase().equals("buitenlands")) {
             return new BuitenlandseStudent("", "", 'm', "", "");
-        } else {
+        } else if(entityStr.toLowerCase().equals("binnenlands")) {
+            return new BinnenlandseStudent("", "", 'm', "", "");
+        } else if(entityStr.toLowerCase().equals("contactpersoon")) {
+            return new Contactpersoon();
+        } else if(entityStr.toLowerCase().equals("onderwijseenheid")) {
+            return new Onderwijseenheid();
+        } else if(entityStr.toLowerCase().equals("opleiding")) {
+            return new Opleiding();
+        } else if(entityStr.toLowerCase().equals("Periode")) {
+            return new Periode();
+        } else{
             return null;
         }
     }
