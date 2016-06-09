@@ -6,6 +6,7 @@
 package View;
 
 import Controller.DatabaseManager;
+import Model.Entiteit;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -135,9 +136,10 @@ public class HoofdView extends javax.swing.JFrame {
         });
 
         DatabaseManager dm = new DatabaseManager();
+
         try{
-            jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
-        }catch(SQLException e){
+            jTable_resultaat.setModel(dm.selectEntity("Binnenlands", "", ""));
+        }catch(Exception e){
             System.out.println("Fout bij de constructie jTable_resultaat");
             e.printStackTrace();
         }
@@ -276,15 +278,14 @@ public class HoofdView extends javax.swing.JFrame {
     private void jButton_zoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_zoekenActionPerformed
 
         try {
-            if(zoekveld.getText().isEmpty()){
+            gekozenAttribuut = "";
+            if(gekozenAttribuut.isEmpty() && zoekveld.getText().isEmpty()){
+                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
                 JOptionPane.showMessageDialog(null, "Graag het zoekveld invullen.");
-            }else{
-<<<<<<< HEAD
-                
+            }else if(zoekveld.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Graag het zoekveld invullen.");
+                }else{
               jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, zoekveld.getText()));
-=======
-              jTable_resultaat.setModel(dm.search(gekozenTabel, gekozenAttribuut, zoekveld.getText()));
->>>>>>> origin/master
             }
             System.out.println("werkt wel");
         } catch (Exception e) {
@@ -359,7 +360,7 @@ public class HoofdView extends javax.swing.JFrame {
                     System.out.println("niet verwijderd");
                 }else{
                     System.out.println("verwijderd");
-                    dm.deleteRecord(gekozenTabel, geselecteerdeVak);
+                    dm.deleteEntity(gekozenTabel, Integer.parseInt(geselecteerdeVak));
                     JOptionPane.showMessageDialog(this, "Met succes verwijderd.");
                     genereerTable();
                 }    
@@ -400,15 +401,15 @@ public class HoofdView extends javax.swing.JFrame {
         //In deze methode komen de attribuutnamen!!!
     }
     
-    
-    private void genereerTable() {
+    private void genereerTable() {      
         try {
-            jTable_resultaat.setModel(dm.getBuitenlandseStudenten());
+            jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, ""));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
+    /*
     public void getRefreshJTable(String tabelNaam){
 
         try {
@@ -417,6 +418,7 @@ public class HoofdView extends javax.swing.JFrame {
             e.printStackTrace();
         } 
     }
+    */
     
     /**
      * @param args the command line arguments

@@ -6,7 +6,12 @@
 package View;
 
 import Controller.DatabaseManager;
+import Model.BinnenlandseStudent;
+import Model.BuitenlandseStudent;
+import Model.Entiteit;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -21,6 +26,7 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7_adres;
     private javax.swing.JTextField adres;
     private DatabaseManager dm;
+    private int opleidingId;
 
     /**
      * Creates new form StudentView
@@ -307,6 +313,11 @@ public class StudentView extends javax.swing.JFrame {
         jLabel8_telefoonnummer2.setText("Telefoonnum. 2");
 
         jComboBox1_opleiding.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "hbo-ICT", "CMD", "Bedrijfskunde", "Wiskunde" }));
+        jComboBox1_opleiding.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1_opleidingActionPerformed(evt);
+            }
+        });
 
         jButton_annuleren.setText("Annuleren");
         jButton_annuleren.addActionListener(new java.awt.event.ActionListener() {
@@ -450,22 +461,17 @@ public class StudentView extends javax.swing.JFrame {
             
             if(alleVakkenControleren(studentType)){
                 
-                    String [] sqlBinnenStudent1 = new String[]{studentnummer.getText(), naam.getText(), "" + geslacht, emailadres.getText()}; 
-                    String [] sqlBinnenStudent = new String[]{studentnummer.getText(), telnr1.getText(), telnr2.getText(), universiteit.getText()};
-
+                    Entiteit binnenStudent = new BinnenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), universiteit.getText(),opleidingId);
                     dm = new DatabaseManager();
 
                     try {
                         if(!knopType){
                             System.out.println("addrecord erin! Binnen");
-                            dm.addRecord("Student", sqlBinnenStudent1);
-                            dm.addRecord("Binnenlands", sqlBinnenStudent);
+                            dm.insertEntity(binnenStudent);
                             JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                         }else{
                             System.out.println("updaterecord erin! Binnen");
-                            dm.updateRecord("Student", sqlBinnenStudent1);
-                            dm.updateRecord("Binnenlands", sqlBinnenStudent);
-                            
+                            dm.updateEntity(binnenStudent);
                             JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
                         }
                     } catch (SQLException ex) {
@@ -473,39 +479,48 @@ public class StudentView extends javax.swing.JFrame {
                         ex.printStackTrace();
                     } 
                     this.dispose();
+            }else{
+                System.out.println("Binnenlandse student toevoegen en wijzigen werkt niet. Zie StudentView.");
             }
             
         }else{  //toevoegen buitenlands student
             
             if(alleVakkenControleren(studentType)){
-
-                String [] sql1 = new String[]{studentnummer.getText(), naam.getText(), "" + geslacht, emailadres.getText()}; 
-                String [] sql = new String[]{studentnummer.getText(), adres.getText(), land, universiteit.getText()};
-                
+                Entiteit buitenlandseStudent = new BuitenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), "", adres.getText(), land, universiteit.getText());
                 dm = new DatabaseManager();
                 
                 try {
                     if(knopType){
                         System.out.println("updaterecord erin! Buiten");
-                        dm.updateRecord("Student", sql1);
-                        dm.updateRecord("Buitenlands", sql);
+                        dm.updateEntity(buitenlandseStudent);
                         JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
-                        //hv.
                     }else{
                         System.out.println("addrecord erin! Buiten");
-                        dm.addRecord("Student", sql1);
-                        dm.addRecord("Buitenlands", sql);
+                        dm.insertEntity(buitenlandseStudent);
                         JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                     }
                 } catch (SQLException ex) {
                     System.out.println("Student is niet toegevoegd in database!");    
                     ex.printStackTrace();
                 }
+                
                 this.dispose();
+            }else{
+                System.out.println("Buitenlandse student toevoegen en wijzigen werkt niet. Zie StudentView.");
             }
         }
-        hv.getRefreshJTable("Buitenlands");
+        //hv.getRefreshJTable("Buitenlands"); HIER KOMT REFRESH METHODE VAN HOOFDVIEW!!
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
+
+    private void jComboBox1_opleidingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_opleidingActionPerformed
+        String opleiding = "" + jComboBox1_opleiding.getSelectedItem();
+        try {
+            opleidingId = dm.getOpleidingID(opleiding);
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(opleiding);
+    }//GEN-LAST:event_jComboBox1_opleidingActionPerformed
 
     private boolean alleVakkenControleren(boolean studentType){
 
@@ -529,6 +544,8 @@ public class StudentView extends javax.swing.JFrame {
                 System.out.println("Vakken zijn ingevuld.");
                 status = true;
             }
+        }else{
+            System.out.println("Alle vakken methode werkt niet.");
         }
         return status;
     }
