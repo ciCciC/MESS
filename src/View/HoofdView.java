@@ -6,12 +6,7 @@
 package View;
 
 import Controller.DatabaseManager;
-import Model.Entiteit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -29,7 +24,6 @@ public class HoofdView extends javax.swing.JFrame {
     private String gekozenAttribuut;
     private String [] alleAttributen;
     private JTable selectie;
-    private String gekozenTabl2;
     
     /**
      * Creates new form HoofdView
@@ -38,10 +32,8 @@ public class HoofdView extends javax.swing.JFrame {
         super("International MESS");
         dm = new DatabaseManager();
         initComponents();
-        //test();
         genereerTabelNamenInComboBox();
-        genereerAttribuutNamenInComboBox();
-        
+
         setLocationRelativeTo(null);
     }
 
@@ -104,7 +96,7 @@ public class HoofdView extends javax.swing.JFrame {
         jLabel_titel.setText("Welkom bij International MESS");
 
         jLabel_toevoegen.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel_toevoegen.setText("Toevoegen...");
+        jLabel_toevoegen.setText("Toevoegen:");
 
         jComboBox_nieuw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,20 +208,20 @@ public class HoofdView extends javax.swing.JFrame {
                         .addComponent(jButton_zoeken)
                         .addGap(16, 16, 16)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_wijzigen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_verwijderen)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
                         .addComponent(jLabel_toevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_nieuw)
-                        .addGap(14, 14, 14)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_wijzigen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_verwijderen)
-                        .addGap(0, 338, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -256,7 +248,7 @@ public class HoofdView extends javax.swing.JFrame {
         this.nieuwGekozen = (String) nieuw.getSelectedItem();
         System.out.println("Nieuwe: " + this.nieuwGekozen);
         
-        // Deze methode is voor om een nieuw student of bedrijf toe te voegen etc.
+        // Deze methode is voor om voor de insert in een tabel.
     }//GEN-LAST:event_jComboBox_nieuwActionPerformed
 
     private void jComboBox_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_tabelActionPerformed
@@ -265,7 +257,7 @@ public class HoofdView extends javax.swing.JFrame {
         System.out.println("tabel: " + gekozenTabel);
         try {
             jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
-            // Deze methode is voor de zoekfunctie.
+            genereerAttribuutNamenInComboBox(); // genereert attrubuutnamen in attribuut combobox
         } catch (SQLException ex) {
             System.out.println("check tabel combobox action : ");
             System.out.print(ex.getMessage());
@@ -289,34 +281,23 @@ public class HoofdView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox_attribuutActionPerformed
 
     private void jButton_zoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_zoekenActionPerformed
-
         try {
-            gekozenAttribuut = "";
-            if(gekozenAttribuut.isEmpty() && zoekveld.getText().isEmpty()){
-                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
-                JOptionPane.showMessageDialog(null, "Graag het zoekveld invullen.");
-            }else if(zoekveld.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Graag het zoekveld invullen.");
-                }else{
-              jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, zoekveld.getText()));
-            }
-            System.out.println("werkt wel");
-        } catch (Exception e) {
-            System.out.println("werkt niet");
-            e.printStackTrace();
+            jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, zoekveld.getText()));
+        } catch (SQLException ex) {
+            System.out.println("Zie zoekveld functie");
+            ex.printStackTrace();
         }
-        
     }//GEN-LAST:event_jButton_zoekenActionPerformed
 
     private void jButton_nieuwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nieuwActionPerformed
         System.out.println("geklikt: " + "nieuw");
         switch (this.nieuwGekozen) {
             case "Binnenlands":
-                StudentView binnen_student = new StudentView();
+                StudentView binnen_student = new StudentView(this);
                 binnen_student.setVisible(true);
                 break;
             case "Buitenlands":
-                StudentView buiten_student = new StudentView(this.nieuwGekozen);
+                StudentView buiten_student = new StudentView(this.nieuwGekozen, this);
                 buiten_student.setVisible(true);
                 break;
             case "Bedrijf":
@@ -346,17 +327,23 @@ public class HoofdView extends javax.swing.JFrame {
             switch (gekozenTabel) {
                 case "Buitenlands":
                     {
-                        StudentView buitenandse_student = new StudentView(gekozenTabel);
+                        StudentView buitenandse_student = new StudentView(gekozenTabel, this);
                         buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat, true);
                         buitenandse_student.setVisible(true);
                         break;
                     }
                 case "Binnenlands":
                     {
-                        StudentView buitenandse_student = new StudentView();
+                        StudentView buitenandse_student = new StudentView(this);
                         buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat, true);
                         buitenandse_student.setVisible(true);
                         break;
+                    }
+                case "Bedrijf":
+                    {
+                        BedrijfView bedrijf = new BedrijfView();
+                        
+                        bedrijf.setVisible(true);
                     }
             }
         }
@@ -375,7 +362,7 @@ public class HoofdView extends javax.swing.JFrame {
                     System.out.println("verwijderd");
                     dm.deleteEntity(gekozenTabel, Integer.parseInt(geselecteerdeVak));
                     JOptionPane.showMessageDialog(this, "Met succes verwijderd.");
-                    genereerTable();
+                    getRefreshJTable();
                 }    
             }
         } catch (SQLException | ArrayIndexOutOfBoundsException e) {           
@@ -401,37 +388,20 @@ public class HoofdView extends javax.swing.JFrame {
     
     private void genereerAttribuutNamenInComboBox(){
         //Hier slaat hij alle attribuutnamen op die bestaan in een tabel.
-        String [] tabellen = new String [jTable_resultaat.getColumnCount()];
+        jComboBox_attribuut.removeAllItems();
         
         for (int i = 0; i < jTable_resultaat.getColumnCount(); i++) {
-            tabellen[i] = jTable_resultaat.getColumnName(i);
-        }
-
-        for (String tabellen1 : tabellen) {
-            jComboBox_attribuut.addItem(tabellen1);
-        }
-        jComboBox_attribuut.addItem("Alles selecteren");
-        //In deze methode komen de attribuutnamen!!!
-    }
-    
-    private void genereerTable() {      
-        try {
-            jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, ""));
-        } catch (Exception e) {
-            e.printStackTrace();
+            jComboBox_attribuut.addItem(jTable_resultaat.getColumnName(i));
         }
     }
-    
-    /*
-    public void getRefreshJTable(String tabelNaam){
 
+    public void getRefreshJTable(){
         try {
-            jTable_resultaat.setModel(dm.search(tabelNaam, "", ""));
+            jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
         } catch (Exception e) {
             e.printStackTrace();
         } 
     }
-    */
     
     /**
      * @param args the command line arguments

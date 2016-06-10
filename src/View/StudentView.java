@@ -617,13 +617,6 @@ public class StudentView extends javax.swing.JFrame {
         }
     }
     
-    public void test(){
-        
-        //dit is om een test uit te voeren.
-        //jComboBox1_opleiding.addItem();
-        
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -655,7 +648,7 @@ public class StudentView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new StudentView().setVisible(true); // View van de hhs student inschrijven
-                new StudentView("exchange").setVisible(true); // View van de buitenlandse student inschrijven
+                //new StudentView("exchange").setVisible(true); // View van de buitenlandse student inschrijven
             }
         });
     }
