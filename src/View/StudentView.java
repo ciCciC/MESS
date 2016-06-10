@@ -29,22 +29,25 @@ public class StudentView extends javax.swing.JFrame {
     private DatabaseManager dm;
     private int opleidingId;
     private String opleiding;
+    private HoofdView hv;
 
     /**
      * Creates new form StudentView
      */
-    public StudentView() {
+    public StudentView(HoofdView hv) {
         super("Nieuwe binnenlandse student");
         this.studentType = true;
+        this.hv = hv;
         opleidingId = 0;
         opleiding = "";
         initComponents();
         setLocationRelativeTo(null);
     }
     
-    public StudentView(String buitenlands){
+    public StudentView(String buitenlands, HoofdView hv){
         super("Nieuwe buitenlandse student");
         this.studentType = false;
+        this.hv = hv;
         initComponentsExchangeStudent();
         setLocationRelativeTo(null);
     }
@@ -494,7 +497,6 @@ public class StudentView extends javax.swing.JFrame {
                         if(!knopType){
                             System.out.println("addrecord erin! Binnen");
                             dm.insertEntity(binnenStudent);
-                            System.out.println("Met succes toegevoegd!!!!!!!!!!!!");
                             JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                         }else{
                             System.out.println("updaterecord erin! Binnen");
@@ -537,7 +539,7 @@ public class StudentView extends javax.swing.JFrame {
                 System.out.println("Buitenlandse student toevoegen en wijzigen werkt niet. Zie StudentView.");
             }
         }
-        //hv.getRefreshJTable("Buitenlands"); HIER KOMT REFRESH METHODE VAN HOOFDVIEW!!
+        hv.getRefreshJTable();
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 
     private void jComboBox1_opleidingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_opleidingActionPerformed
@@ -556,8 +558,6 @@ public class StudentView extends javax.swing.JFrame {
 
     private boolean alleVakkenControleren(boolean studentType){
 
-        String land = this.telnr2.getText();    // om verwarring te voorkomen, dit geldt alleen voor de buitenlandse student
-        
         boolean status = false;
         
         if(studentType){
@@ -570,7 +570,7 @@ public class StudentView extends javax.swing.JFrame {
             }
         }else if(!studentType){
             System.out.println("Buitenlandse student vakken.");
-            if(!(jRadioButton_man.isSelected() || jRadioButton_vrouw.isSelected()) || (studentnummer.getText().isEmpty() || naam.getText().isEmpty() || emailadres.getText().isEmpty() || universiteit.getText().isEmpty() || adres.getText().isEmpty() || land.isEmpty())){
+            if(!(jRadioButton_man.isSelected() || jRadioButton_vrouw.isSelected()) || (studentnummer.getText().isEmpty() || naam.getText().isEmpty() || emailadres.getText().isEmpty() || universiteit.getText().isEmpty() || adres.getText().isEmpty() || land.getText().isEmpty())){
                 JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
             }else{
                 System.out.println("Vakken zijn ingevuld.");
@@ -601,12 +601,12 @@ public class StudentView extends javax.swing.JFrame {
         if(tabel.equals("Binnenlands")){
             System.out.println("Binnenlands test");
             jButton_toevoegen.setText("Wijzigen");
-            this.setTitle("Student wijzigen");
+            this.setTitle("Binnenlands student wijzigen");
             studentnummer.setEnabled(false);
 
         }else if(tabel.equals("Buitenlands")){
             jButton_toevoegen.setText("Wijzigen");
-            this.setTitle("Student wijzigen");
+            this.setTitle("Buitenlands student wijzigen");
             System.out.println("Buitenlands test");
             studentnummer.setEnabled(false);
             
