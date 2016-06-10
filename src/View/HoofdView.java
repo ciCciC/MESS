@@ -7,7 +7,11 @@ package View;
 
 import Controller.DatabaseManager;
 import Model.Entiteit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -25,6 +29,7 @@ public class HoofdView extends javax.swing.JFrame {
     private String gekozenAttribuut;
     private String [] alleAttributen;
     private JTable selectie;
+    private String gekozenTabl2;
     
     /**
      * Creates new form HoofdView
@@ -33,7 +38,7 @@ public class HoofdView extends javax.swing.JFrame {
         super("International MESS");
         dm = new DatabaseManager();
         initComponents();
-        
+        //test();
         genereerTabelNamenInComboBox();
         genereerAttribuutNamenInComboBox();
         
@@ -136,13 +141,14 @@ public class HoofdView extends javax.swing.JFrame {
         });
 
         DatabaseManager dm = new DatabaseManager();
-
+        /*
         try{
-            jTable_resultaat.setModel(dm.selectEntity("Binnenlands", "", ""));
+            jTable_resultaat.setModel(dm.selectEntity(gekozenTabl2, "", ""));
         }catch(Exception e){
             System.out.println("Fout bij de constructie jTable_resultaat");
             e.printStackTrace();
         }
+        */
         jTable_resultaat.setAutoCreateRowSorter(true);
         /*
         jTable_resultaat.setModel(null);
@@ -257,7 +263,14 @@ public class HoofdView extends javax.swing.JFrame {
         JComboBox tabel = (JComboBox) evt.getSource();
         this.gekozenTabel = (String) tabel.getSelectedItem();
         System.out.println("tabel: " + gekozenTabel);
-        // Deze methode is voor de zoekfunctie.
+        try {
+            jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
+            // Deze methode is voor de zoekfunctie.
+        } catch (SQLException ex) {
+            System.out.println("check tabel combobox action : ");
+            System.out.print(ex.getMessage());
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jComboBox_tabelActionPerformed
 
     private void jComboBox_attribuutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_attribuutActionPerformed

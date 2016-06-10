@@ -54,7 +54,7 @@ public class BedrijfView extends javax.swing.JFrame {
         jButton_annuleren = new javax.swing.JButton();
         jButton_toevoegen = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1_bedrijfsgegevens.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1_bedrijfsgegevens.setText("Bedrijfsgegevens");

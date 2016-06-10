@@ -10,8 +10,7 @@ import Model.BinnenlandseStudent;
 import Model.BuitenlandseStudent;
 import Model.Entiteit;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -25,8 +24,11 @@ public class StudentView extends javax.swing.JFrame {
     private boolean knopType;
     private javax.swing.JLabel jLabel7_adres;
     private javax.swing.JTextField adres;
+    private javax.swing.JLabel jLabel_land;
+    private javax.swing.JTextField land;
     private DatabaseManager dm;
     private int opleidingId;
+    private String opleiding;
 
     /**
      * Creates new form StudentView
@@ -34,6 +36,8 @@ public class StudentView extends javax.swing.JFrame {
     public StudentView() {
         super("Nieuwe binnenlandse student");
         this.studentType = true;
+        opleidingId = 0;
+        opleiding = "";
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -47,30 +51,32 @@ public class StudentView extends javax.swing.JFrame {
     
     private void initComponentsExchangeStudent() {
         
-        jLabel_studentnummer = new javax.swing.JLabel();
+        jLabel_studentnummer = new javax.swing.JLabel("Studentnummer");
         studentnummer = new javax.swing.JTextField();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1_persoonsgegevens = new javax.swing.JLabel();
-        jLabel2_naam = new javax.swing.JLabel();
-        jLabel3_geslacht = new javax.swing.JLabel();
-        jLabel4_emailadres = new javax.swing.JLabel();
-        jRadioButton_man = new javax.swing.JRadioButton();
-        jRadioButton_vrouw = new javax.swing.JRadioButton();
+        jLabel2_naam = new javax.swing.JLabel("Naam");
+        jLabel3_geslacht = new javax.swing.JLabel("Geslacht");
+        jLabel4_emailadres = new javax.swing.JLabel("E-mailadres");
+        jRadioButton_man = new javax.swing.JRadioButton("Man");
+        jRadioButton_vrouw = new javax.swing.JRadioButton("Vrouw");
         naam = new javax.swing.JTextField();
         jLabel5_opleiding = new javax.swing.JLabel();
-        jLabel6_universiteit = new javax.swing.JLabel();
+        jLabel6_universiteit = new javax.swing.JLabel("Herkomst Uni");
         universiteit = new javax.swing.JTextField();
-        jLabel7_adres = new javax.swing.JLabel();
+        jLabel7_adres = new javax.swing.JLabel("Adres");
         adres = new javax.swing.JTextField();
-        jLabel7_telefoonnummer1 = new javax.swing.JLabel();
+        jLabel7_telefoonnummer1 = new javax.swing.JLabel("Vaste telnr.");
         telnr1 = new javax.swing.JTextField();
-        jLabel8_telefoonnummer2 = new javax.swing.JLabel();
+        jLabel8_telefoonnummer2 = new javax.swing.JLabel("Mobiele telnr.");
         telnr2 = new javax.swing.JTextField();
         jComboBox1_opleiding = new javax.swing.JComboBox();
         emailadres = new javax.swing.JTextField();
-        jButton_annuleren = new javax.swing.JButton();
-        jButton_toevoegen = new javax.swing.JButton();
+        jButton_annuleren = new javax.swing.JButton("Annuleren");
+        jButton_toevoegen = new javax.swing.JButton("Toevoegen");
+        jLabel_land = new javax.swing.JLabel("Land");
+        land = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,39 +88,29 @@ public class StudentView extends javax.swing.JFrame {
         
         jRadioButton_man.setSelected(false);
         buttonGroup1.add(jRadioButton_man);
-        jRadioButton_man.setText("Man");
 
         jRadioButton_vrouw.setSelected(false);
         buttonGroup1.add(jRadioButton_vrouw);
-        jRadioButton_vrouw.setText("Vrouw");
         
         jLabel_studentnummer.setForeground(new java.awt.Color(0,0,0));
-        jLabel_studentnummer.setText("Studentnummer");
         
         jLabel2_naam.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2_naam.setText("Naam");
 
         jLabel3_geslacht.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel4_emailadres.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4_emailadres.setText("E-mailadres");
 
         jLabel6_universiteit.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6_universiteit.setText("Herkomst Uni");
         
         jLabel7_telefoonnummer1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7_telefoonnummer1.setText("Telefoonnummer");
         
         jLabel7_adres.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7_adres.setText("Adres");
 
         jLabel8_telefoonnummer2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8_telefoonnummer2.setText("Land");
         
         //jComboBox1_opleiding.setEnabled(false);
         jComboBox1_opleiding.setVisible(false);
         
-        jButton_annuleren.setText("Annuleren");
         jButton_annuleren.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +118,6 @@ public class StudentView extends javax.swing.JFrame {
             }
         });
 
-        jButton_toevoegen.setText("Toevoegen");
         jButton_toevoegen.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,15 +133,23 @@ public class StudentView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8_telefoonnummer2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_land, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton_toevoegen)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton_annuleren))
-                            .addComponent(telnr2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(land, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1_persoonsgegevens)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7_telefoonnummer1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telnr1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))  
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8_telefoonnummer2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telnr2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))    
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7_adres, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -216,8 +219,16 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(adres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_land, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(land, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7_telefoonnummer1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telnr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8_telefoonnummer2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telnr2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telnr2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))    
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_annuleren)
@@ -233,7 +244,7 @@ public class StudentView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)//343
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)//343
         );
 
         pack();
@@ -265,6 +276,7 @@ public class StudentView extends javax.swing.JFrame {
         telnr1 = new javax.swing.JTextField();
         jLabel8_telefoonnummer2 = new javax.swing.JLabel();
         telnr2 = new javax.swing.JTextField();
+        DatabaseManager dm = new DatabaseManager();
         jComboBox1_opleiding = new javax.swing.JComboBox();
         emailadres = new javax.swing.JTextField();
         jButton_annuleren = new javax.swing.JButton();
@@ -307,12 +319,27 @@ public class StudentView extends javax.swing.JFrame {
         jLabel6_universiteit.setText("Uitgaans Uni");
 
         jLabel7_telefoonnummer1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7_telefoonnummer1.setText("Telefoonnum. 1");
+        jLabel7_telefoonnummer1.setText("Vaste telnr.");
 
         jLabel8_telefoonnummer2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8_telefoonnummer2.setText("Telefoonnum. 2");
+        jLabel8_telefoonnummer2.setText("Mobiele telnr.");
 
-        jComboBox1_opleiding.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "hbo-ICT", "CMD", "Bedrijfskunde", "Wiskunde" }));
+        try{
+            String [] opleidingen = new String[dm.getOpleidingNamen().size()];
+            for(int i = 0; i < opleidingen.length; i++){
+                opleidingen[i] = dm.getOpleidingNamen().get(i);
+                System.out.println(opleidingen[i]);
+            }
+
+            for(int i = 0; i < opleidingen.length; i++){
+                jComboBox1_opleiding.addItem(opleidingen[i]);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        /*
+        jComboBox1_opleiding.setModel(new javax.swing.DefaultComboBoxModel(opleidingen));
+        */
         jComboBox1_opleiding.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1_opleidingActionPerformed(evt);
@@ -451,9 +478,7 @@ public class StudentView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_annulerenActionPerformed
 
     private void jButton_toevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_toevoegenActionPerformed
-        HoofdView hv = new HoofdView();
-        String land = this.telnr2.getText();    // om verwarring te voorkomen, dit geldt alleen voor de buitenlandse student
-        
+
         char geslacht = '?';
         if(jRadioButton_man.isSelected()){geslacht = 'M';}else if(jRadioButton_vrouw.isSelected()){geslacht = 'V';}
         
@@ -462,12 +487,14 @@ public class StudentView extends javax.swing.JFrame {
             if(alleVakkenControleren(studentType)){
                 
                     Entiteit binnenStudent = new BinnenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), universiteit.getText(),opleidingId);
+                    
                     dm = new DatabaseManager();
 
                     try {
                         if(!knopType){
                             System.out.println("addrecord erin! Binnen");
                             dm.insertEntity(binnenStudent);
+                            System.out.println("Met succes toegevoegd!!!!!!!!!!!!");
                             JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                         }else{
                             System.out.println("updaterecord erin! Binnen");
@@ -475,7 +502,7 @@ public class StudentView extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
                         }
                     } catch (SQLException ex) {
-                        System.out.println("Student is niet toegevoegd in database!");    
+                        System.out.println("Student is niet gewijzigd of toegevoegd in database!");    
                         ex.printStackTrace();
                     } 
                     this.dispose();
@@ -486,7 +513,8 @@ public class StudentView extends javax.swing.JFrame {
         }else{  //toevoegen buitenlands student
             
             if(alleVakkenControleren(studentType)){
-                Entiteit buitenlandseStudent = new BuitenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), "", adres.getText(), land, universiteit.getText());
+                Entiteit buitenlandseStudent = new BuitenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), "", adres.getText(), land.getText(), universiteit.getText());
+                
                 dm = new DatabaseManager();
                 
                 try {
@@ -513,13 +541,17 @@ public class StudentView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 
     private void jComboBox1_opleidingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_opleidingActionPerformed
-        String opleiding = "" + jComboBox1_opleiding.getSelectedItem();
+        dm = new DatabaseManager();
+        JComboBox temp = (JComboBox) evt.getSource();
         try {
+            opleiding = "" + temp.getSelectedItem();
             opleidingId = dm.getOpleidingID(opleiding);
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | NullPointerException ex) {
+            System.out.println("Check combobox opleiding action knop");
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
-        System.out.println(opleiding);
+        
     }//GEN-LAST:event_jComboBox1_opleidingActionPerformed
 
     private boolean alleVakkenControleren(boolean studentType){
@@ -556,6 +588,7 @@ public class StudentView extends javax.swing.JFrame {
         
         for (int i = 0; i < row.length; i++) {
             row[i] = "" + studentTable.getValueAt(studentTable.getSelectedRow(), i);
+            System.out.println("Row: " + row[i]);
             if(row[i].equals("M")){
                 jRadioButton_man.setSelected(true);
             }else if(row[i].equals("V")){
@@ -568,18 +601,27 @@ public class StudentView extends javax.swing.JFrame {
         if(tabel.equals("Binnenlands")){
             System.out.println("Binnenlands test");
             jButton_toevoegen.setText("Wijzigen");
+            this.setTitle("Student wijzigen");
             studentnummer.setEnabled(false);
 
         }else if(tabel.equals("Buitenlands")){
             jButton_toevoegen.setText("Wijzigen");
+            this.setTitle("Student wijzigen");
             System.out.println("Buitenlands test");
             studentnummer.setEnabled(false);
             
             studentnummer.setText(row[0]); naam.setText(row[1]); emailadres.setText(row[3]); universiteit.setText(row[6]); 
-            adres.setText(row[4]); telnr1.setText(row[0]); telnr2.setText(row[5]);
+            adres.setText(row[4]); land.setText(row[5]); telnr1.setText("Onbekend"); telnr2.setText("Onbekend");
         }else{
             System.out.println("Werkt niet, zie studentView onder studentWijzigen methode!");
         }
+    }
+    
+    public void test(){
+        
+        //dit is om een test uit te voeren.
+        //jComboBox1_opleiding.addItem();
+        
     }
     
     /**
@@ -612,7 +654,7 @@ public class StudentView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentView().setVisible(true); // View van de hhs student inschrijven
+                //new StudentView().setVisible(true); // View van de hhs student inschrijven
                 new StudentView("exchange").setVisible(true); // View van de buitenlandse student inschrijven
             }
         });
