@@ -14,13 +14,16 @@ import java.sql.SQLException;
  * @author Ruben
  */
 public class Contactpersoon implements Entiteit {
-    
+
     private int ID;
     private String naam;
     private String email;
     private String telNr;
-    
-    public Contactpersoon() {};
+
+    public Contactpersoon() {
+    }
+
+    ;
     
     public Contactpersoon(int ID, String naam, String email, String telNr) {
         this.ID = ID;
@@ -28,68 +31,83 @@ public class Contactpersoon implements Entiteit {
         this.email = email;
         this.telNr = telNr;
     }
-    
+
     public int getContactID() {
         return ID;
     }
-    
+
     public String getContactNaam() {
         return naam;
     }
-    
+
     public String getContactEmail() {
         return email;
     }
-    
+
     public String getContactTelNr() {
         return telNr;
     }
-    
+
     public String InsertContactpersoon() {
-        return "INSERT INTO Contactpersoon VALUES('" + 
-                this.getContactID() + "', '" +
-                this.getContactNaam() + "', '" +
-                this.getContactEmail() + "', '" +
-                this.getContactTelNr() + "');";
-}
+        return "INSERT INTO Contactpersoon VALUES('"
+                + this.getContactID() + "', '"
+                + this.getContactNaam() + "', '"
+                + this.getContactEmail() + "', '"
+                + this.getContactTelNr() + "');";
+    }
 
     @Override
     public String getInsertSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "INSERT INTO Contactpersoon (naam, emailadres, telefoonnummer) VALUES (?, ? , ?);";
     }
 
     @Override
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, this.naam);
+        stmt.setString(2, this.email);
+        stmt.setString(3, this.telNr);
+        return stmt;
     }
 
     @Override
     public String getUpdateSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "UPDATE Contactpersoon SET naam = ?, emailadres = ?, telefoonnummer = ? WHERE contact_id = ?";
     }
 
     @Override
     public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, this.naam);
+        stmt.setString(2, this.email);
+        stmt.setString(3, this.telNr);
+        stmt.setInt(4, this.ID);
+        return stmt;
     }
 
     @Override
     public String getDeleteSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "DELETE from Contactpersoon WHERE contact_id = ?";
     }
 
     @Override
     public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setInt(1, keyValue);
+        return stmt;
     }
 
     @Override
     public String getSelectSQL(String columnName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String SQL = "";
+        if (columnName.isEmpty()) {
+            SQL = "SELECT * FROM Contactpersoon";
+        } else {
+            SQL = "SELECT * FROM Contactpersoon WHERE " + columnName + " LIKE ?";
+        }
+        return SQL;
     }
 
     @Override
     public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, "%" + columnInput + "%");
+        return stmt;
     }
 }
