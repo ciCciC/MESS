@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author Joep
  */
 public class Onderwijseenheid implements Entiteit{
-    private String soort;
+    private int ond_id;
     private int studiepunten; 
     private String soort_studie;
     private int bedrijf_id;
@@ -22,52 +22,63 @@ public class Onderwijseenheid implements Entiteit{
     
     public Onderwijseenheid() {};
     
-    public Onderwijseenheid(String soort, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid) {
-        this.soort = soort;
+    public Onderwijseenheid(int ond_id, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid) {
+        this.ond_id = ond_id;
         this.studiepunten = studiepunten;
-        this.soort_studie = soort_studie;
+        this.soort_studie = soort_studie; //Minon/european summer school etc;
         this.bedrijf_id = bedrijf_id;
         this.typeonderwijseenheid = typeonderwijseenheid;
     }
 
-    @Override
     public String getInsertSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "INSERT INTO Onderwijseenheid (studiepunten, soort_studie, bedrijf_id, typeonderwijseenheid)"
+                + " VALUES (?, ?, ?, ?);";
     }
 
-    @Override
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setInt(1, this.studiepunten);
+        stmt.setString(2, this.soort_studie);
+        stmt.setInt(3, this.bedrijf_id);
+        stmt.setString(4, this.typeonderwijseenheid);
+        return stmt;
     }
-
-    @Override
+    
     public String getUpdateSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
+        return "UPDATE Onderwijseenheid SET studiepunten = ?, soort_studie = ?, bedrijf_id = ?, typeonderwijseenheid= ?"
+                + "WHERE ond_id = ?";
+                
+    }    
     public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setInt(1, this.studiepunten);
+        stmt.setString(2, this.soort_studie);
+        stmt.setInt(3, this.bedrijf_id);
+        stmt.setString(4, this.typeonderwijseenheid);
+        stmt.setInt(5, this.ond_id);
+        return stmt;
     }
-
-    @Override
+    
     public String getDeleteSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "DELETE FROM Onderwijseenheid WHERFE ond_id = ?";
     }
 
-    @Override
     public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setInt(1, keyValue);
+        return stmt;
     }
-
-    @Override
+    
     public String getSelectSQL(String columnName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String SQL = "";
+        if(columnName.isEmpty()) {
+            SQL = "SELECT * FROM Onderwijseenheid";
+        }else{
+            SQL = "SELECT * FROM Onderwijseenheid WHERE " + columnName + " LIKE ?";
+        }
+        return SQL;
     }
 
-    @Override
     public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, columnInput);
+        return stmt;
     }
     
 }

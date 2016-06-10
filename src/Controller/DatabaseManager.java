@@ -91,8 +91,10 @@ public class DatabaseManager {
             sql = entiteit.getSelectSQL(columnName);
             stmt = con.prepareStatement(sql);
             stmt.setString(1, "%" + columnInput + "%");
-        }        
+        }
+        System.out.println(stmt.toString());
         ResultSet rs = stmt.executeQuery();
+        
         DefaultTableModel table = this.buildTableModel(rs);
         
         con.close();

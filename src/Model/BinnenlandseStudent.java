@@ -80,12 +80,12 @@ public class BinnenlandseStudent extends Student implements Entiteit{
             columnName = columnName.toLowerCase();
             if(columnName.equals("naam") || columnName.equals("geslacht") || columnName.equals("adres")) {
                 SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                        "B.uitgaans_uni, B.opleiding_id FROM Student S join Buitenlands B " +
+                        "B.uitgaans_uni, B.opleiding_id FROM Student S join Binnenlands B " +
                         "ON S.studentnummer = B.studentnummer WHERE S." + columnName + " LIKE ?";
             } else 
             {
             SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                    "B.uitgaans_uni, B.opleiding_id FROM Student S join Buitenlands B " + 
+                    "B.uitgaans_uni, B.opleiding_id FROM Student S join Binnenlands B " + 
                     "ON S.studentnummer = B.studentnummer WHERE B." + columnName + " LIKE ?";
             }            
         }        

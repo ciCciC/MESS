@@ -72,7 +72,8 @@ public class Student{
         PreparedStatement stmt = con.prepareStatement(SQL);
         stmt = this.getInsertStudentStatement(stmt);
         System.out.println(stmt.toString());
-        stmt.execute();       
+        stmt.execute();
+        System.out.println("insertStudent reached");
         stmt.close();
     }
     

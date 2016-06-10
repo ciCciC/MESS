@@ -8,6 +8,7 @@
 package Controller;
 
 import Model.Bedrijf;
+import Model.BinnenlandseStudent;
 import static com.sun.org.apache.bcel.internal.Constants.WIDE;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -27,9 +28,10 @@ public class testTable extends javax.swing.JFrame {
         
         
             try {
-                Bedrijf bedrijf = new Bedrijf(2, "Dunder Mifflin", " 13927 Saticoy", "Panorama City", "USA");
-                DBM.deleteEntity("buitenlands", 1);
-                jTable1.setModel(DBM.selectEntity("Bedrijf", "", ""));
+                BinnenlandseStudent student2 = new BinnenlandseStudent("12345", "Kees Mulder", 'm', "joep1995@gmail.com", 
+                    "0610454701", "uitgaandeUni", 1);
+               //DBM.deleteEntity("buitenlands", 1);
+                jTable1.setModel(DBM.selectEntity("binnenlands", "uitgaans_uni", "HHS"));
                 
                 /*String[] student = new String[jTable1.getColumnCount()];
                 for(int i=0; i<jTable1.getColumnCount(); i++) {
