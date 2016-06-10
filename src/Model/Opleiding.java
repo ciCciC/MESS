@@ -54,13 +54,14 @@ public class Opleiding implements Entiteit{
 
     @Override
     public String getUpdateSQL() {
-        return "UPDATE Opleiding SET naam = ? WHERE opleiding_id = ?";
+        return "UPDATE Opleiding SET naam = ?, contact_id = ? WHERE opleiding_id = ?";
     }
 
     @Override
     public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException {
         stmt.setString(1, this.naam);
-        stmt.setInt(2, this.ID);
+        stmt.setInt(2, this.contact_id);
+        stmt.setInt(3, this.ID);
         return stmt;
     }
 
