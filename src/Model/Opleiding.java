@@ -43,41 +43,52 @@ public class Opleiding implements Entiteit{
 
     @Override
     public String getInsertSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "INSERT INTO Opleiding (naam) VALUES (?);";
     }
 
     @Override
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, this.naam);
+        return stmt;
     }
 
     @Override
     public String getUpdateSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "UPDATE Opleiding SET naam = ? WHERE opleiding_id = ?";
     }
 
     @Override
     public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, this.naam);
+        stmt.setInt(2, this.ID);
+        return stmt;
     }
 
     @Override
     public String getDeleteSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "DELETE from Opleiding WHERE opleiding_id = ?";
     }
 
     @Override
     public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setInt(1, keyValue);
+        return stmt;
     }
 
     @Override
     public String getSelectSQL(String columnName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String SQL = "";
+        if (columnName.isEmpty()) {
+            SQL = "SELECT * FROM Opleiding";
+        } else {
+            SQL = "SELECT * FROM Opleiding WHERE " + columnName + " LIKE ?";
+        }
+        return SQL;
     }
 
     @Override
     public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, "%" + columnInput + "%");
+        return stmt;
     }
 }
