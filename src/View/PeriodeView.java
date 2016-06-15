@@ -5,6 +5,10 @@
  */
 package View;
 
+import Controller.DatabaseManager;
+import Model.Entiteit;
+import Model.Periode;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,12 +16,18 @@ import javax.swing.JOptionPane;
  * @author koray
  */
 public class PeriodeView extends javax.swing.JFrame {
-
+    private String beginDatum;
+    private String eindDatum;
+    private DatabaseManager dm;
+    
     /**
      * Creates new form PeriodeView
      */
     public PeriodeView() {
         super("Nieuwe periode");
+        this.beginDatum = "";
+        this.eindDatum = "";
+        this.dm = new DatabaseManager();
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -34,11 +44,17 @@ public class PeriodeView extends javax.swing.JFrame {
         jLabel1_periodegegevens = new javax.swing.JLabel();
         jLabel2_begindatum = new javax.swing.JLabel();
         jLabel4_einddatum = new javax.swing.JLabel();
-        begindatum = new javax.swing.JTextField();
-        einddatum = new javax.swing.JTextField();
-        jLabel4_einddatum1 = new javax.swing.JLabel();
         jButton_toevoegen = new javax.swing.JButton();
         jButton_annuleren = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1_dag = new javax.swing.JComboBox();
+        jComboBox2_dag = new javax.swing.JComboBox();
+        jComboBox1_maand = new javax.swing.JComboBox();
+        jComboBox2_maand = new javax.swing.JComboBox();
+        jComboBox1_jaar = new javax.swing.JComboBox();
+        jComboBox2_jaar = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -46,14 +62,13 @@ public class PeriodeView extends javax.swing.JFrame {
         jLabel1_periodegegevens.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1_periodegegevens.setText("Periodegegevens");
 
+        jLabel2_begindatum.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel2_begindatum.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2_begindatum.setText("Begindatum");
 
+        jLabel4_einddatum.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel4_einddatum.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4_einddatum.setText("Einddatum");
-
-        jLabel4_einddatum1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4_einddatum1.setText("voorbeeld 02-06-2016");
 
         jButton_toevoegen.setText("Toevoegen");
         jButton_toevoegen.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +84,36 @@ public class PeriodeView extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Dag");
+
+        jLabel2.setText("Maand");
+
+        jLabel3.setText("Jaar");
+
+        for(int i = 1; i < 32; i++){
+            jComboBox1_dag.addItem(i);
+        }
+
+        for(int i = 1; i < 32; i++){
+            jComboBox2_dag.addItem(i);
+        }
+
+        for(int i = 1; i < 13; i++){
+            jComboBox1_maand.addItem(i);
+        }
+
+        for(int i = 1; i < 13; i++){
+            jComboBox2_maand.addItem(i);
+        }
+
+        for(int i = 2016; i < 2026; i++){
+            jComboBox1_jaar.addItem(i);
+        }
+
+        for(int i = 2016; i < 2026; i++){
+            jComboBox2_jaar.addItem(i);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,44 +121,70 @@ public class PeriodeView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1_periodegegevens)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton_toevoegen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_annuleren))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4_einddatum, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2_begindatum, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4_einddatum, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2_begindatum, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox1_dag, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox2_dag, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1_periodegegevens)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(einddatum, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(begindatum, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel4_einddatum1))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_toevoegen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_annuleren)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComboBox1_maand, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox2_maand, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComboBox1_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox2_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1_periodegegevens, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1_periodegegevens, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(5, 5, 5)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2_begindatum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(begindatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jComboBox1_dag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1_maand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4_einddatum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(einddatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4_einddatum1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jComboBox2_dag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2_maand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_annuleren)
                     .addComponent(jButton_toevoegen))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,20 +195,25 @@ public class PeriodeView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_annulerenActionPerformed
 
     private void jButton_toevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_toevoegenActionPerformed
-        if(alleVakkenControleren()){
-            System.out.println(begindatum.getText());
-            System.out.println(einddatum.getText());
-            
+        
+        beginDatum = jComboBox1_jaar.getSelectedItem() + "-" + jComboBox1_maand.getSelectedItem() + "-" + jComboBox1_dag.getSelectedItem();
+        eindDatum = jComboBox2_jaar.getSelectedItem() + "-" + jComboBox2_maand.getSelectedItem() + "-" + jComboBox2_dag.getSelectedItem();
+        
+        Entiteit periode = new Periode(0, beginDatum, eindDatum);
+        // Get insert methode bestaat nog niet vandaar dat dit nog niet werkt!!!
+        try {
+            dm.insertEntity(periode);
             JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
+            this.dispose();   
+        } catch (SQLException e) {
+            System.out.println("DM werkt niet, zie toevoegen functie van PeriodeView.");
+            e.printStackTrace();
         }
+        
+        //System.out.println("Begin periode: " + beginDatum);
+        //System.out.println("Eind periode: " + eindDatum);
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 
-    private boolean alleVakkenControleren(){
-        return !this.begindatum.getText().isEmpty() || this.einddatum.getText().isEmpty();
-    }
     
     /**
      * @param args the command line arguments
@@ -175,13 +251,19 @@ public class PeriodeView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField begindatum;
-    private javax.swing.JTextField einddatum;
     private javax.swing.JButton jButton_annuleren;
     private javax.swing.JButton jButton_toevoegen;
+    private javax.swing.JComboBox jComboBox1_dag;
+    private javax.swing.JComboBox jComboBox1_jaar;
+    private javax.swing.JComboBox jComboBox1_maand;
+    private javax.swing.JComboBox jComboBox2_dag;
+    private javax.swing.JComboBox jComboBox2_jaar;
+    private javax.swing.JComboBox jComboBox2_maand;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel1_periodegegevens;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel2_begindatum;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4_einddatum;
-    private javax.swing.JLabel jLabel4_einddatum1;
     // End of variables declaration//GEN-END:variables
 }

@@ -64,6 +64,9 @@ public class HoofdView extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_resultaat = new javax.swing.JTable();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel_inschrijven = new javax.swing.JLabel();
+        jButton_inschrijven = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1080, 820));
@@ -157,6 +160,11 @@ public class HoofdView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable_resultaat);
 
+        jLabel_inschrijven.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel_inschrijven.setText("Inschrijven:");
+
+        jButton_inschrijven.setText("Inschrijven");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -181,8 +189,11 @@ public class HoofdView extends javax.swing.JFrame {
                             .addComponent(jButton_verwijderen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton_wijzigen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_nieuw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.Alignment.LEADING, 0, 143, Short.MAX_VALUE)
+                            .addComponent(jButton_nieuw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_inschrijven, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_inschrijven, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(34, 43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -220,6 +231,12 @@ public class HoofdView extends javax.swing.JFrame {
                         .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_nieuw)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_inschrijven)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_inschrijven)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE))
                 .addContainerGap())
@@ -257,6 +274,7 @@ public class HoofdView extends javax.swing.JFrame {
         System.out.println("tabel: " + gekozenTabel);
         try {
             jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
+            jComboBox_attribuut.setSelectedIndex(-1);
             genereerAttribuutNamenInComboBox(); // genereert attrubuutnamen in attribuut combobox
         } catch (SQLException ex) {
             System.out.println("check tabel combobox action : ");
@@ -268,8 +286,22 @@ public class HoofdView extends javax.swing.JFrame {
     private void jComboBox_attribuutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_attribuutActionPerformed
         JComboBox attribuut = (JComboBox) evt.getSource();
         this.gekozenAttribuut = "" + attribuut.getSelectedItem();
-        System.out.println("attribuut: " + gekozenAttribuut);
+        /*
+        try {
+            if(gekozenAttribuut.isEmpty()){
+                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
+            }else{
+                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, ""));
+            }
+            //jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, ""));
+            System.out.println("Attribuut: " + gekozenAttribuut);
+        } catch (SQLException e) {
+            System.out.println("Zie attribuutActionPerformed.");
+            e.printStackTrace();
+        }
+        */
         
+        /*
         alleAttributen = new String[attribuut.getItemCount()];
         if(gekozenAttribuut.equals("Alles selecteren")){
             for (int i = 0; i < attribuut.getItemCount(); i++) {
@@ -277,12 +309,17 @@ public class HoofdView extends javax.swing.JFrame {
                 System.out.println("Test alles selecteren: " + alleAttributen[i]);
             }
         }
+        */
         // Hiermee kan je alle attribuutnamen selecteren. Deze methode is voor de zoekfunctie.
     }//GEN-LAST:event_jComboBox_attribuutActionPerformed
 
     private void jButton_zoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_zoekenActionPerformed
         try {
-            jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, zoekveld.getText()));
+            if(zoekveld.getText().isEmpty()){
+                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, "")); // Alle rijen van één attribuut zien
+            }else{
+                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, zoekveld.getText())); // Alleen rijen zien van de zoekactie
+            }
         } catch (SQLException ex) {
             System.out.println("Zie zoekveld functie");
             ex.printStackTrace();
@@ -301,7 +338,7 @@ public class HoofdView extends javax.swing.JFrame {
                 buiten_student.setVisible(true);
                 break;
             case "Bedrijf":
-                BedrijfView bedrijf = new BedrijfView();
+                BedrijfView bedrijf = new BedrijfView(this);
                 bedrijf.setVisible(true);
                 break;
             case "Periode":
@@ -341,8 +378,8 @@ public class HoofdView extends javax.swing.JFrame {
                     }
                 case "Bedrijf":
                     {
-                        BedrijfView bedrijf = new BedrijfView();
-                        
+                        BedrijfView bedrijf = new BedrijfView(this);
+                        bedrijf.bedrijfWijzigen(true, jTable_resultaat);
                         bedrijf.setVisible(true);
                     }
             }
@@ -357,7 +394,7 @@ public class HoofdView extends javax.swing.JFrame {
             }else{
                 int keuze = JOptionPane.showConfirmDialog(null, "Wilt u, " + geselecteerdeVak + ", verwijderen?", "Verwijderen", JOptionPane.YES_NO_OPTION);
                 if(keuze == 1){
-                    System.out.println("niet verwijderd");
+                    System.out.println("Niet verwijderd");
                 }else{
                     System.out.println("verwijderd");
                     dm.deleteEntity(gekozenTabel, Integer.parseInt(geselecteerdeVak));
@@ -377,7 +414,7 @@ public class HoofdView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_resultaatMousePressed
 
     private void genereerTabelNamenInComboBox(){
-        String tabellen [] = {"Binnenlands", "Buitenlands", "Bedrijf", "Opleiding", "Onderwijseenheid", "Contactpersoon"}; // Dit is een voorbeeld.
+        String tabellen [] = {"Binnenlands", "Buitenlands", "Bedrijf", "Periode", "Opleiding", "Onderwijseenheid", "Contactpersoon"}; // Dit is een voorbeeld.
 
         for (String tabellen1 : tabellen) {
             jComboBox_tabel.addItem(tabellen1);
@@ -389,7 +426,7 @@ public class HoofdView extends javax.swing.JFrame {
     private void genereerAttribuutNamenInComboBox(){
         //Hier slaat hij alle attribuutnamen op die bestaan in een tabel.
         jComboBox_attribuut.removeAllItems();
-        
+        jComboBox_attribuut.addItem("");
         for (int i = 0; i < jTable_resultaat.getColumnCount(); i++) {
             jComboBox_attribuut.addItem(jTable_resultaat.getColumnName(i));
         }
@@ -440,6 +477,7 @@ public class HoofdView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_inschrijven;
     private javax.swing.JButton jButton_nieuw;
     private javax.swing.JButton jButton_verwijderen;
     private javax.swing.JButton jButton_wijzigen;
@@ -447,6 +485,7 @@ public class HoofdView extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox_attribuut;
     private javax.swing.JComboBox jComboBox_nieuw;
     private javax.swing.JComboBox jComboBox_tabel;
+    private javax.swing.JLabel jLabel_inschrijven;
     private javax.swing.JLabel jLabel_selecteer_attribuut;
     private javax.swing.JLabel jLabel_selecteer_tabel;
     private javax.swing.JLabel jLabel_titel;
@@ -456,6 +495,7 @@ public class HoofdView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable_resultaat;
     private javax.swing.JTextField zoekveld;
     // End of variables declaration//GEN-END:variables

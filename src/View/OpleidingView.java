@@ -108,12 +108,12 @@ public class OpleidingView extends javax.swing.JFrame {
     private void toevoegenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegenKnopActionPerformed
         // TODO add your handling code here:
         if(alleVakkenControleren()){
+            JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
+        }else{
             System.out.println(naamText.getText());
             
             JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
             this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
         }
     }//GEN-LAST:event_toevoegenKnopActionPerformed
 
@@ -121,7 +121,7 @@ public class OpleidingView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private boolean alleVakkenControleren(){
-        return !this.naamText.getText().isEmpty();
+        return this.naamText.getText().isEmpty();
     }
     
     public static void main(String args[]) {
