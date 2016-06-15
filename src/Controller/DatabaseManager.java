@@ -82,11 +82,11 @@ public class DatabaseManager {
     public DefaultTableModel selectEntity(String tableName, String columnName, String columnInput) throws SQLException { 
         Connection con = this.getConnection();
         String sql = "";
-        PreparedStatement stmt = null;
+        PreparedStatement stmt = null;        
         Entiteit entiteit = this.getEntity(tableName);
-        if(columnName.isEmpty() || columnInput.isEmpty()) {
-            sql = entiteit.getSelectSQL(columnName);
-            stmt = con.prepareStatement(sql);
+        if(columnInput.isEmpty()) {
+            sql = entiteit.getSelectSQL("");
+            stmt = con.prepareStatement(sql);            
         } else {
             sql = entiteit.getSelectSQL(columnName);
             stmt = con.prepareStatement(sql);
@@ -190,9 +190,9 @@ public class DatabaseManager {
         if(entityStr.toLowerCase().equals("bedrijf")) {
             return new Bedrijf();
         } else if(entityStr.toLowerCase().equals("buitenlands")) {
-            return new BuitenlandseStudent("", "", 'm', "", "");
+            return new BuitenlandseStudent("", "", 'm', "", "", "");
         } else if(entityStr.toLowerCase().equals("binnenlands")) {
-            return new BinnenlandseStudent("", "", 'm', "", "");
+            return new BinnenlandseStudent("", "", 'm', "", "", "");
         } else if(entityStr.toLowerCase().equals("contactpersoon")) {
             return new Contactpersoon();
         } else if(entityStr.toLowerCase().equals("onderwijseenheid")) {
@@ -215,7 +215,7 @@ public class DatabaseManager {
         Vector<String> columnNames = new Vector<>();
         int columnCount = metaData.getColumnCount();
         for (int i = 1;  i <= columnCount; i++) {
-            columnNames.add(metaData.getColumnName(i));
+            columnNames.add(metaData.getColumnLabel(i));
         }
 
         // data of the table

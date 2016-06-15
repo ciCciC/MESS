@@ -21,16 +21,16 @@ public class Student{
     private String naam;
     private char geslacht;
     private String email;
-    private ArrayList<String> telefoonNummers;
+    private String vastTel;
+    private String mobielTel;
     
-    public Student(String studentNr, String naam, char geslacht, String email, String telNr) {
+    public Student(String studentNr, String naam, char geslacht, String email, String vastTel, String mobielTel) {
         this.studentNummer = studentNr;
         this.naam = naam;
         this.geslacht = Character.toUpperCase(geslacht);
         this.email = email;
-        telefoonNummers = new ArrayList<String>();
-        telefoonNummers.add(telNr);
-    }
+        this.vastTel = vastTel;
+        this.mobielTel = mobielTel;     }
     
     public String getStudentNummer() {
         return this.studentNummer;
@@ -47,21 +47,34 @@ public class Student{
     public String getEmail() {
         return this.email;
     }
-    public ArrayList<String> getTelefoonNummers() {
-        return this.telefoonNummers;
+    
+    public String getVastTel() {
+        return this.vastTel;
     }
+    
+    public String getMobielTel() {
+        return this.mobielTel;
+    }    
     
     public String getStudentInsertSQL() {
-        return "INSERT INTO Student VALUES (?, ?, ?, ?); ";
-       
+        return "INSERT INTO Student VALUES (?, ?, ?, ?, ?, ?); ";       
     }
     
-    public PreparedStatement getInsertStudentStatement(PreparedStatement stmt) throws SQLException {
-        
+    public PreparedStatement getInsertStudentStatement(PreparedStatement stmt) throws SQLException {        
         stmt.setString(1, this.studentNummer);
         stmt.setString(2, this.naam);
         stmt.setString(3, "" + this.geslacht);
         stmt.setString(4, this.email);
+        if(this.vastTel.isEmpty()) {
+            stmt.setString(5, "-");
+        } else {
+            stmt.setString(5, this.vastTel);
+        }
+         if(this.mobielTel.isEmpty()) {
+            stmt.setString(6, "-");
+        } else {
+            stmt.setString(6, this.mobielTel);
+        }
         return stmt;       
     }
     
@@ -78,14 +91,25 @@ public class Student{
     }
     
     public String getUpdateStudentSQL() {
-        return "UPDATE Student SET naam = ?, geslacht = ?, emailadres = ? WHERE studentnummer = ?";       
+        return "UPDATE Student SET naam = ?, geslacht = ?, emailadres = ?, vasttel = ?, mobieltel = ? "
+                + " WHERE studentnummer = ?";       
     }
     
     public PreparedStatement getUpdateStudentStatement(PreparedStatement stmt) throws SQLException {        
         stmt.setString(1, this.naam);
         stmt.setString(2, "" + this.geslacht);
         stmt.setString(3, this.email);
-        stmt.setString(4, this.studentNummer);
+        if(this.vastTel.isEmpty()) {
+            stmt.setString(4, "-");
+        } else {
+            stmt.setString(4, this.vastTel);
+        }
+        if(this.mobielTel.isEmpty()) {
+            stmt.setString(5, "-");
+        } else {
+            stmt.setString(5, this.mobielTel);
+        }
+        stmt.setString(6, this.studentNummer);
         return stmt;       
     }
     

@@ -20,13 +20,14 @@ public class BuitenlandseStudent extends Student implements Entiteit{
     private String land;
     private String herkomstUni;
     
-    public BuitenlandseStudent(String studentNr, String naam, char geslacht, String email, String telNr) {
-        super(studentNr, naam, geslacht, email, telNr);
+    public BuitenlandseStudent(String studentNr, String naam, char geslacht, String email, String vastTel, String mobielTel) {
+        super(studentNr, naam, geslacht, email, vastTel, mobielTel);
     }
         
-    public BuitenlandseStudent(String studentNr, String naam, char geslacht, String email, String telNr, String adres, String land, String herkomstUni) {
+    public BuitenlandseStudent(String studentNr, String naam, char geslacht, String email, String vastTel, String mobielTel, 
+            String adres, String land, String herkomstUni) {
         
-        super(studentNr, naam, geslacht, email, telNr);
+        super(studentNr, naam, geslacht, email, vastTel, mobielTel);
         this.adres = adres;
         this.land = land;
         this.herkomstUni = herkomstUni;        
@@ -47,8 +48,7 @@ public class BuitenlandseStudent extends Student implements Entiteit{
     
     public String getInsertSQL() {        
         return "INSERT INTO Buitenlands VALUES (?, ?, ?, ?);";            
-    }
-    
+    }   
     
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException{        
         
@@ -94,20 +94,23 @@ public class BuitenlandseStudent extends Student implements Entiteit{
     public String getSelectSQL(String columnName) {
         String SQL = "";
         if(columnName.isEmpty()) {
-            SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                    "B.adres, B.land, B.herkomst_uni FROM Student S join Buitenlands B " + 
-                    "ON S.studentnummer = B.studentnummer";
+            SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel as VasteTelefoon, "
+                    + "S.mobieltel as MobieleTelefoon, B.adres, B.land, B.herkomst_uni "
+                    + "FROM Student S join Buitenlands B ON S.studentnummer = B.studentnummer";
         } else {
             columnName = columnName.toLowerCase();
-            if(columnName.equals("naam") || columnName.equals("geslacht") || columnName.equals("adres")) {
+            if(columnName.equals("naam") || columnName.equals("geslacht") || columnName.equals("adres") || 
+                    columnName.equals("vasttel") || columnName.equals("mobieltel")) {
                 SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                        "B.adres, B.land, B.herkomst_uni FROM Student S join Buitenlands B " +
-                        "ON S.studentnummer = B.studentnummer WHERE S." + columnName + " LIKE ?";
+                        "S.vasttel as VasteTelefoon, S.mobieltel as MobieleTelefoon, B.adres, B.land, B.herkomst_uni" 
+                        + "FROM Student S join Buitenlands B ON S.studentnummer = B.studentnummer" +
+                        "WHERE S." + columnName + " LIKE ?";
             } else 
             {
             SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                    "B.adres, B.land, B.herkomst_uni FROM Student S join Buitenlands B " + 
-                    "ON S.studentnummer = B.studentnummer WHERE B." + columnName + " LIKE ?";
+                        "S.vasttel as VasteTelefoon, S.mobieltel as MobieleTelefoon, B.adres, B.land, B.herkomst_uni" 
+                        + "FROM Student S join Buitenlands B ON S.studentnummer = B.studentnummer" +
+                        "WHERE B." + columnName + " LIKE ?";
             }            
         }        
         return SQL;

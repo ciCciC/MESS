@@ -21,19 +21,19 @@ public class TestController {
     
     public static void main(String[] args) {      
     
-        BuitenlandseStudent student = new BuitenlandseStudent("15132345", "Joep Mulder", 'm', "joep1995@gmail.com", 
-              "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");
+        /*BuitenlandseStudent student = new BuitenlandseStudent("15132345", "Joep Mulder", 'm', "joep1995@gmail.com", 
+              "0610454701", "Vinkelaan 54", "Nederland", "University of Queensland");*/
         Bedrijf bedrijf = new Bedrijf(2, "Dunder Mifflin", " 13927 Saticoy", "Panorama City", "USA");
         DatabaseManager DBM = new DatabaseManager();
         BinnenlandseStudent student2 = new BinnenlandseStudent("12345", "Kees Mulder", 'm', "joep1995@gmail.com", 
-              "0610454701", "uitgaandeUni", 1);
+              "0610454701", "061234567", "uitgaandeUni", 1);
         Onderwijseenheid OndEh = new Onderwijseenheid(1, 15, "European Summer School", -1, "Studie");
                
         try {
             
             
             //DBM.updateEntity(student2);
-            DBM.insertEntity(OndEh);
+            DBM.insertEntity(student2);
             
             
         } catch(Exception e) {

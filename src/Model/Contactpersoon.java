@@ -97,6 +97,7 @@ public class Contactpersoon implements Entiteit {
     @Override
     public String getSelectSQL(String columnName) {
         String SQL = "";
+        System.out.println("aa" + columnName +"aa");
         if (columnName.isEmpty()) {
             SQL = "SELECT * FROM Contactpersoon";
         } else {
