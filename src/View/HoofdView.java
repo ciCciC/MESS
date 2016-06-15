@@ -22,7 +22,6 @@ public class HoofdView extends javax.swing.JFrame {
     private String geselecteerdeVak;
     private String gekozenTabel;
     private String gekozenAttribuut;
-    private String [] alleAttributen;
     private JTable selectie;
     
     /**
@@ -271,10 +270,9 @@ public class HoofdView extends javax.swing.JFrame {
     private void jComboBox_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_tabelActionPerformed
         JComboBox tabel = (JComboBox) evt.getSource();
         this.gekozenTabel = (String) tabel.getSelectedItem();
-        System.out.println("tabel: " + gekozenTabel);
+        System.out.println("Tabel: " + gekozenTabel);
         try {
             jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
-            jComboBox_attribuut.setSelectedIndex(-1);
             genereerAttribuutNamenInComboBox(); // genereert attrubuutnamen in attribuut combobox
         } catch (SQLException ex) {
             System.out.println("check tabel combobox action : ");
@@ -286,37 +284,15 @@ public class HoofdView extends javax.swing.JFrame {
     private void jComboBox_attribuutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_attribuutActionPerformed
         JComboBox attribuut = (JComboBox) evt.getSource();
         this.gekozenAttribuut = "" + attribuut.getSelectedItem();
-        /*
-        try {
-            if(gekozenAttribuut.isEmpty()){
-                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", ""));
-            }else{
-                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, ""));
-            }
-            //jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, ""));
-            System.out.println("Attribuut: " + gekozenAttribuut);
-        } catch (SQLException e) {
-            System.out.println("Zie attribuutActionPerformed.");
-            e.printStackTrace();
-        }
-        */
-        
-        /*
-        alleAttributen = new String[attribuut.getItemCount()];
-        if(gekozenAttribuut.equals("Alles selecteren")){
-            for (int i = 0; i < attribuut.getItemCount(); i++) {
-                alleAttributen[i] = "" + attribuut.getItemAt(i);
-                System.out.println("Test alles selecteren: " + alleAttributen[i]);
-            }
-        }
-        */
-        // Hiermee kan je alle attribuutnamen selecteren. Deze methode is voor de zoekfunctie.
+        System.out.println("Attribuut: " + gekozenAttribuut);
+
+        // Hiermee kan je een attribuutnaam selecteren. Deze methode is voor de zoekfunctie.
     }//GEN-LAST:event_jComboBox_attribuutActionPerformed
 
     private void jButton_zoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_zoekenActionPerformed
         try {
             if(zoekveld.getText().isEmpty()){
-                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, "")); // Alle rijen van één attribuut zien
+                jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, "", "")); // Alle rijen van één attribuut zien
             }else{
                 jTable_resultaat.setModel(dm.selectEntity(gekozenTabel, gekozenAttribuut, zoekveld.getText())); // Alleen rijen zien van de zoekactie
             }
@@ -350,7 +326,7 @@ public class HoofdView extends javax.swing.JFrame {
                 opleiding.setVisible(true);
                 break;
             case "Contactpersoon":
-                ContactpersoonView Contactpersoon = new ContactpersoonView();
+                ContactpersoonView Contactpersoon = new ContactpersoonView(this);
                 Contactpersoon.setVisible(true);
                 break;
         }
@@ -381,6 +357,12 @@ public class HoofdView extends javax.swing.JFrame {
                         BedrijfView bedrijf = new BedrijfView(this);
                         bedrijf.bedrijfWijzigen(true, jTable_resultaat);
                         bedrijf.setVisible(true);
+                    }
+                case "Contactpersoon":
+                    {
+                        ContactpersoonView contact = new ContactpersoonView(this);
+                        contact.contactWijzigen(true, jTable_resultaat);
+                        contact.setVisible(true);
                     }
             }
         }
@@ -426,7 +408,6 @@ public class HoofdView extends javax.swing.JFrame {
     private void genereerAttribuutNamenInComboBox(){
         //Hier slaat hij alle attribuutnamen op die bestaan in een tabel.
         jComboBox_attribuut.removeAllItems();
-        jComboBox_attribuut.addItem("");
         for (int i = 0; i < jTable_resultaat.getColumnCount(); i++) {
             jComboBox_attribuut.addItem(jTable_resultaat.getColumnName(i));
         }

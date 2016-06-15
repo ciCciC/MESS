@@ -6,18 +6,27 @@
 package View;
 
 import javax.swing.JOptionPane;
+import Controller.DatabaseManager;
+import Model.Opleiding;
+import Model.Entiteit;
+import java.sql.SQLException;
 
 /**
  *
  * @author Ruben
  */
 public class OpleidingView extends javax.swing.JFrame {
-
+    
+    private DatabaseManager dm;
+    private int contactpersoonId;
+    
     /**
      * Creates new form OpleidingView
      */
     public OpleidingView() {
         super("Nieuwe opleiding");
+        this.contactpersoonId = 0;
+        dm = new DatabaseManager();
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -32,17 +41,20 @@ public class OpleidingView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1_periodegegevens = new javax.swing.JLabel();
-        naamText = new javax.swing.JTextField();
+        naamOpleiding = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         toevoegenKnop = new javax.swing.JButton();
         annulerenKnop = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        DatabaseManager dm = new DatabaseManager();
+        jComboBox_contactpersonen = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1_periodegegevens.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1_periodegegevens.setText("Opleidinggegevens");
 
-        jLabel1.setText("Naam");
+        jLabel1.setText("Naam opleiding");
 
         toevoegenKnop.setText("Toevoegen");
         toevoegenKnop.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +70,16 @@ public class OpleidingView extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Contactpersoon");
+
+        try{
+            for(int i = 0; i < dm.getContactpersoonNamen().size(); i++){
+                jComboBox_contactpersonen.addItem(dm.getContactpersoonNamen().get(i));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -65,32 +87,40 @@ public class OpleidingView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel1_periodegegevens))
+                        .addContainerGap(53, Short.MAX_VALUE)
+                        .addComponent(toevoegenKnop)
+                        .addGap(18, 18, 18)
+                        .addComponent(annulerenKnop))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(toevoegenKnop)
-                                .addGap(18, 18, 18)
-                                .addComponent(annulerenKnop))
+                                .addComponent(jLabel1_periodegegevens)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(58, 58, 58)
-                                .addComponent(naamText)
-                                .addGap(9, 9, 9)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(naamOpleiding)
+                                    .addComponent(jComboBox_contactpersonen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1_periodegegevens, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(naamText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(naamOpleiding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox_contactpersonen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toevoegenKnop)
                     .addComponent(annulerenKnop))
@@ -101,19 +131,31 @@ public class OpleidingView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void annulerenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerenKnopActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_annulerenKnopActionPerformed
 
     private void toevoegenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegenKnopActionPerformed
-        // TODO add your handling code here:
+        try {
+            contactpersoonId = dm.getContactpersoonID("" + jComboBox_contactpersonen.getSelectedItem());
+            System.out.println("ContactId: " +contactpersoonId);
+        } catch (SQLException e) {
+            System.out.println("Check rij 141.");
+            e.printStackTrace();
+        }
+        
         if(alleVakkenControleren()){
             JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
         }else{
-            System.out.println(naamText.getText());
-            
-            JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
-            this.dispose();
+            System.out.println(naamOpleiding.getText());
+            Entiteit opleidingToevoegen = new Opleiding(0, contactpersoonId, naamOpleiding.getText());
+            try {
+                dm.insertEntity(opleidingToevoegen);
+                JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                this.dispose();
+            } catch (SQLException e) {
+                System.out.println("Fout bij toevoegen opleiding, zie opleidingView");
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_toevoegenKnopActionPerformed
 
@@ -121,7 +163,7 @@ public class OpleidingView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private boolean alleVakkenControleren(){
-        return this.naamText.getText().isEmpty();
+        return this.naamOpleiding.getText().isEmpty();
     }
     
     public static void main(String args[]) {
@@ -150,6 +192,7 @@ public class OpleidingView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new OpleidingView().setVisible(true);
             }
@@ -158,9 +201,11 @@ public class OpleidingView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annulerenKnop;
+    private javax.swing.JComboBox jComboBox_contactpersonen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel1_periodegegevens;
-    private javax.swing.JTextField naamText;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField naamOpleiding;
     private javax.swing.JButton toevoegenKnop;
     // End of variables declaration//GEN-END:variables
 }

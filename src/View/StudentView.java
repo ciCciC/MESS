@@ -28,7 +28,7 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JTextField land;
     private DatabaseManager dm;
     private int opleidingId;
-    private String opleiding;
+    private String gekozenOpleiding;
     private HoofdView hv;
 
     /**
@@ -39,7 +39,7 @@ public class StudentView extends javax.swing.JFrame {
         this.studentType = true;
         this.hv = hv;
         opleidingId = 0;
-        opleiding = "";
+        gekozenOpleiding = "";
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -331,13 +331,17 @@ public class StudentView extends javax.swing.JFrame {
             String [] opleidingen = new String[dm.getOpleidingNamen().size()];
             for(int i = 0; i < opleidingen.length; i++){
                 opleidingen[i] = dm.getOpleidingNamen().get(i);
-                System.out.println(opleidingen[i]);
+                jComboBox1_opleiding.addItem(opleidingen[i]);
             }
 
+            /*
             for(int i = 0; i < opleidingen.length; i++){
                 jComboBox1_opleiding.addItem(opleidingen[i]);
             }
+            */
+
         }catch(SQLException e){
+            System.out.println("Fout bij combobox opleiding van Binnenlandse StudentView.");
             e.printStackTrace();
         }
         /*
@@ -481,7 +485,7 @@ public class StudentView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_annulerenActionPerformed
 
     private void jButton_toevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_toevoegenActionPerformed
-
+        
         char geslacht = '?';
         if(jRadioButton_man.isSelected()){geslacht = 'M';}else if(jRadioButton_vrouw.isSelected()){geslacht = 'V';}
         
@@ -489,17 +493,21 @@ public class StudentView extends javax.swing.JFrame {
             
             if(alleVakkenControleren(studentType)){
                 
-                    Entiteit binnenStudent = new BinnenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), universiteit.getText(),opleidingId);
-                    
+                    Entiteit binnenStudent;
                     dm = new DatabaseManager();
 
                     try {
+
                         if(!knopType){
-                            System.out.println("addrecord erin! Binnen");
+                            binnenStudent = new BinnenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, 
+                            emailadres.getText(), telnr1.getText(), telnr2.getText(), universiteit.getText(), opleidingId);
+                            
                             dm.insertEntity(binnenStudent);
                             JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                         }else{
-                            System.out.println("updaterecord erin! Binnen");
+                            binnenStudent = new BinnenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, 
+                            emailadres.getText(), telnr1.getText(), telnr2.getText(), universiteit.getText(), dm.getOpleidingID("" + jComboBox1_opleiding.getSelectedItem()));
+                            
                             dm.updateEntity(binnenStudent);
                             JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
                         }
@@ -515,13 +523,13 @@ public class StudentView extends javax.swing.JFrame {
         }else{  //toevoegen buitenlands student
             
             if(alleVakkenControleren(studentType)){
-                Entiteit buitenlandseStudent = new BuitenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), "", adres.getText(), land.getText(), universiteit.getText());
+                Entiteit buitenlandseStudent = new BuitenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), telnr2.getText(), adres.getText(), land.getText(), universiteit.getText());
                 
                 dm = new DatabaseManager();
                 
                 try {
                     if(knopType){
-                        System.out.println("updaterecord erin! Buiten");
+                        System.out.println("updaterecord erin! Buiten"); // Wijzigen student
                         dm.updateEntity(buitenlandseStudent);
                         JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
                     }else{
@@ -546,8 +554,8 @@ public class StudentView extends javax.swing.JFrame {
         dm = new DatabaseManager();
         JComboBox temp = (JComboBox) evt.getSource();
         try {
-            opleiding = "" + temp.getSelectedItem();
-            opleidingId = dm.getOpleidingID(opleiding);
+            gekozenOpleiding = "" + temp.getSelectedItem();
+            opleidingId = dm.getOpleidingID(gekozenOpleiding);
         } catch (SQLException | NullPointerException ex) {
             System.out.println("Check combobox opleiding action knop");
             System.out.println(ex.getMessage());
@@ -584,14 +592,13 @@ public class StudentView extends javax.swing.JFrame {
     
     public void studentWijzigen(String tabel, JTable studentTable, boolean knopType){
         this.knopType = knopType;
-        String row [] = new String[studentTable.getColumnCount()];
+        String col [] = new String[studentTable.getColumnCount()];
         
-        for (int i = 0; i < row.length; i++) {
-            row[i] = "" + studentTable.getValueAt(studentTable.getSelectedRow(), i);
-            System.out.println("Row: " + row[i]);
-            if(row[i].equals("M")){
+        for (int i = 0; i < col.length; i++) {
+            col[i] = "" + studentTable.getValueAt(studentTable.getSelectedRow(), i);
+            if(col[i].equals("M")){
                 jRadioButton_man.setSelected(true);
-            }else if(row[i].equals("V")){
+            }else if(col[i].equals("V")){
                 jRadioButton_vrouw.setSelected(true);
             }else{
                 System.out.println("geen geslacht!!");
@@ -599,19 +606,26 @@ public class StudentView extends javax.swing.JFrame {
         } 
         
         if(tabel.equals("Binnenlands")){
-            System.out.println("Binnenlands test");
             jButton_toevoegen.setText("Wijzigen");
             this.setTitle("Binnenlands student wijzigen");
             studentnummer.setEnabled(false);
 
+            for (int i = 0; i < jComboBox1_opleiding.getItemCount(); i++) {
+                if(col[7].equals(jComboBox1_opleiding.getItemAt(i))){
+                    jComboBox1_opleiding.setSelectedIndex(i);
+                }
+            }
+
+            studentnummer.setText(col[0]); naam.setText(col[1]); emailadres.setText(col[3]); universiteit.setText(col[6]); telnr1.setText(col[4]); telnr2.setText(col[5]);
+
         }else if(tabel.equals("Buitenlands")){
             jButton_toevoegen.setText("Wijzigen");
             this.setTitle("Buitenlands student wijzigen");
-            System.out.println("Buitenlands test");
             studentnummer.setEnabled(false);
             
-            studentnummer.setText(row[0]); naam.setText(row[1]); emailadres.setText(row[3]); universiteit.setText(row[6]); 
-            adres.setText(row[4]); land.setText(row[5]); telnr1.setText("Onbekend"); telnr2.setText("Onbekend");
+            studentnummer.setText(col[0]);  naam.setText(col[1]);   emailadres.setText(col[3]);   universiteit.setText(col[8]); 
+            adres.setText(col[6]);          land.setText(col[7]);   telnr1.setText(col[4]);       telnr2.setText(col[5]);
+            
         }else{
             System.out.println("Werkt niet, zie studentView onder studentWijzigen methode!");
         }

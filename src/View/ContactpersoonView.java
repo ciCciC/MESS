@@ -5,19 +5,33 @@
  */
 package View;
 
+import Controller.DatabaseManager;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import Model.Entiteit;
+import Model.Contactpersoon;
+import java.sql.SQLException;
 
 /**
  *
  * @author Ruben
  */
 public class ContactpersoonView extends javax.swing.JFrame {
-
+    
+    private boolean wijzigen;
+    private String [] attributen;
+    private int contactId;
+    private HoofdView hv;
+    private DatabaseManager dm;
+    
     /**
      * Creates new form ContactpersoonView
      */
-    public ContactpersoonView() {
+    public ContactpersoonView(HoofdView hv) {
         super("Nieuwe contactpersoon");
+        this.wijzigen = false;
+        this.hv = hv;
+        dm = new DatabaseManager();
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -32,9 +46,9 @@ public class ContactpersoonView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1_periodegegevens = new javax.swing.JLabel();
-        naamText = new javax.swing.JTextField();
-        emailText = new javax.swing.JTextField();
-        telText = new javax.swing.JTextField();
+        naam = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
+        telnr = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,15 +61,15 @@ public class ContactpersoonView extends javax.swing.JFrame {
         jLabel1_periodegegevens.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1_periodegegevens.setText("Contactpersoon gegevens");
 
-        naamText.addActionListener(new java.awt.event.ActionListener() {
+        naam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                naamTextActionPerformed(evt);
+                naamActionPerformed(evt);
             }
         });
 
-        emailText.addActionListener(new java.awt.event.ActionListener() {
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailTextActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
 
@@ -93,9 +107,9 @@ public class ContactpersoonView extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(naamText, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(telText, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(naam, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telnr, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(toevoegenKnop)
                                 .addGap(18, 18, 18)
@@ -111,15 +125,15 @@ public class ContactpersoonView extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(naamText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(naam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(telText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toevoegenKnop)
@@ -130,38 +144,101 @@ public class ContactpersoonView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void naamTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_naamTextActionPerformed
+    private void naamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamActionPerformed
+    }//GEN-LAST:event_naamActionPerformed
 
-    private void emailTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailTextActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+    }//GEN-LAST:event_emailActionPerformed
 
     private void annulerenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerenKnopActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_annulerenKnopActionPerformed
 
     private void toevoegenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegenKnopActionPerformed
-        // TODO add your handling code here:
-        if(alleVakkenControleren()){
-            System.out.println(naamText.getText());
-            System.out.println(emailText.getText());
-            System.out.println(telText.getText());
+        if(!wijzigen){
             
-            JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
-            this.dispose();
+            if(alleVakkenControleren()){
+                JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
+            }else{
+
+                if(!checkTelnr()){
+                    JOptionPane.showMessageDialog(null, "Voer cijfers in.");
+                }else{
+                    if(!checkAantalCijfers()){
+                        JOptionPane.showMessageDialog(null, "Voer max. 10 cijfers in.");
+                    }else{
+                        Entiteit contactToevoegen = new Contactpersoon(0, naam.getText(), email.getText(), telnr.getText());
+                        try {
+                            dm.insertEntity(contactToevoegen);
+                            JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                            this.dispose();
+                        } catch (SQLException e) {
+                            System.out.println("Fout bij toevoegen functie van ContactpersoonView");
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }else if(wijzigen){
+            if(alleVakkenControleren()){
+                JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
+            }else{
+
+                if(!checkTelnr()){
+                    JOptionPane.showMessageDialog(null, "Voer cijfers in.");
+                }else{
+                    if(!checkAantalCijfers()){
+                        JOptionPane.showMessageDialog(null, "Voer max. 10 cijfers in.");
+                    }else{
+                        
+                        try {
+                            Entiteit contactWijzigen = new Contactpersoon(contactId, naam.getText(), email.getText(), telnr.getText());
+                            dm.updateEntity(contactWijzigen);
+                            JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
+                            this.dispose();
+                        } catch (SQLException e) {
+                            System.out.println("Fout bij wijzigen functie van ContactpersoonView");
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
+            System.out.println("Toevoegen en wijzigen functie werken niet.");
         }
+        hv.getRefreshJTable();
     }//GEN-LAST:event_toevoegenKnopActionPerformed
 
+    private boolean checkTelnr(){ // Hier wordt gecontroleerd of de invoer wel cijfers zijn.
+        try {
+            long temp = Long.parseLong(telnr.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            e.getMessage();
+            return false;
+        }
+    }
+    
+    private boolean checkAantalCijfers(){ // Hier wordt gecontroleerd of de invoer bestaan uit 10 digits
+        return telnr.getText().length() == 10;
+    }
+    
     /**
      * @param args the command line arguments
      */
     private boolean alleVakkenControleren(){
-        return !this.naamText.getText().isEmpty() || this.emailText.getText().isEmpty() || this.telText.getText().isEmpty();
+        return this.naam.getText().isEmpty() || this.email.getText().isEmpty() || this.telnr.getText().isEmpty();
+    }
+    
+    public void contactWijzigen(boolean wijzigen, JTable table){
+        this.setTitle("Wijzigen contactpersoon");
+        this.toevoegenKnop.setText("wijzigen");
+        this.wijzigen = wijzigen;
+        attributen = new String[table.getColumnCount()];
+        for (int i = 0; i < attributen.length; i++) {
+            attributen[i] = "" + table.getValueAt(table.getSelectedRow(), i);
+        }
+        contactId = Integer.parseInt(attributen[0]); naam.setText(attributen[1]); email.setText(attributen[2]); telnr.setText(attributen[3]);
     }
     
     public static void main(String args[]) {
@@ -191,20 +268,20 @@ public class ContactpersoonView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ContactpersoonView().setVisible(true);
+                //new ContactpersoonView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annulerenKnop;
-    private javax.swing.JTextField emailText;
+    private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel1_periodegegevens;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField naamText;
-    private javax.swing.JTextField telText;
+    private javax.swing.JTextField naam;
+    private javax.swing.JTextField telnr;
     private javax.swing.JButton toevoegenKnop;
     // End of variables declaration//GEN-END:variables
 }

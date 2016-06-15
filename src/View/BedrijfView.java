@@ -170,9 +170,9 @@ public class BedrijfView extends javax.swing.JFrame {
             if(alleVakkenControleren()){
                 JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
             }else{
-                Entiteit bedrijf = new Bedrijf(0, bedrijfsnaam.getText(), adres.getText(), stad.getText(), land.getText());
+                Entiteit bedrijfToevoegen = new Bedrijf(0, bedrijfsnaam.getText(), adres.getText(), stad.getText(), land.getText());
                 try {
-                    dm.insertEntity(bedrijf);
+                    dm.insertEntity(bedrijfToevoegen);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -183,10 +183,10 @@ public class BedrijfView extends javax.swing.JFrame {
             if(alleVakkenControleren()){
                 JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
             }else{
-                System.out.println("HIER ZITTEN WE!");
-                Entiteit bedrijf = new Bedrijf(Integer.parseInt(bedrijfsId), bedrijfsnaam.getText(), stad.getText(), adres.getText(), land.getText());
+                Entiteit bedrijfWijzigen = new Bedrijf(Integer.parseInt(bedrijfsId), bedrijfsnaam.getText(), stad.getText(), adres.getText(), land.getText());
+                
                 try {
-                    dm.updateEntity(bedrijf);
+                    dm.updateEntity(bedrijfWijzigen);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
