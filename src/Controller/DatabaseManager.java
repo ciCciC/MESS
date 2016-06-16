@@ -106,6 +106,44 @@ public class DatabaseManager {
         return table;       
     }
     
+    public void schrijfIn(String studentnummer, int onderwijsID) throws SQLException{
+        Connection con = this.getConnection();
+        
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = Date.valueOf(LocalDate.now());
+        String dateStr = df.format(date);
+        
+        String SQL = "INSERT INTO Schrijft_in VALUES(?, ?, ?)";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, studentnummer);
+        stmt.setInt(2, onderwijsID);
+        stmt.setString(3, dateStr);
+        
+        stmt.execute();
+        
+        stmt.close();
+        con.close();                   
+    }
+    
+    public DefaultTableModel getInschrijvingen() throws SQLException{
+        Connection con = this.getConnection();
+        
+        String SQL = "SELECT S.studentnummer, S.naam, OE.typeonderwijseenheid, O.naam as opleiding, SI.inschrijfdatum "
+                + "FROM Schrijft_in SI JOIN Student S ON SI.studentnummer = S.studentnummer "
+                + "JOIN Onderwijseenheid OE on SI.ond_id = OE.ond_id, Opleiding O "
+                + "WHERE OE.opleiding = O.opleiding_id ";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        ResultSet rs = stmt.executeQuery();      
+        stmt.execute();
+        
+        DefaultTableModel table = this.buildTableModel(rs);
+        
+        stmt.close();
+        con.close();  
+        
+        return table;                
+    }
+    
     public ArrayList<String> getOpleidingNamen() throws SQLException{
         ArrayList<String> opleidingNamen = new ArrayList<String>();
         Connection con = this.getConnection();

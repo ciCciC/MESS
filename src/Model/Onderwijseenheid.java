@@ -92,10 +92,15 @@ public class Onderwijseenheid implements Entiteit{
     
     public String getSelectSQL(String columnName) {
         String SQL = "";
+        
         if(columnName.isEmpty()) {
-            SQL = "SELECT * FROM Onderwijseenheid";
+            SQL = "SELECT OE.ond_id, OE.studiepunten, OE.soort_studie, B.bedrijfsnaam, OE.typeonderwijseenheid, "
+                    + "O.naam as opleiding FROM Onderwijseenheid OE left join Bedrijf B on OE.bedrijf_id = B.bedrijf_id "
+                    + "join Opleiding O on OE.opleiding = O.opleiding_id ";
         }else{
-            SQL = "SELECT * FROM Onderwijseenheid WHERE " + columnName + " LIKE ?";
+            SQL = "SELECT OE.ond_id, OE.studiepunten, OE.soort_studie, B.bedrijfsnaam, OE.typeonderwijseenheid, "
+                    + "O.naam FROM Onderwijseenheid OE left join Bedrijf B on OE.bedrijf_id = B.bedrijf_id "
+                    + "join Opleiding O on OE.opleiding = O.opleiding_id  WHERE " + columnName + " LIKE ?";
         }
         return SQL;
     }

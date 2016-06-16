@@ -10,6 +10,7 @@ package Controller;
 import Model.Bedrijf;
 import Model.BinnenlandseStudent;
 import static com.sun.org.apache.bcel.internal.Constants.WIDE;
+import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
@@ -24,15 +25,17 @@ public class testTable extends javax.swing.JFrame {
      */
     public testTable() {
         initComponents();
+        this.setSize(1500, 800);
+        
         DatabaseManager DBM = new DatabaseManager();
         
         
             try {
-                BinnenlandseStudent student2 = new BinnenlandseStudent("12345", "Kees Mulder", 'm', "joep1995@gmail.com", 
-                    "0610454701", "uitgaandeUni", 1);
-               //DBM.deleteEntity("buitenlands", 1);
-                jTable1.setModel(DBM.selectEntity("binnenlands", "uitgaans_uni", "HHS"));
                 
+                jTable1.setModel(DBM.getInschrijvingen());
+                jTable1.setSize(1200, 600);
+                jTable1.setFont(new Font("Arial", Font.PLAIN, 12));
+                jTable1.getTableHeader().setFont(new Font("Arial", Font.BOLD, 12));
                 /*String[] student = new String[jTable1.getColumnCount()];
                 for(int i=0; i<jTable1.getColumnCount(); i++) {
                     student[i] = "" + jTable1.getValueAt(jTable1.getSelectedRow(), i);

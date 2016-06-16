@@ -39,7 +39,7 @@ public class TestController {
         
         try {         
             
-            DBM.updateEntity(OndEh);
+            DBM.schrijfIn("12345", 4);
             
             
         } catch(Exception e) {
