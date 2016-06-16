@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1_persoonsgegevens" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel5_type" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jComboBox1_type" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel4_soortstudie2" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jComboBox1_periode" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel5_opleiding" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jComboBox1_opleiding" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel_studiepunten" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="studiepunten" min="-2" pref="200" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jButton_toevoegen" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButton_annuleren" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel4_soortstudie" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="jLabel5_bedrijf" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jComboBox1_soort_studie" pref="200" max="32767" attributes="0"/>
+                              <Component id="jComboBox1_bedrijf" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1_persoonsgegevens" min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel_studiepunten" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="studiepunten" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jComboBox1_opleiding" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5_opleiding" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel4_soortstudie2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="jComboBox1_periode" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jComboBox1_type" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5_type" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel4_soortstudie" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="jComboBox1_soort_studie" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jComboBox1_bedrijf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5_bedrijf" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton_annuleren" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton_toevoegen" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1_persoonsgegevens">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Onderwijseenheid"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel_studiepunten">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Studiepunten"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="studiepunten">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5_opleiding">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opleiding"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1_opleiding">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(opleidingen)" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1_opleidingActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    String [] opleidingen = new String[dm.getOpleidingNamen().size()];&#xa;    for(int i = 0; i &lt; opleidingen.length; i++){&#xa;        opleidingen[i] = dm.getOpleidingNamen().get(i);&#xa;        jComboBox1_opleiding.addItem(opleidingen[i]);&#xa;    }&#xa;    &#xa;/*&#xa;    for(int i = 0; i &lt; opleidingen.length; i++){&#xa;        jComboBox1_type.addItem(opleidingen[i]);&#xa;    }&#xa;*/&#xa;&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij combobox opleiding van Binnenlandse StudentView.&quot;);&#xa;    e.printStackTrace();&#xa;}&#xa;/*"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5_type">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Type"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1_type">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(opleidingen)" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1_typeActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox1_type.addItem(&quot;Leeg&quot;);&#xa;    jComboBox1_type.addItem(&quot;Studie&quot;);&#xa;    jComboBox1_type.addItem(&quot;Stage&quot;);&#xa;&#xa;jComboBox1_soort_studie.setEnabled(false);&#xa;jComboBox1_bedrijf.setEnabled(false);&#xa;/*&#xa;    for(int i = 0; i &lt; opleidingen.length; i++){&#xa;        jComboBox1_type.addItem(opleidingen[i]);&#xa;    }&#xa;*/&#xa;/*"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4_soortstudie">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Soort studie"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5_bedrijf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bedrijf"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1_bedrijf">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(opleidingen)" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1_bedrijfActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DatabaseManager dm = new DatabaseManager();"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    String [] bedrijven = new String[dm.getBedrijfsNamen().size()];&#xa;    for(int i = 0; i &lt; bedrijven.length; i++){&#xa;        bedrijven[i] = dm.getBedrijfsNamen().get(i);&#xa;        jComboBox1_bedrijf.addItem(bedrijven[i]);&#xa;    }&#xa;    &#xa;/*&#xa;    for(int i = 0; i &lt; opleidingen.length; i++){&#xa;        jComboBox1_type.addItem(opleidingen[i]);&#xa;    }&#xa;*/&#xa;&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij combobox opleiding van Binnenlandse StudentView.&quot;);&#xa;    e.printStackTrace();&#xa;}&#xa;/*"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_toevoegen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Toevoegen"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_toevoegenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_annuleren">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Annuleren"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_annulerenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1_soort_studie">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(opleidingen)" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1_soort_studieActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox1_soort_studie.addItem(&quot;Minors&quot;);&#xa;    jComboBox1_soort_studie.addItem(&quot;European Project Semesters&quot;);&#xa;    jComboBox1_soort_studie.addItem(&quot;Summer schools&quot;);&#xa;&#xa;/*&#xa;    for(int i = 0; i &lt; opleidingen.length; i++){&#xa;        jComboBox1_type.addItem(opleidingen[i]);&#xa;    }&#xa;*/&#xa;/*"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4_soortstudie2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Periode"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1_periode">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(opleidingen)" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1_periodeActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    String [] periodes = new String[dm.getPeriodes().size()];&#xa;    for(int i = 0; i &lt; periodes.length; i++){&#xa;        periodes[i] = dm.getPeriodes().get(i);&#xa;        jComboBox1_periode.addItem(periodes[i]);&#xa;    }&#xa;    &#xa;&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij combobox periode van Onderwijseenheid.&quot;);&#xa;    e.printStackTrace();&#xa;}&#xa;/*"/>
+      </AuxValues>
+    </Component>
+  </SubComponents>
+</Form>
