@@ -2,6 +2,9 @@ package Controller;
 
 import java.sql.*;
 import Model.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.*;
@@ -112,7 +115,10 @@ public class DatabaseManager {
         
         while(rs.next()) {
             opleidingNamen.add(rs.getString("naam"));
-        }        
+        }  
+        rs.close();
+        con.close();
+        
         return opleidingNamen;
     }
     
@@ -126,7 +132,10 @@ public class DatabaseManager {
         
         while(rs.next()) {
             opleidingID = rs.getInt("opleiding_id");
-        }        
+        }   
+        rs.close();
+        con.close();
+        
         return opleidingID;
     }
     
@@ -139,7 +148,10 @@ public class DatabaseManager {
         
         while(rs.next()) {
             bedrijfsNamen.add(rs.getString("bedrijfsnaam"));
-        }        
+        } 
+        rs.close();
+        con.close();
+        
         return bedrijfsNamen;
     }
     
@@ -154,7 +166,9 @@ public class DatabaseManager {
         while(rs.next()) {
             opleidingID = rs.getInt("bedrijf_id");
             break;
-        }        
+        }    
+        rs.close();
+        con.close();
         return opleidingID;
     }
     
@@ -164,10 +178,11 @@ public class DatabaseManager {
         String sql = "SELECT DISTINCT naam FROM Contactpersoon";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
-        
         while(rs.next()) {
             contactpersoonNamen.add(rs.getString("naam"));
-        }        
+        }
+        rs.close();
+        con.close();
         return contactpersoonNamen;
     }
     
@@ -182,28 +197,70 @@ public class DatabaseManager {
         while(rs.next()) {
             contactpersoonID = rs.getInt("contact_id");
             break;
-        }        
+        }
+        
+        rs.close();
+        con.close();
         return contactpersoonID;
     }
     
+    public ArrayList<String> getPeriodes() throws SQLException{
+        ArrayList<String> periodes = new ArrayList<String>();
+        
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = Date.valueOf(LocalDate.now());
+        String dateStr = df.format(date);
+        
+        Connection con = this.getConnection();
+        String sql = "SELECT P.begindatum, P.einddatum FROM Periode P WHERE DATEDIFF(P.begindatum, ?) > -200 "
+                + "ORDER BY begindatum ASC";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, dateStr);
+        System.out.println(stmt.toString());
+        ResultSet rs = stmt.executeQuery();
+        
+        
+        while(rs.next()) {
+            String beginDate = rs.getString("begindatum");
+            String endDate = rs.getString("einddatum");
+            String dates = beginDate + "/" + endDate;
+            periodes.add(dates);
+            
+        }        
+        rs.close();
+        con.close();
+        
+        
+        return periodes;
+    }
+    
     public Entiteit getEntity(String entityStr) {
-        if(entityStr.toLowerCase().equals("bedrijf")) {
-            return new Bedrijf();
-        } else if(entityStr.toLowerCase().equals("buitenlands")) {
-            return new BuitenlandseStudent("", "", 'm', "", "", "");
-        } else if(entityStr.toLowerCase().equals("binnenlands")) {
-            return new BinnenlandseStudent("", "", 'm', "", "", "");
-        } else if(entityStr.toLowerCase().equals("contactpersoon")) {
-            return new Contactpersoon();
-        } else if(entityStr.toLowerCase().equals("onderwijseenheid")) {
-            return new Onderwijseenheid();
-        } else if(entityStr.toLowerCase().equals("opleiding")) {
-            return new Opleiding();
-        } else if(entityStr.toLowerCase().equals("periode")) {
-            return new Periode();
-        } else{
-            return null;
+        entityStr = entityStr.toLowerCase();
+        Entiteit enti = null;
+        switch (entityStr) {
+            case "bedrijf":
+                enti = new Bedrijf();
+                break;
+            case "buitenlands":
+                enti = new BuitenlandseStudent("", "", 'm', "", "", "");
+                break;
+            case "binnenlands":
+                enti =  new BinnenlandseStudent("", "", 'm', "", "", "");
+                break;
+            case "contactpersoon":
+                enti = new Contactpersoon();
+                break;
+            case "onderwijseenheid":
+                enti = new Onderwijseenheid();
+                break;
+            case "opleiding":
+                enti = new Opleiding();
+                break;
+            case "periode":
+                enti = new Periode();
+                break;               
         }
+        return enti;
     }
     
     public DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
