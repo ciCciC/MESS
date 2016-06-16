@@ -30,7 +30,7 @@ public class Opleiding implements Entiteit{
     public int getOpleidingID() {
         return ID;
     }
-
+    
     public String getOpleidingNaam() {
         return naam;
     }
@@ -40,54 +40,49 @@ public class Opleiding implements Entiteit{
                 + this.getOpleidingID() + "', '"
                 + this.getOpleidingNaam() + "');";
     }
-
-    @Override
+    
     public String getInsertSQL() {
         return "INSERT INTO Opleiding (naam) VALUES (?);";
     }
-
-    @Override
+   
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException {
         stmt.setString(1, this.naam);
         return stmt;
     }
-
-    @Override
+    
     public String getUpdateSQL() {
         return "UPDATE Opleiding SET naam = ?, contact_id = ? WHERE opleiding_id = ?";
     }
-
-    @Override
+  
     public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException {
         stmt.setString(1, this.naam);
         stmt.setInt(2, this.contact_id);
         stmt.setInt(3, this.ID);
         return stmt;
     }
-
-    @Override
+    
     public String getDeleteSQL() {
         return "DELETE from Opleiding WHERE opleiding_id = ?";
     }
-
-    @Override
+   
     public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
         stmt.setInt(1, keyValue);
         return stmt;
     }
-
-    @Override
+    
     public String getSelectSQL(String columnName) {
         String SQL = "";
         if (columnName.isEmpty()) {
-            SQL = "SELECT * FROM Opleiding";
+            SQL = "SELECT O.naam, C.naam as contactpersoon, C.emailadres as contactemail, C.telefoonnummer as Contactnummer " 
+                    + "FROM Opleiding O join Contactpersoon C on O.contact_id = C.contact_id";
         } else {
-            SQL = "SELECT * FROM Opleiding WHERE " + columnName + " LIKE ?";
+            SQL = "SELECT O.naam, C.naam as contactpersoon, C.emailadres as contactemail, C.telefoonnummer as Contactnummer " 
+                    + "FROM FROM Opleiding O join Contactpersoon C on O.contact_id = C.contact_id" 
+                    + "WHERE " + columnName + " LIKE ?";
         }
         return SQL;
     }
-
-    @Override
+    
     public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
         stmt.setString(1, "%" + columnInput + "%");
         return stmt;

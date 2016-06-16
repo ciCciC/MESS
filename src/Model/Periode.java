@@ -38,51 +38,50 @@ public class Periode implements Entiteit {
     public String getEindDatum() {
         return eindDatum;
     }
-    
-    public String insertPeriode() {
-        return "INSERT INTO Periode VALUES('" + 
-                this.getPeriodeID() + "', '" +
-                this.getBeginDatum() + "', '" +
-                this.getEindDatum() + "');";
-    }
-
-    @Override
+        
     public String getInsertSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "INSERT INTO Periode (begindatum, einddatum) VALUES(?, ?)";
     }
 
-    @Override
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, this.beginDatum);
+        stmt.setString(2, this.eindDatum);
+        return stmt;
     }
 
-    @Override
     public String getUpdateSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "UPDATE Periode SET begindatum = ?, einddatum = ? WHERE per_id = ?";
+        
     }
 
-    @Override
     public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, this.beginDatum);
+        stmt.setString(2, this.eindDatum);
+        stmt.setInt(3, this.ID);
+        return stmt;
     }
-
-    @Override
+    
     public String getDeleteSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "DELETE FROM Periode WHERE per_id = ?";
     }
 
-    @Override
     public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setInt(1, keyValue);
+        return stmt;
     }
 
-    @Override
     public String getSelectSQL(String columnName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String SQL = "";
+        if(columnName.isEmpty()) {
+            SQL = "SELECT * FROM Periode";
+        }else{
+            SQL = "SELECT * FROM Periode WHERE " + columnName + " LIKE ?";
+        }
+        return SQL;
     }
 
-    @Override
     public PreparedStatement getSelectStatement(PreparedStatement stmt, String columnInput) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stmt.setString(1, "%" + columnInput + "%");
+        return stmt;
     }
 }

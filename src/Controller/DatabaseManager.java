@@ -199,7 +199,7 @@ public class DatabaseManager {
             return new Onderwijseenheid();
         } else if(entityStr.toLowerCase().equals("opleiding")) {
             return new Opleiding();
-        } else if(entityStr.toLowerCase().equals("Periode")) {
+        } else if(entityStr.toLowerCase().equals("periode")) {
             return new Periode();
         } else{
             return null;

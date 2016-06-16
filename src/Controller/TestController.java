@@ -28,21 +28,16 @@ public class TestController {
         BinnenlandseStudent student2 = new BinnenlandseStudent("12345", "Kees Mulder", 'm', "joep1995@gmail.com", 
               "0610454701", "061234567", "uitgaandeUni", 1);
         Onderwijseenheid OndEh = new Onderwijseenheid(1, 15, "European Summer School", -1, "Studie");
-               
+        Periode periode = new Periode(1, "09012016", "20170603");       
         try {
             
             
             //DBM.updateEntity(student2);
-            DBM.insertEntity(student2);
+            DBM.insertEntity(periode);
             
             
         } catch(Exception e) {
-            if(e.getMessage().startsWith("Duplicate")) {
-                System.out.println("studentnummer bestaat al! gebruik andere");
-            } else {
-                System.out.println("SQL error");
-                e.printStackTrace();
-            }
+            e.printStackTrace();
             
         }     
     }
