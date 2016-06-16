@@ -19,40 +19,64 @@ public class Onderwijseenheid implements Entiteit{
     private String soort_studie;
     private int bedrijf_id;
     private String typeonderwijseenheid;
+    private int opleiding;
     
     public Onderwijseenheid() {};
     
-    public Onderwijseenheid(int ond_id, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid) {
+    public Onderwijseenheid(int ond_id, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid
+                                , int opleiding) {
         this.ond_id = ond_id;
         this.studiepunten = studiepunten;
         this.soort_studie = soort_studie; //Minon/european summer school etc;
         this.bedrijf_id = bedrijf_id;
         this.typeonderwijseenheid = typeonderwijseenheid;
+        this.opleiding = opleiding;
     }
 
     public String getInsertSQL() {
-        return "INSERT INTO Onderwijseenheid (studiepunten, soort_studie, bedrijf_id, typeonderwijseenheid)"
+        String SQL = "INSERT INTO Onderwijseenheid (studiepunten, ";
+        if(!this.soort_studie.isEmpty()) {
+            SQL += "soort_studie, ";
+        } else if(this.bedrijf_id > 0) {
+            SQL += "bedrijf_id, ";
+        }
+        SQL += "typeonderwijseenheid, opleiding)"
                 + " VALUES (?, ?, ?, ?);";
+        return SQL;
     }
 
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException {
         stmt.setInt(1, this.studiepunten);
-        stmt.setString(2, this.soort_studie);
-        stmt.setInt(3, this.bedrijf_id);
-        stmt.setString(4, this.typeonderwijseenheid);
+        if(!this.soort_studie.isEmpty()) {
+            stmt.setString(2, this.soort_studie);
+        } else {
+            stmt.setInt(2, this.bedrijf_id);
+        }        
+        stmt.setString(3, this.typeonderwijseenheid);
+        stmt.setInt(4, this.opleiding);
         return stmt;
     }
     
     public String getUpdateSQL() {
-        return "UPDATE Onderwijseenheid SET studiepunten = ?, soort_studie = ?, bedrijf_id = ?, typeonderwijseenheid= ?"
-                + "WHERE ond_id = ?";
-                
-    }    
+         String SQL = "UPDATE Onderwijseenheid SET studiepunten = ?, ";
+        if(!this.soort_studie.isEmpty()) {
+            SQL += "soort_studie = ?, ";
+        } else if(this.bedrijf_id > 0) {
+            SQL += "bedrijf_id = ?, ";
+        }
+        SQL += "typeonderwijseenheid= ?, opleiding = ? WHERE ond_id = ?";
+        return SQL;
+    }              
+        
     public PreparedStatement getUpdateStatement(PreparedStatement stmt, Connection con) throws SQLException {
         stmt.setInt(1, this.studiepunten);
-        stmt.setString(2, this.soort_studie);
-        stmt.setInt(3, this.bedrijf_id);
-        stmt.setString(4, this.typeonderwijseenheid);
+        if(!this.soort_studie.isEmpty()) {
+            stmt.setString(2, this.soort_studie);
+        } else {
+            stmt.setInt(2, this.bedrijf_id);
+        }     
+        stmt.setString(3, this.typeonderwijseenheid);
+        stmt.setInt(4, this.opleiding);
         stmt.setInt(5, this.ond_id);
         return stmt;
     }

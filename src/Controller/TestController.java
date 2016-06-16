@@ -31,14 +31,15 @@ public class TestController {
         DatabaseManager DBM = new DatabaseManager();
         BinnenlandseStudent student2 = new BinnenlandseStudent("12345", "Kees Mulder", 'm', "joep1995@gmail.com", 
               "0610454701", "061234567", "uitgaandeUni", 1);
-        Onderwijseenheid OndEh = new Onderwijseenheid(1, 15, "European Summer School", -1, "Studie");
+        Onderwijseenheid OndEh = new Onderwijseenheid(4, 15, "Summer schools", -1, "Stage", 1);
         Periode periode = new Periode(1, "09012016", "20170603"); 
+        Contactpersoon contact = new Contactpersoon(1, "Contactpersoon", "Contactemail", "Contactnummer" );
+        Opleiding opl = new Opleiding(1, 1, "HBO-C&M");
+               
         
-        try {
+        try {         
             
-            System.out.println(DBM.getPeriodes());
-            //DBM.updateEntity(student2);
-            /*DBM.insertEntity(periode);*/
+            DBM.updateEntity(OndEh);
             
             
         } catch(Exception e) {

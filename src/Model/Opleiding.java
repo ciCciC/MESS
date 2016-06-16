@@ -16,8 +16,9 @@ import java.sql.SQLException;
 public class Opleiding implements Entiteit{
 
     private int ID;
-    private String naam;
     private int contact_id;
+    private String naam;
+    
 
     public Opleiding() {};
     
@@ -42,11 +43,12 @@ public class Opleiding implements Entiteit{
     }
     
     public String getInsertSQL() {
-        return "INSERT INTO Opleiding (naam) VALUES (?);";
+        return "INSERT INTO Opleiding (contact_id, naam) VALUES (?, ?);";
     }
    
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException {
-        stmt.setString(1, this.naam);
+        stmt.setInt(1, this.contact_id);
+        stmt.setString(2, this.naam);
         return stmt;
     }
     

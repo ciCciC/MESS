@@ -215,8 +215,7 @@ public class DatabaseManager {
         String sql = "SELECT P.begindatum, P.einddatum FROM Periode P WHERE DATEDIFF(P.begindatum, ?) > -200 "
                 + "ORDER BY begindatum ASC";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(1, dateStr);
-        System.out.println(stmt.toString());
+        stmt.setString(1, dateStr);        
         ResultSet rs = stmt.executeQuery();
         
         
