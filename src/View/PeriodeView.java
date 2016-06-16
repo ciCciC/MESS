@@ -9,7 +9,10 @@ import Controller.DatabaseManager;
 import Model.Entiteit;
 import Model.Periode;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -19,14 +22,25 @@ public class PeriodeView extends javax.swing.JFrame {
     private String beginDatum;
     private String eindDatum;
     private DatabaseManager dm;
+    private boolean wijzigen;
+    private String [] col;
+    private int periodeId;
+    private HoofdView hv;
+    private Date huidigeDatum;
+    private Calendar cal;
     
     /**
      * Creates new form PeriodeView
      */
-    public PeriodeView() {
+    public PeriodeView(HoofdView hv) {
         super("Nieuwe periode");
         this.beginDatum = "";
         this.eindDatum = "";
+        this.huidigeDatum = new Date();
+        cal = Calendar.getInstance();
+        cal.setTime(this.huidigeDatum);
+        this.wijzigen = false;
+        this.hv = hv;
         this.dm = new DatabaseManager();
         initComponents();
         setLocationRelativeTo(null);
@@ -93,26 +107,48 @@ public class PeriodeView extends javax.swing.JFrame {
         for(int i = 1; i < 32; i++){
             jComboBox1_dag.addItem(i);
         }
+        jComboBox1_dag.setSelectedIndex(cal.get(Calendar.DAY_OF_MONTH)-1);
 
         for(int i = 1; i < 32; i++){
             jComboBox2_dag.addItem(i);
         }
 
+        jComboBox2_dag.setSelectedIndex(cal.get(Calendar.DAY_OF_MONTH)-1);
+
         for(int i = 1; i < 13; i++){
             jComboBox1_maand.addItem(i);
         }
 
+        jComboBox1_maand.setSelectedIndex(cal.get(Calendar.MONTH));
+
         for(int i = 1; i < 13; i++){
             jComboBox2_maand.addItem(i);
         }
+        jComboBox2_maand.setSelectedIndex(cal.get(Calendar.MONTH));
 
+        int index1 = 0;
         for(int i = 2016; i < 2026; i++){
             jComboBox1_jaar.addItem(i);
+            int jaar = cal.get(Calendar.YEAR);
+            if(jaar == i)
+            {
+                jComboBox1_jaar.setSelectedIndex(index1);
+            }
+            index1++;
         }
+        //jComboBox1_jaar.setSelectedIndex(cal.get(Calendar.YEAR));
 
+        int index2 = 0;
         for(int i = 2016; i < 2026; i++){
             jComboBox2_jaar.addItem(i);
+            int jaar = cal.get(Calendar.YEAR);
+            if(jaar == i)
+            {
+                jComboBox2_jaar.setSelectedIndex(index2);
+            }
+            index2++;
         }
+        //jComboBox2_jaar.setSelectedIndex(cal.get(Calendar.YEAR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,7 +157,7 @@ public class PeriodeView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton_toevoegen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -134,52 +170,57 @@ public class PeriodeView extends javax.swing.JFrame {
                                     .addComponent(jLabel2_begindatum, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1_dag, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox2_dag, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jComboBox1_dag, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox2_dag, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1_periodegegevens)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox1_maand, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox2_maand, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox1_maand, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox2_maand, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox1_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox2_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                            .addComponent(jComboBox1_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox2_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1_periodegegevens, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1_periodegegevens, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(5, 5, 5)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(5, 5, 5)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2_begindatum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1_dag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1_maand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4_einddatum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2_dag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2_maand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2_begindatum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1_dag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4_einddatum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox2_dag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(5, 5, 5)
+                        .addComponent(jComboBox1_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox2_jaar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(5, 5, 5)
+                        .addComponent(jComboBox1_maand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox2_maand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_annuleren)
@@ -199,21 +240,72 @@ public class PeriodeView extends javax.swing.JFrame {
         beginDatum = jComboBox1_jaar.getSelectedItem() + "-" + jComboBox1_maand.getSelectedItem() + "-" + jComboBox1_dag.getSelectedItem();
         eindDatum = jComboBox2_jaar.getSelectedItem() + "-" + jComboBox2_maand.getSelectedItem() + "-" + jComboBox2_dag.getSelectedItem();
         
-        Entiteit periode = new Periode(0, beginDatum, eindDatum);
+        Entiteit periode;
         // Get insert methode bestaat nog niet vandaar dat dit nog niet werkt!!!
         try {
-            dm.insertEntity(periode);
-            JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
-            this.dispose();   
+            if(!wijzigen){
+                periode = new Periode(0, beginDatum, eindDatum);
+                dm.insertEntity(periode);//toevoegen nieuwe periode
+                JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+            }else{
+                periode = new Periode(periodeId, beginDatum, eindDatum);
+                dm.updateEntity(periode); // wijzigen periode
+                JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
+            }  
         } catch (SQLException e) {
             System.out.println("DM werkt niet, zie toevoegen functie van PeriodeView.");
             e.printStackTrace();
+        }finally{
+            this.dispose();
+            hv.getRefreshJTable();
         }
-        
-        //System.out.println("Begin periode: " + beginDatum);
-        //System.out.println("Eind periode: " + eindDatum);
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 
+    public void periodeWijzigen(boolean wijzigen, JTable table){
+        this.wijzigen = wijzigen;
+        this.jButton_toevoegen.setText("Wijzigen");
+        this.setTitle("Wijzigen periode");
+        
+        col = new String [table.getColumnCount()];
+        
+        for (int i = 0; i < col.length; i++) {
+            col[i] = "" + table.getValueAt(table.getSelectedRow(), i);
+        }
+        //filterData(col);
+        periodeId = Integer.parseInt(col[0]);
+    }
+    
+    public void filterData(){
+        String [] colTest = {"2", "2022-06-05", "2016-20-04"}; //test Zodra periodemodel klaar is moet deze statement weg!!
+        String [] beginD = colTest[1].split("-");
+        String [] eindD = colTest[2].split("-");
+        
+        for (int i = 1; i < beginD.length; i++) {
+            if(beginD[i].charAt(0) == '0'){
+                String beginTrim = beginD[i].replaceFirst("0", " ").trim();
+                beginD[i] = beginTrim;
+            }
+            
+            if(eindD[i].charAt(0) == '0'){
+                String eindTrim = eindD[i].replaceFirst("0", " ").trim();
+                eindD[i] = eindTrim;
+            }
+        }
+        
+        try {
+            for (int i = 0; i < jComboBox1_dag.getItemCount(); i++) {
+                if(jComboBox1_dag.getItemAt(i).toString().equals(beginD[2])){jComboBox1_dag.setSelectedIndex(i);}
+                if(jComboBox1_maand.getItemAt(i).toString().equals(beginD[1])){jComboBox1_maand.setSelectedIndex(i);}
+                if(jComboBox1_jaar.getItemAt(i).toString().equals(beginD[0])){jComboBox1_jaar.setSelectedIndex(i);}
+                
+                if(jComboBox2_dag.getItemAt(i).toString().equals(eindD[2])){jComboBox2_dag.setSelectedIndex(i);}
+                if(jComboBox2_maand.getItemAt(i).toString().equals(eindD[1])){jComboBox2_maand.setSelectedIndex(i);}
+                if(jComboBox2_jaar.getItemAt(i).toString().equals(eindD[0])){jComboBox2_jaar.setSelectedIndex(i);}
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Index is te groot voor de loop index van maand en jaar. Maar dat weten we.");
+        }
+    } 
     
     /**
      * @param args the command line arguments
@@ -245,7 +337,8 @@ public class PeriodeView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PeriodeView().setVisible(true);
+                //new PeriodeView().setVisible(true);
+                
             }
         });
     }

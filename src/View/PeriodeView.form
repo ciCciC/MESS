@@ -26,13 +26,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jButton_toevoegen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButton_annuleren" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -41,8 +41,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jComboBox1_dag" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="jComboBox2_dag" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="jComboBox1_dag" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="jComboBox2_dag" min="-2" pref="70" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -51,23 +51,19 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBox1_maand" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jComboBox2_maand" min="-2" pref="50" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jComboBox1_maand" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="jComboBox2_maand" min="-2" pref="70" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBox1_jaar" min="-2" pref="70" max="-2" attributes="0"/>
-                              <Component id="jComboBox2_jaar" min="-2" pref="70" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jComboBox1_jaar" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="jComboBox2_jaar" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -78,32 +74,42 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1_periodegegevens" min="-2" pref="25" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel1_periodegegevens" min="-2" pref="25" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2_begindatum" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jComboBox1_dag" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel4_einddatum" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jComboBox2_dag" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-              </Group>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2_begindatum" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="jComboBox1_dag" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1_maand" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1_jaar" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4_einddatum" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="jComboBox2_dag" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox2_maand" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox2_jaar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="jComboBox1_jaar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jComboBox2_jaar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="jComboBox1_maand" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jComboBox2_maand" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -187,7 +193,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 32; i++){&#xa;    jComboBox1_dag.addItem(i);&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 32; i++){&#xa;    jComboBox1_dag.addItem(i);&#xa;}&#xa;jComboBox1_dag.setSelectedIndex(cal.get(Calendar.DAY_OF_MONTH)-1);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox2_dag">
@@ -197,7 +203,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 32; i++){&#xa;    jComboBox2_dag.addItem(i);&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 32; i++){&#xa;    jComboBox2_dag.addItem(i);&#xa;}&#xa;&#xa;jComboBox2_dag.setSelectedIndex(cal.get(Calendar.DAY_OF_MONTH)-1);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox1_maand">
@@ -207,7 +213,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 13; i++){&#xa;    jComboBox1_maand.addItem(i);&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 13; i++){&#xa;    jComboBox1_maand.addItem(i);&#xa;}&#xa;&#xa;jComboBox1_maand.setSelectedIndex(cal.get(Calendar.MONTH));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox2_maand">
@@ -217,7 +223,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 13; i++){&#xa;    jComboBox2_maand.addItem(i);&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 13; i++){&#xa;    jComboBox2_maand.addItem(i);&#xa;}&#xa;jComboBox2_maand.setSelectedIndex(cal.get(Calendar.MONTH));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox1_jaar">
@@ -227,7 +233,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 2016; i &lt; 2026; i++){&#xa;    jComboBox1_jaar.addItem(i);&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="int index1 = 0;&#xa;for(int i = 2016; i &lt; 2026; i++){&#xa;    jComboBox1_jaar.addItem(i);&#xa;    int jaar = cal.get(Calendar.YEAR);&#xa;    if(jaar == i)&#xa;    {&#xa;        jComboBox1_jaar.setSelectedIndex(index1);&#xa;    }&#xa;    index1++;&#xa;}&#xa;//jComboBox1_jaar.setSelectedIndex(cal.get(Calendar.YEAR));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox2_jaar">
@@ -237,7 +243,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 2016; i &lt; 2026; i++){&#xa;    jComboBox2_jaar.addItem(i);&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="int index2 = 0;&#xa;for(int i = 2016; i &lt; 2026; i++){&#xa;    jComboBox2_jaar.addItem(i);&#xa;    int jaar = cal.get(Calendar.YEAR);&#xa;    if(jaar == i)&#xa;    {&#xa;        jComboBox2_jaar.setSelectedIndex(index2);&#xa;    }&#xa;    index2++;&#xa;}&#xa;//jComboBox2_jaar.setSelectedIndex(cal.get(Calendar.YEAR));"/>
       </AuxValues>
     </Component>
   </SubComponents>

@@ -318,7 +318,7 @@ public class HoofdView extends javax.swing.JFrame {
                 bedrijf.setVisible(true);
                 break;
             case "Periode":
-                PeriodeView periode = new PeriodeView();
+                PeriodeView periode = new PeriodeView(this);//Hier komt this!!
                 periode.setVisible(true);
                 break;
             case "Opleiding":
@@ -356,13 +356,17 @@ public class HoofdView extends javax.swing.JFrame {
                     {
                         BedrijfView bedrijf = new BedrijfView(this);
                         bedrijf.bedrijfWijzigen(true, jTable_resultaat);
-                        bedrijf.setVisible(true);
                     }
                 case "Contactpersoon":
                     {
                         ContactpersoonView contact = new ContactpersoonView(this);
                         contact.contactWijzigen(true, jTable_resultaat);
                         contact.setVisible(true);
+                    }
+                case "Periode":
+                    {
+                        PeriodeView periode = new PeriodeView(this);//Hier komt this!!
+                        periode.periodeWijzigen(true, jTable_resultaat);
                     }
             }
         }
