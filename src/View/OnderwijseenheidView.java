@@ -6,7 +6,11 @@
 package View;
 
 import Controller.DatabaseManager;
+import Model.Onderwijseenheid;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,9 +22,10 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
      * Creates new form OnderwijseenheidView2
      */
     public OnderwijseenheidView() {
+       dm = new DatabaseManager();
         initComponents();
     }
-
+    DatabaseManager dm;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +44,6 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
         jComboBox1_type = new javax.swing.JComboBox();
         jLabel4_soortstudie = new javax.swing.JLabel();
         jLabel5_bedrijf = new javax.swing.JLabel();
-        DatabaseManager dm = new DatabaseManager();
         jComboBox1_bedrijf = new javax.swing.JComboBox();
         jButton_toevoegen = new javax.swing.JButton();
         jButton_annuleren = new javax.swing.JButton();
@@ -295,62 +299,45 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
 
     private void jButton_toevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_toevoegenActionPerformed
 
-/*
-            if(alleVakkenControleren(studentType)){
-
-                Entiteit binnenStudent;
+                Onderwijseenheid onderwijseenheid;
                 dm = new DatabaseManager();
-
+                boolean wijzigen = false;
+                
+                int bedrijf_id = 0;
+                try {
+                    bedrijf_id = dm.getBedrijfID(jComboBox1_bedrijf.getSelectedItem().toString());
+                } catch (SQLException ex) {
+                    System.out.println("Bedrijfs id niet gevonden");
+                }
+                int opleiding_id = 0;
+                try {
+                    opleiding_id = dm.getOpleidingID(jComboBox1_opleiding.getSelectedItem().toString());
+                } catch (SQLException ex) {
+                    System.out.println("Opleiding id niet gevonden");
+                }
+                
                 try {
 
-                    if(!knopType){
-                        binnenStudent = new BinnenlandseStudent(studiepunten.getText(), naam.getText(), geslacht,
-                            soort_studie.getText(), telnr1.getText(), telnr2.getText(), universiteit.getText(), opleidingId);
+                    if(!wijzigen){
+                        onderwijseenheid = new Onderwijseenheid(0, Integer.parseInt(studiepunten.getText()), jComboBox1_soort_studie.getSelectedItem().toString(), bedrijf_id, jComboBox1_type.getSelectedItem().toString()
+                                , opleiding_id);
 
-                        dm.insertEntity(binnenStudent);
+                        dm.insertEntity(onderwijseenheid);
                         JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                     }else{
+                        /*
                         binnenStudent = new BinnenlandseStudent(studiepunten.getText(), naam.getText(), geslacht,
                             soort_studie.getText(), telnr1.getText(), telnr2.getText(), universiteit.getText(), dm.getOpleidingID("" + jComboBox1_type.getSelectedItem()));
 
                         dm.updateEntity(binnenStudent);
-                        JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
+                        JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");*/
                     }
                 } catch (SQLException ex) {
-                    System.out.println("Student is niet gewijzigd of toegevoegd in database!");
+                    System.out.println("Onderwijseenheid is niet gewijzigd of toegevoegd in database!");
                     ex.printStackTrace();
                 }
                 this.dispose();
-            }else{
-                System.out.println("Binnenlandse student toevoegen en wijzigen werkt niet. Zie StudentView.");
-            }
-
    
-
-            if(alleVakkenControleren(studentType)){
-                Entiteit buitenlandseStudent = new BuitenlandseStudent(studiepunten.getText(), naam.getText(), geslacht, soort_studie.getText(), telnr1.getText(), telnr2.getText(), adres.getText(), land.getText(), universiteit.getText());
-
-                dm = new DatabaseManager();
-
-                try {
-                    if(knopType){
-                        System.out.println("updaterecord erin! Buiten"); // Wijzigen student
-                        dm.updateEntity(buitenlandseStudent);
-                        JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
-                    }else{
-                        System.out.println("addrecord erin! Buiten");
-                        dm.insertEntity(buitenlandseStudent);
-                        JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
-                    }
-                } catch (SQLException ex) {
-                    System.out.println("Student is niet toegevoegd in database!");
-                    ex.printStackTrace();
-                }
-
-                this.dispose();
-            }else{
-                System.out.println("Buitenlandse student toevoegen en wijzigen werkt niet. Zie StudentView.");
-            }*/
         //hv.getRefreshJTable();
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 

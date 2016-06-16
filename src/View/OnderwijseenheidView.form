@@ -191,7 +191,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1_bedrijfActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DatabaseManager dm = new DatabaseManager();"/>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    String [] bedrijven = new String[dm.getBedrijfsNamen().size()];&#xa;    for(int i = 0; i &lt; bedrijven.length; i++){&#xa;        bedrijven[i] = dm.getBedrijfsNamen().get(i);&#xa;        jComboBox1_bedrijf.addItem(bedrijven[i]);&#xa;    }&#xa;    &#xa;/*&#xa;    for(int i = 0; i &lt; opleidingen.length; i++){&#xa;        jComboBox1_type.addItem(opleidingen[i]);&#xa;    }&#xa;*/&#xa;&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij combobox opleiding van Binnenlandse StudentView.&quot;);&#xa;    e.printStackTrace();&#xa;}&#xa;/*"/>
       </AuxValues>
