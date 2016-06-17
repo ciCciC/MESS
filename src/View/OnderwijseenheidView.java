@@ -24,8 +24,10 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
     public OnderwijseenheidView() {
        dm = new DatabaseManager();
         initComponents();
+        wijzigen = false;
     }
     DatabaseManager dm;
+    private boolean wijzigen;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +53,7 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
         jLabel4_soortstudie2 = new javax.swing.JLabel();
         jComboBox1_periode = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1_persoonsgegevens.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1_persoonsgegevens.setText("Onderwijseenheid");
@@ -301,7 +303,6 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
 
                 Onderwijseenheid onderwijseenheid;
                 dm = new DatabaseManager();
-                boolean wijzigen = false;
                 
                 int bedrijf_id = 0;
                 try {
