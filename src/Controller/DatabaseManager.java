@@ -144,7 +144,8 @@ public class DatabaseManager {
         return table;                
     }
     
-     public DefaultTableModel getStudentenCalamiteit(String land) throws SQLException{
+    /*
+    public DefaultTableModel getStudentenCalamiteit(String land) throws SQLException{
         
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         Date date = Date.valueOf(LocalDate.now());
@@ -166,6 +167,26 @@ public class DatabaseManager {
         con.close();  
         
         return table;                
+    }*/
+     
+    public String getPopulairsteHerkomstland() throws SQLException {
+        String herkomstLand = "";        
+        Connection con = this.getConnection();
+        String SQL = "SELECT land FROM Buitenlands GROUP BY land " 
+                + "HAVING count(land) = (SELECT MAX(aantal) "
+                + "FROM (SELECT COUNT(land) AS aantal FROM Buitenlands GROUP BY land) as max)";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        ResultSet rs = stmt.executeQuery();      
+        
+        while(rs.next()) {
+            herkomstLand = rs.getString("land");
+        }
+        
+        con.close();
+        stmt.close();
+        rs.close();
+        
+        return herkomstLand;
     }
     
     public ArrayList<String> getOpleidingNamen() throws SQLException{
@@ -293,6 +314,26 @@ public class DatabaseManager {
         
         
         return periodes;
+    }
+    
+    public int getPeriodeID(String periode) throws SQLException{
+        int periodeID = -1;
+        Connection con = this.getConnection();
+        
+        String begindate = periode.substring(0, 10);
+        String enddate = periode.substring(11, periode.length());
+        String sql = "SELECT per_id FROM Periode WHERE begindatum = ? AND einddatum = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, begindate);
+        stmt.setString(2, enddate);
+        
+        System.out.println(stmt.toString());
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()) {
+            periodeID = rs.getInt("per_id");
+        }        
+        return periodeID;
+        
     }
     
     public Entiteit getEntity(String entityStr) {

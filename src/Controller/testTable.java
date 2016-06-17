@@ -32,7 +32,7 @@ public class testTable extends javax.swing.JFrame {
         
             try {
                 
-                jTable1.setModel(DBM.getInschrijvingen());
+                jTable1.setModel(DBM.selectEntity("buitenlands", "", ""));
                 jTable1.setSize(1200, 600);
                 jTable1.setFont(new Font("Arial", Font.PLAIN, 12));
                 jTable1.getTableHeader().setFont(new Font("Arial", Font.BOLD, 12));
