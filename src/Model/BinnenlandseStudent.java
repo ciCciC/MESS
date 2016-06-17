@@ -73,9 +73,9 @@ public class BinnenlandseStudent extends Student implements Entiteit{
     public String getSelectSQL(String columnName) {
         String SQL = "";
         if(columnName.isEmpty()) {
-            SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel as VasteTelefoon, "
-                    + "S.mobielTel as MobieleTelefoon, B.uitgaans_uni, O.naam as Opleiding, C.naam as Contactpersoon, "
-                    + "C.emailadres as ContactEmail, C.telefoonnummer as ContactTelefoon "
+            SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel as vastnummer, "
+                    + "S.mobielTel as mobielnummer, B.uitgaans_uni, O.naam as opleiding, C.naam as contactpersoon, "
+                    + "C.emailadres as ccntactemail, C.telefoonnummer as contacttelefoon "
                     + "FROM Student S, Binnenlands B, Opleiding O, Contactpersoon C "
                     + "WHERE S.studentnummer = B.studentnummer "
                     + "AND B.opleiding_id = O.opleiding_id "
@@ -84,9 +84,9 @@ public class BinnenlandseStudent extends Student implements Entiteit{
             columnName = columnName.toLowerCase();
             if(columnName.equals("naam") || columnName.equals("geslacht") || columnName.equals("adres")
                     || columnName.equals("vasttel") || columnName.equals("mobieltel")) {
-                SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel as VasteTelefoon, "
-                    + "S.mobielTel as MobieleTelefoon, B.uitgaans_uni, O.naam as Opleiding, C.naam as Contactpersoon, "
-                    + "C.emailadres as ContactEmail, C.telefoonnummer as ContactTelefoon "
+                SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel as vastnummer, "
+                    + "S.mobielTel as mobielnummer, B.uitgaans_uni, O.naam as opleiding, C.naam as contactpersoon, "
+                    + "C.emailadres as contactemail, C.telefoonnummer as contacttelefoon "
                     + "FROM Student S, Binnenlands B, Opleiding O, Contactpersoon C "
                     + "WHERE S.studentnummer = B.studentnummer "
                     + "AND B.opleiding_id = O.opleiding_id "
@@ -95,9 +95,9 @@ public class BinnenlandseStudent extends Student implements Entiteit{
             } 
             else
             {
-                SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel as VasteTelefoon, "
-                    + "S.mobielTel as MobieleTelefoon, B.uitgaans_uni, O.naam as Opleiding, C.naam as Contactpersoon, "
-                    + "C.emailadres as ContactEmail, C.telefoonnummer as ContactTelefoon "
+                SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel as vastnummer, "
+                    + "S.mobielTel as mobielnummer, B.uitgaans_uni, O.naam as opleiding, C.naam as contactpersoon, "
+                    + "C.emailadres as contactEmail, C.telefoonnummer as contacttelefoon "
                     + "FROM Student S, Binnenlands B, Opleiding O, Contactpersoon C "
                     + "WHERE S.studentnummer = B.studentnummer "
                     + "AND B.opleiding_id = O.opleiding_id "
