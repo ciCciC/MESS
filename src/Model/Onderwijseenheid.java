@@ -35,10 +35,20 @@ public class Onderwijseenheid implements Entiteit{
         this.typeonderwijseenheid = typeonderwijseenheid;
         this.land = land;
         this.stad = stad;
-        this.opleiding = opleiding;        
+        this.opleiding = opleiding; 
+        this.periode = periode;
+    }
+    
+    public int getOndID() {
+        return this.ond_id;
+    }
+    
+    public int getPeriode() {
+        return this.periode;
     }
 
     public String getInsertSQL() {
+        
         String SQL = "INSERT INTO Onderwijseenheid (studiepunten, ";
         if(!this.soort_studie.isEmpty()) {
             SQL += "soort_studie, ";
@@ -60,7 +70,7 @@ public class Onderwijseenheid implements Entiteit{
         stmt.setString(3, this.typeonderwijseenheid);
         stmt.setString(4, this.land);
         stmt.setString(5, this.stad);
-        stmt.setInt(6, this.opleiding);
+        stmt.setInt(6, this.opleiding);        
         return stmt;
     }
     
@@ -71,7 +81,7 @@ public class Onderwijseenheid implements Entiteit{
         } else if(this.bedrijf_id > 0) {
             SQL += "bedrijf_id = ?, ";
         }
-        SQL += "typeonderwijseenheid= ?, land = ?, stad = ?, opleiding = ? WHERE ond_id = ?";
+        SQL += "typeonderwijseenheid= ?, land = ?, stad = ?, opleiding = ?, WHERE ond_id = ?";
         return SQL;
     }              
         
@@ -85,7 +95,7 @@ public class Onderwijseenheid implements Entiteit{
         stmt.setString(3, this.typeonderwijseenheid);
         stmt.setString(4, this.land);
         stmt.setString(5, this.stad);
-        stmt.setInt(6, this.opleiding);
+        stmt.setInt(6, this.opleiding);        
         stmt.setInt(7, this.ond_id);
         return stmt;
     }
@@ -118,5 +128,12 @@ public class Onderwijseenheid implements Entiteit{
         stmt.setString(1, columnInput);
         return stmt;
     }
+    
+    
+
+    public String toString() {
+        return "Onderwijseenheid";
+    }
+
     
 }

@@ -42,10 +42,17 @@ public class DatabaseManager {
         PreparedStatement stmt = con.prepareStatement(entiteit.getInsertSQL());
         stmt = entiteit.getInsertStatement(stmt, con);
         System.out.println(stmt.toString());
-        stmt.execute();      
+        stmt.execute();
         
         con.close();
         stmt.close();
+        
+        if(entiteit.toString().equals("Onderwijseenheid")) {
+            System.out.println("OND");
+            this.insertOnderwijs_Periode(entiteit);
+        }
+        
+       
     }
     
     public void updateEntity(Entiteit entiteit) throws SQLException { 
@@ -144,8 +151,23 @@ public class DatabaseManager {
         return table;                
     }
     
-    /*
-    public DefaultTableModel getStudentenCalamiteit(String land) throws SQLException{
+    public void insertOnderwijs_Periode(Entiteit enti) throws SQLException{
+        Connection con = this.getConnection();
+        Onderwijseenheid Ond = (Onderwijseenheid) enti;
+        String SQL = "INSERT INTO Periode_onderwijseenheid VALUES(?, ?)";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setInt(1, Ond.getPeriode());
+        stmt.setInt(2, Ond.getOndID());
+        System.out.println(stmt.toString());
+        stmt.execute();        
+        
+        stmt.close();
+        con.close();  
+        
+    }
+    
+    
+    public DefaultTableModel getStudentenCalamiteit(String landOfStad) throws SQLException{
         
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         Date date = Date.valueOf(LocalDate.now());
@@ -153,11 +175,17 @@ public class DatabaseManager {
          
         Connection con = this.getConnection();
         
-        String SQL = "SELECT S.studentnummer, S.naam, S.emailadres, S.vasttel, S.mobieltel, OE.land, OE.stad"
-                + "FROM Schrijft_in SI join Student S ON SI.studentnummer = S.studentnummer "
-                + "join Onderwijseenheid OE on SI.ond_id = OE.ond_id, Periode P "
-                + "WHERE OE.";
+        String SQL = "SELECT S.studentnummer, S.naam, S.emailadres, S.vasttel, S.mobieltel, OE.land, OE.stad " 
+                + "FROM Schrijft_in SI join Student S ON SI.studentnummer = S.studentnummer join "
+                + "Onderwijseenheid OE on SI.ond_id = OE.ond_id, Periode_onderwijseenheid PO join Periode P on "
+                + "PO.per_id = P.per_id WHERE PO.ond_id = OE.ond_id AND P.begindatum < ? AND P.einddatum > ? " 
+                + "AND (OE.land like ? OR OE.stad like ?)";	
         PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, dateStr);
+        stmt.setString(2, dateStr);
+        stmt.setString(3, landOfStad);
+        stmt.setString(4, landOfStad);
+        
         ResultSet rs = stmt.executeQuery();      
         stmt.execute();
         
@@ -167,7 +195,7 @@ public class DatabaseManager {
         con.close();  
         
         return table;                
-    }*/
+    }
      
     public String getPopulairsteHerkomstland() throws SQLException {
         String herkomstLand = "";        

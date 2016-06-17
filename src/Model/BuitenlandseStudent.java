@@ -31,7 +31,8 @@ public class BuitenlandseStudent extends Student implements Entiteit{
         super(studentNr, naam, geslacht, email, vastTel, mobielTel);
         this.adres = adres;
         this.land = land;
-        this.herkomstUni = herkomstUni;        
+        this.herkomstUni = herkomstUni;
+        this.opleiding_id = opleiding_id;
     }
     
     public String getAdres() {
@@ -58,6 +59,7 @@ public class BuitenlandseStudent extends Student implements Entiteit{
         stmt.setString(2, this.adres);
         stmt.setString(3, this.land);
         stmt.setString(4, this.herkomstUni);
+        System.out.println("opldid = " + this.opleiding_id);
         stmt.setInt(5, this.opleiding_id);
         
         return stmt;
