@@ -489,8 +489,9 @@ public class StudentView extends javax.swing.JFrame {
             
             if(alleVakkenControleren(studentType)){
                 
-                    Entiteit binnenStudent = new BinnenlandseStudent(studentnummer.getText(), naam.getText(), geslacht,emailadres.getText(), telnr1.getText(), telnr2.getText(), universiteit.getText(), opleidingId);
-
+                Entiteit binnenStudent = new BinnenlandseStudent(studentnummer.getText(), naam.getText(), geslacht,emailadres.getText(), telnr1.getText(), telnr2.getText(), universiteit.getText(), opleidingId);
+                
+                if(checkCijfers(studentnummer.getText(), telnr1.getText(), telnr2.getText())){
                     try {
                         if(!knopType){
                             dm.insertEntity(binnenStudent);
@@ -502,8 +503,13 @@ public class StudentView extends javax.swing.JFrame {
                     } catch (SQLException ex) {
                         System.out.println("Student is niet gewijzigd of toegevoegd in database!");    
                         ex.printStackTrace();
+                    } finally{
+                        this.dispose();
+                        hv.getRefreshJTable();
                     }
-                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Voer cijfers in studentnummer (max. 8), vaste telnr en mobiel telnr.");
+                }
             }else{
                 System.out.println("Binnenlandse student toevoegen en wijzigen werkt niet. Zie StudentView.");
             }
@@ -513,28 +519,48 @@ public class StudentView extends javax.swing.JFrame {
             if(alleVakkenControleren(studentType)){
                 Entiteit buitenlandseStudent = new BuitenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), telnr2.getText(), adres.getText(), land.getText(), universiteit.getText());
                 
-                try {
-                    if(knopType){
-                        System.out.println("updateEntity erin! Buiten"); // Wijzigen student
-                        dm.updateEntity(buitenlandseStudent);
-                        JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
-                    }else{
-                        System.out.println("insertEntity erin! Buiten");
-                        dm.insertEntity(buitenlandseStudent);
-                        JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                if(checkCijfers(studentnummer.getText(), telnr1.getText(), telnr2.getText())){
+                    try {
+                        if(knopType){
+                            System.out.println("updateEntity erin! Buiten"); // Wijzigen student
+                            dm.updateEntity(buitenlandseStudent);
+                            JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
+                        }else{
+                            System.out.println("insertEntity erin! Buiten");
+                            dm.insertEntity(buitenlandseStudent);
+                            JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println("Student is niet toegevoegd in database!");    
+                        ex.printStackTrace();
+                    } finally{
+                        this.dispose();
+                        hv.getRefreshJTable();
                     }
-                } catch (SQLException ex) {
-                    System.out.println("Student is niet toegevoegd in database!");    
-                    ex.printStackTrace();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Voer cijfers in studentnummer (max. 8), vaste telnr en mobiel telnr.");
                 }
-                this.dispose();
             }else{
                 System.out.println("Buitenlandse student toevoegen en wijzigen werkt niet. Zie StudentView.");
             }
         }
-        hv.getRefreshJTable();
     }//GEN-LAST:event_jButton_toevoegenActionPerformed
 
+    private boolean checkCijfers(String studentnr, String huistel, String mobielnr){ 
+        try {
+            int cijfer = Integer.parseInt(studentnr);
+            long huis = Long.parseLong(huistel);
+            long mobiel = Long.parseLong(mobielnr);
+            return studentnrLengte(studentnr);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private boolean studentnrLengte(String studentnr){
+        return studentnr.length() == 8;
+    }
+    
     private void jComboBox1_opleidingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_opleidingActionPerformed
 
         try {
