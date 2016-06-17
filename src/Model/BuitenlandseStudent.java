@@ -19,13 +19,14 @@ public class BuitenlandseStudent extends Student implements Entiteit{
     private String adres;
     private String land;
     private String herkomstUni;
+    private int opleiding_id;
     
     public BuitenlandseStudent(String studentNr, String naam, char geslacht, String email, String vastTel, String mobielTel) {
         super(studentNr, naam, geslacht, email, vastTel, mobielTel);
     }
         
     public BuitenlandseStudent(String studentNr, String naam, char geslacht, String email, String vastTel, String mobielTel, 
-            String adres, String land, String herkomstUni) {
+            String adres, String land, String herkomstUni, int opleiding_id) {
         
         super(studentNr, naam, geslacht, email, vastTel, mobielTel);
         this.adres = adres;
@@ -47,7 +48,7 @@ public class BuitenlandseStudent extends Student implements Entiteit{
     
     
     public String getInsertSQL() {        
-        return "INSERT INTO Buitenlands VALUES (?, ?, ?, ?);";            
+        return "INSERT INTO Buitenlands VALUES (?, ?, ?, ?, ?);";            
     }   
     
     public PreparedStatement getInsertStatement(PreparedStatement stmt, Connection con) throws SQLException{        
@@ -57,12 +58,13 @@ public class BuitenlandseStudent extends Student implements Entiteit{
         stmt.setString(2, this.adres);
         stmt.setString(3, this.land);
         stmt.setString(4, this.herkomstUni);
+        stmt.setInt(5, this.opleiding_id);
         
         return stmt;
     }
     
     public String getUpdateSQL() {        
-        return "UPDATE Buitenlands SET adres = ?, land = ?, herkomst_uni = ? WHERE studentnummer = ?";          
+        return "UPDATE Buitenlands SET adres = ?, land = ?, herkomst_uni = ?, opleiding_id = ? WHERE studentnummer = ?";          
     }
     
     
@@ -72,7 +74,8 @@ public class BuitenlandseStudent extends Student implements Entiteit{
         stmt.setString(1, this.adres);
         stmt.setString(2, this.land);
         stmt.setString(3, this.herkomstUni);
-        stmt.setString(4, super.getStudentNummer());
+        stmt.setInt(4, this.opleiding_id);
+        stmt.setString(5, super.getStudentNummer());
         
         return stmt;
     }
@@ -94,22 +97,31 @@ public class BuitenlandseStudent extends Student implements Entiteit{
     public String getSelectSQL(String columnName) {
         String SQL = "";
         if(columnName.isEmpty()) {
-            SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel as VasteTelefoon, "
-                    + "S.mobieltel as MobieleTelefoon, B.adres, B.land, B.herkomst_uni "
-                    + "FROM Student S join Buitenlands B ON S.studentnummer = B.studentnummer";
+            SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel, "
+                    + "S.mobieltel, B.adres, B.land, B.herkomst_uni, O.naam as opleiding "
+                    + "FROM Buitenlands B join Student ON B.studentnummer = S.studentnummer "
+                    + "left join Opleiding O on B.opleiding_id = O.opleiding_id ";
         } else {
             columnName = columnName.toLowerCase();
             if(columnName.equals("naam") || columnName.equals("geslacht") || columnName.equals("adres") || 
                     columnName.equals("vasttel") || columnName.equals("mobieltel")) {
                 SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                        "S.vasttel as VasteTelefoon, S.mobieltel as MobieleTelefoon, B.adres, B.land, B.herkomst_uni" 
-                        + "FROM Student S join Buitenlands B ON S.studentnummer = B.studentnummer" +
-                        "WHERE S." + columnName + " LIKE ?";
-            } else 
+                        "S.vasttel, S.mobieltel, B.adres, B.land, B.herkomst_uni, " 
+                        + "O.naam as opleiding FROM Buitenlands B join Student ON B.studentnummer = S.studentnummer "
+                        + "left join Opleiding O on B.opleiding_id = O.opleiding_id "
+                        + "WHERE S." + columnName + " LIKE ?";
+            } else if(columnName.equals("opleiding")) {
+                SQL =   "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
+                        "S.vasttel, S.mobieltel, B.adres, B.land, B.herkomst_uni, " 
+                        + "O.naam as opleiding FROM Buitenlands B join Student ON B.studentnummer = S.studentnummer "
+                        + "left join Opleiding O on B.opleiding_id = O.opleiding_id "
+                        + "WHERE O.opleiding_id = B.opleiding_id ";
+            }
+            else 
             {
             SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                        "S.vasttel as VasteTelefoon, S.mobieltel as MobieleTelefoon, B.adres, B.land, B.herkomst_uni" 
-                        + "FROM Student S join Buitenlands B ON S.studentnummer = B.studentnummer" +
+                        "S.vasttel, S.mobieltel, B.adres, B.land, B.herkomst_uni " 
+                        + "FROM Student S join Buitenlands B ON S.studentnummer = B.studentnummer " +
                         "WHERE B." + columnName + " LIKE ?";
             }            
         }        

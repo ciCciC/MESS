@@ -19,17 +19,19 @@ public class Onderwijseenheid implements Entiteit{
     private String soort_studie;
     private int bedrijf_id;
     private String typeonderwijseenheid;
+    private String land;
     private int opleiding;
     
     public Onderwijseenheid() {};
     
     public Onderwijseenheid(int ond_id, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid
-                                , int opleiding) {
+                                ,String land , int opleiding) {
         this.ond_id = ond_id;
         this.studiepunten = studiepunten;
         this.soort_studie = soort_studie; //Minon/european summer school etc;
         this.bedrijf_id = bedrijf_id;
         this.typeonderwijseenheid = typeonderwijseenheid;
+        this.land = land;
         this.opleiding = opleiding;
     }
 

@@ -72,7 +72,6 @@ public class HoofdView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(1096, 804));
-        jPanel1.setSize(new java.awt.Dimension(100, 100));
         //jPanel1.setSize(1096, 804);
 
         jLabel_selecteer_tabel.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
@@ -137,7 +136,6 @@ public class HoofdView extends javax.swing.JFrame {
         });
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane1.setColumnHeaderView(null);
 
         DatabaseManager dm = new DatabaseManager();
         /*
@@ -160,7 +158,6 @@ public class HoofdView extends javax.swing.JFrame {
         jTable_resultaat.setEditingRow(0);
         jTable_resultaat.setGridColor(new java.awt.Color(51, 51, 51));
         jTable_resultaat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable_resultaat.setShowGrid(false);
         jTable_resultaat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable_resultaatMousePressed(evt);
