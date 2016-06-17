@@ -20,18 +20,20 @@ public class Onderwijseenheid implements Entiteit{
     private int bedrijf_id;
     private String typeonderwijseenheid;
     private String land;
+    private String stad;
     private int opleiding;
     
     public Onderwijseenheid() {};
     
     public Onderwijseenheid(int ond_id, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid
-                                ,String land , int opleiding) {
+                                ,String land, String stad, int opleiding) {
         this.ond_id = ond_id;
         this.studiepunten = studiepunten;
         this.soort_studie = soort_studie; //Minon/european summer school etc;
         this.bedrijf_id = bedrijf_id;
         this.typeonderwijseenheid = typeonderwijseenheid;
         this.land = land;
+        this.stad = stad;
         this.opleiding = opleiding;
     }
 
@@ -42,8 +44,8 @@ public class Onderwijseenheid implements Entiteit{
         } else if(this.bedrijf_id > 0) {
             SQL += "bedrijf_id, ";
         }
-        SQL += "typeonderwijseenheid, land, opleiding)"
-                + " VALUES (?, ?, ?,?, ?);";
+        SQL += "typeonderwijseenheid, land, stad, opleiding)"
+                + " VALUES (?, ?, ?, ?, ?, ?);";
         return SQL;
     }
 
@@ -56,7 +58,8 @@ public class Onderwijseenheid implements Entiteit{
         }        
         stmt.setString(3, this.typeonderwijseenheid);
         stmt.setString(4, this.land);
-        stmt.setInt(5, this.opleiding);
+        stmt.setString(5, this.stad);
+        stmt.setInt(6, this.opleiding);
         return stmt;
     }
     
@@ -67,7 +70,7 @@ public class Onderwijseenheid implements Entiteit{
         } else if(this.bedrijf_id > 0) {
             SQL += "bedrijf_id = ?, ";
         }
-        SQL += "typeonderwijseenheid= ?, opleiding = ? WHERE ond_id = ?";
+        SQL += "typeonderwijseenheid= ?, land = ?, stad = ?, opleiding = ? WHERE ond_id = ?";
         return SQL;
     }              
         
@@ -79,8 +82,10 @@ public class Onderwijseenheid implements Entiteit{
             stmt.setInt(2, this.bedrijf_id);
         }     
         stmt.setString(3, this.typeonderwijseenheid);
-        stmt.setInt(4, this.opleiding);
-        stmt.setInt(5, this.ond_id);
+        stmt.setString(4, this.land);
+        stmt.setString(5, this.stad);
+        stmt.setInt(6, this.opleiding);
+        stmt.setInt(7, this.ond_id);
         return stmt;
     }
     

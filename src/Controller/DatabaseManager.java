@@ -144,6 +144,28 @@ public class DatabaseManager {
         return table;                
     }
     
+     public DefaultTableModel getStudentenCalamiteit(String land) throws SQLException{
+        
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = Date.valueOf(LocalDate.now());
+        String dateStr = df.format(date);
+         
+        Connection con = this.getConnection();
+        
+        String SQL = "SELECT S.studentnummer, S.naam, S.emailadres, S.vasttel, S.mobieltel, OE.land, OE.stad"
+                + "FROM Schrijft_in SI join Student S ON SI.studentnummer =  ";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        ResultSet rs = stmt.executeQuery();      
+        stmt.execute();
+        
+        DefaultTableModel table = this.buildTableModel(rs);
+        
+        stmt.close();
+        con.close();  
+        
+        return table;                
+    }
+    
     public ArrayList<String> getOpleidingNamen() throws SQLException{
         ArrayList<String> opleidingNamen = new ArrayList<String>();
         Connection con = this.getConnection();
