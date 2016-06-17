@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -26,49 +26,65 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1_persoonsgegevens" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel5_type" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBox1_type" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jButton_toevoegen" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton_annuleren" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1_persoonsgegevens" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel5_type" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jComboBox1_type" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel4_soortstudie2" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jComboBox1_periode" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel5_opleiding" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jComboBox1_opleiding" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel_studiepunten" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="studiepunten" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel2" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="land" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel4_soortstudie" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jComboBox1_soort_studie" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel4_soortstudie2" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBox1_periode" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel5_opleiding" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBox1_opleiding" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel_studiepunten" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="studiepunten" min="-2" pref="200" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jButton_toevoegen" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton_annuleren" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4_soortstudie" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="jLabel5_bedrijf" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBox1_soort_studie" pref="200" max="32767" attributes="0"/>
-                              <Component id="jComboBox1_bedrijf" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel5_bedrijf" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jComboBox1_bedrijf" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="stad" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,7 +108,7 @@
                   <Component id="jLabel4_soortstudie2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="jComboBox1_periode" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jComboBox1_type" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5_type" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -107,7 +123,17 @@
                   <Component id="jComboBox1_bedrijf" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5_bedrijf" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="stad" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="land" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton_annuleren" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton_toevoegen" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -168,7 +194,7 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox1_type.addItem(&quot;Leeg&quot;);&#xa;    jComboBox1_type.addItem(&quot;Studie&quot;);&#xa;    jComboBox1_type.addItem(&quot;Stage&quot;);&#xa;&#xa;jComboBox1_soort_studie.setEnabled(false);&#xa;jComboBox1_bedrijf.setEnabled(false);&#xa;/*&#xa;    for(int i = 0; i &lt; opleidingen.length; i++){&#xa;        jComboBox1_type.addItem(opleidingen[i]);&#xa;    }&#xa;*/&#xa;/*"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox1_type.addItem(&quot;Leeg&quot;);&#xa;    jComboBox1_type.addItem(&quot;Studie&quot;);&#xa;    jComboBox1_type.addItem(&quot;Stage&quot;);&#xa;    jComboBox1_type.addItem(&quot;Afstudeerstage&quot;);&#xa;&#xa;jComboBox1_soort_studie.setEnabled(false);&#xa;jComboBox1_bedrijf.setEnabled(false);&#xa;&#xa;/*"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4_soortstudie">
@@ -192,7 +218,7 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    String [] bedrijven = new String[dm.getBedrijfsNamen().size()];&#xa;    for(int i = 0; i &lt; bedrijven.length; i++){&#xa;        bedrijven[i] = dm.getBedrijfsNamen().get(i);&#xa;        jComboBox1_bedrijf.addItem(bedrijven[i]);&#xa;    }&#xa;    &#xa;/*&#xa;    for(int i = 0; i &lt; opleidingen.length; i++){&#xa;        jComboBox1_type.addItem(opleidingen[i]);&#xa;    }&#xa;*/&#xa;&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij combobox opleiding van Binnenlandse StudentView.&quot;);&#xa;    e.printStackTrace();&#xa;}&#xa;/*"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    ArrayList&lt;String&gt; bedrijven = new ArrayList&lt;&gt;(dm.getBedrijfsNamen());&#xa;    String [] bedrijf = new String[bedrijven.size()];&#xa;    bedrijf = bedrijven.toArray(bedrijf);&#xa;    for(int i = 0; i &lt; bedrijf.length; i++){&#xa;        jComboBox1_bedrijf.addItem(bedrijf[i]);&#xa;    }&#xa;&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij combobox opleiding van Binnenlandse StudentView.&quot;);&#xa;    e.printStackTrace();&#xa;}&#xa;/*"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton_toevoegen">
@@ -243,6 +269,20 @@
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    String [] periodes = new String[dm.getPeriodes().size()];&#xa;    for(int i = 0; i &lt; periodes.length; i++){&#xa;        periodes[i] = dm.getPeriodes().get(i);&#xa;        jComboBox1_periode.addItem(periodes[i]);&#xa;    }&#xa;    &#xa;&#xa;}catch(SQLException e){&#xa;    System.out.println(&quot;Fout bij combobox periode van Onderwijseenheid.&quot;);&#xa;    e.printStackTrace();&#xa;}&#xa;/*"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Stad"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="stad">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Land"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="land">
     </Component>
   </SubComponents>
 </Form>

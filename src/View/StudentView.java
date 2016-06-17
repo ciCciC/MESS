@@ -72,7 +72,7 @@ public class StudentView extends javax.swing.JFrame {
         telnr1 = new javax.swing.JTextField();
         jLabel8_telefoonnummer2 = new javax.swing.JLabel("Mobiele telnr.");
         telnr2 = new javax.swing.JTextField();
-        jLabel5_opleiding = new javax.swing.JLabel();
+        jLabel5_opleiding = new javax.swing.JLabel("Opleiding");
         jComboBox1_opleiding = new javax.swing.JComboBox();
         emailadres = new javax.swing.JTextField();
         jButton_annuleren = new javax.swing.JButton("Annuleren");
@@ -110,8 +110,16 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel8_telefoonnummer2.setForeground(new java.awt.Color(0, 0, 0));
         
-        //jComboBox1_opleiding.setEnabled(false);
-        jComboBox1_opleiding.setVisible(false);
+        try {
+            ArrayList<String> opleidingen = new ArrayList<String>(dm.getOpleidingNamen());
+            String [] opleiding = new String[opleidingen.size()];
+            opleiding = opleidingen.toArray(opleiding);
+            for (int i = 0; i < opleiding.length; i++) {
+                jComboBox1_opleiding.addItem(opleiding[i]);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         
         jButton_annuleren.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -517,7 +525,8 @@ public class StudentView extends javax.swing.JFrame {
         }else{  //toevoegen buitenlands student
             
             if(alleVakkenControleren(studentType)){
-                Entiteit buitenlandseStudent = new BuitenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), telnr2.getText(), adres.getText(), land.getText(), universiteit.getText());
+                Entiteit buitenlandseStudent = new BuitenlandseStudent(studentnummer.getText(), naam.getText(), geslacht, emailadres.getText(), telnr1.getText(), 
+                        telnr2.getText(), adres.getText(), land.getText(), universiteit.getText(), opleidingId);
                 
                 if(checkCijfers(studentnummer.getText(), telnr1.getText(), telnr2.getText())){
                     try {
@@ -630,6 +639,12 @@ public class StudentView extends javax.swing.JFrame {
             jButton_toevoegen.setText("Wijzigen");
             this.setTitle("Buitenlands student wijzigen");
             studentnummer.setEnabled(false);
+            
+            for (int i = 0; i < jComboBox1_opleiding.getItemCount(); i++) {
+                if(col[7].equals(jComboBox1_opleiding.getItemAt(i))){
+                    jComboBox1_opleiding.setSelectedIndex(i);
+                }
+            }
             
             studentnummer.setText(col[0]);  naam.setText(col[1]);   emailadres.setText(col[3]);   universiteit.setText(col[8]); 
             adres.setText(col[6]);          land.setText(col[7]);   telnr1.setText(col[4]);       telnr2.setText(col[5]);
