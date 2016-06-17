@@ -42,8 +42,8 @@ public class Onderwijseenheid implements Entiteit{
         } else if(this.bedrijf_id > 0) {
             SQL += "bedrijf_id, ";
         }
-        SQL += "typeonderwijseenheid, opleiding)"
-                + " VALUES (?, ?, ?, ?);";
+        SQL += "typeonderwijseenheid, land, opleiding)"
+                + " VALUES (?, ?, ?,?, ?);";
         return SQL;
     }
 
@@ -55,7 +55,8 @@ public class Onderwijseenheid implements Entiteit{
             stmt.setInt(2, this.bedrijf_id);
         }        
         stmt.setString(3, this.typeonderwijseenheid);
-        stmt.setInt(4, this.opleiding);
+        stmt.setString(4, this.land);
+        stmt.setInt(5, this.opleiding);
         return stmt;
     }
     
