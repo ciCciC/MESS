@@ -394,7 +394,7 @@ public class HoofdView extends javax.swing.JFrame {
                         break;
                 case "Onderwijseenheid":
                         OnderwijseenheidView onderwijseenheid = new OnderwijseenheidView();
-                        //Hier komt wijzigen functie!!!
+                        onderwijseenheid.onderwijseenheidWijzigen(true, jTable_resultaat);
                         onderwijseenheid.setVisible(true);
                         break;
             }
@@ -465,7 +465,12 @@ public class HoofdView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_resultaatMousePressed
 
     private void jButton_inschrijvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inschrijvenActionPerformed
-        //HIER KOMT INSCHRIJVEN!!!!
+        if(geselecteerdeVak == null || gekozenTabel.equals("onderwijseenheid")){
+            JOptionPane.showMessageDialog(null, "Selecteer een onderwijseenheid");
+        }else{
+            InschrijvenView inschrijven = new InschrijvenView(geselecteerdeVak);
+            inschrijven.setVisible(true);
+        }      
     }//GEN-LAST:event_jButton_inschrijvenActionPerformed
     
     private void genereerTabelNamenInComboBox(){

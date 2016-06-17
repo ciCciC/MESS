@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -41,16 +41,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jLabel_onderwijseenheid" max="32767" attributes="0"/>
                       <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel_studentnummer" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="studentnummer" max="32767" attributes="0"/>
-                      <Component id="jComboBox_onderwijseenheidType" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jButton_toevoegen" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_inschrijven" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButton_annuleren" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -71,13 +69,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel_onderwijseenheid" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox_onderwijseenheidType" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton_annuleren" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton_toevoegen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton_inschrijven" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -97,18 +90,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="studentnummer">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel_onderwijseenheid">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Onderwijseenheid"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox_onderwijseenheidType">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="jButton_annuleren">
           <Properties>
             <Property name="text" type="java.lang.String" value="Annuleren"/>
@@ -117,12 +98,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_annulerenActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton_toevoegen">
+        <Component class="javax.swing.JButton" name="jButton_inschrijven">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Toevoegen"/>
+            <Property name="text" type="java.lang.String" value="Inschrijven"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_toevoegenActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_inschrijvenActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

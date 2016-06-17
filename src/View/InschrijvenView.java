@@ -10,6 +10,7 @@ package View;
  * @author Ruben
  */
 import Controller.DatabaseManager;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class InschrijvenView extends javax.swing.JFrame {
@@ -17,11 +18,12 @@ public class InschrijvenView extends javax.swing.JFrame {
     /**
      * Creates new form SchrijftZichIn
      */
-    private String geselecteerdeVak;
     private DatabaseManager dm = new DatabaseManager();
+    private String ond_id;
     
-    public InschrijvenView() {
+    public InschrijvenView(String ond_id) {
         super("Inschrijven");
+        this.ond_id = ond_id;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -39,18 +41,14 @@ public class InschrijvenView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel_studentnummer = new javax.swing.JLabel();
         studentnummer = new javax.swing.JTextField();
-        jLabel_onderwijseenheid = new javax.swing.JLabel();
-        jComboBox_onderwijseenheidType = new javax.swing.JComboBox();
         jButton_annuleren = new javax.swing.JButton();
-        jButton_toevoegen = new javax.swing.JButton();
+        jButton_inschrijven = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setText("Inschrijven gegevens");
 
         jLabel_studentnummer.setText("Studentnummer");
-
-        jLabel_onderwijseenheid.setText("Onderwijseenheid");
 
         jButton_annuleren.setText("Annuleren");
         jButton_annuleren.addActionListener(new java.awt.event.ActionListener() {
@@ -59,10 +57,10 @@ public class InschrijvenView extends javax.swing.JFrame {
             }
         });
 
-        jButton_toevoegen.setText("Toevoegen");
-        jButton_toevoegen.addActionListener(new java.awt.event.ActionListener() {
+        jButton_inschrijven.setText("Inschrijven");
+        jButton_inschrijven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_toevoegenActionPerformed(evt);
+                jButton_inschrijvenActionPerformed(evt);
             }
         });
 
@@ -73,15 +71,13 @@ public class InschrijvenView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel_onderwijseenheid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_studentnummer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(studentnummer)
-                    .addComponent(jComboBox_onderwijseenheidType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton_toevoegen)
+                        .addComponent(jButton_inschrijven)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_annuleren)))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -97,12 +93,8 @@ public class InschrijvenView extends javax.swing.JFrame {
                     .addComponent(studentnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_onderwijseenheid)
-                    .addComponent(jComboBox_onderwijseenheidType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_annuleren)
-                    .addComponent(jButton_toevoegen))
+                    .addComponent(jButton_inschrijven))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -124,18 +116,26 @@ public class InschrijvenView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton_annulerenActionPerformed
 
-    private void jButton_toevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_toevoegenActionPerformed
+    private void jButton_inschrijvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inschrijvenActionPerformed
         if(alleVakkenControleren()){
             JOptionPane.showMessageDialog(null, "Vul studentnummer in.");
         }else{
             if(!checkCijfer()){
-                JOptionPane.showMessageDialog(null, "Voer cijfers in.");
+                JOptionPane.showMessageDialog(null, "Voer max. 8 cijfers in.");
             }else{
-                
+                try {
+                    dm.schrijfIn(studentnummer.getText(), Integer.parseInt(ond_id));
+                    JOptionPane.showMessageDialog(null, "Met succes ingeschreven.");
+                } catch (SQLException e) {
+                    System.out.println("Zie inschrijven view");
+                    e.printStackTrace();
+                }finally{
+                    this.dispose();
+                }
             }
         }
-    }//GEN-LAST:event_jButton_toevoegenActionPerformed
-
+    }//GEN-LAST:event_jButton_inschrijvenActionPerformed
+    
     private boolean alleVakkenControleren(){
         return studentnummer.getText().isEmpty();
     }
@@ -175,17 +175,15 @@ public class InschrijvenView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InschrijvenView().setVisible(true);
+                //new InschrijvenView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_annuleren;
-    private javax.swing.JButton jButton_toevoegen;
-    private javax.swing.JComboBox jComboBox_onderwijseenheidType;
+    private javax.swing.JButton jButton_inschrijven;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel_onderwijseenheid;
     private javax.swing.JLabel jLabel_studentnummer;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField studentnummer;
