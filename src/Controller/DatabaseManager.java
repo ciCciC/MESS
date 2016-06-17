@@ -153,7 +153,9 @@ public class DatabaseManager {
         Connection con = this.getConnection();
         
         String SQL = "SELECT S.studentnummer, S.naam, S.emailadres, S.vasttel, S.mobieltel, OE.land, OE.stad"
-                + "FROM Schrijft_in SI join Student S ON SI.studentnummer =  ";
+                + "FROM Schrijft_in SI join Student S ON SI.studentnummer = S.studentnummer "
+                + "join Onderwijseenheid OE on SI.ond_id = OE.ond_id, Periode P "
+                + "WHERE OE.";
         PreparedStatement stmt = con.prepareStatement(SQL);
         ResultSet rs = stmt.executeQuery();      
         stmt.execute();

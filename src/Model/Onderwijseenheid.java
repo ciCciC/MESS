@@ -22,11 +22,12 @@ public class Onderwijseenheid implements Entiteit{
     private String land;
     private String stad;
     private int opleiding;
+    private int periode;
     
     public Onderwijseenheid() {};
     
     public Onderwijseenheid(int ond_id, int studiepunten, String soort_studie, int bedrijf_id, String typeonderwijseenheid
-                                ,String land, String stad, int opleiding) {
+                                ,String land, String stad, int opleiding, int periode) {
         this.ond_id = ond_id;
         this.studiepunten = studiepunten;
         this.soort_studie = soort_studie; //Minon/european summer school etc;
@@ -34,7 +35,7 @@ public class Onderwijseenheid implements Entiteit{
         this.typeonderwijseenheid = typeonderwijseenheid;
         this.land = land;
         this.stad = stad;
-        this.opleiding = opleiding;
+        this.opleiding = opleiding;        
     }
 
     public String getInsertSQL() {

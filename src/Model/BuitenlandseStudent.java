@@ -99,7 +99,7 @@ public class BuitenlandseStudent extends Student implements Entiteit{
         if(columnName.isEmpty()) {
             SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, S.vasttel, "
                     + "S.mobieltel, B.adres, B.land, B.herkomst_uni, O.naam as opleiding "
-                    + "FROM Buitenlands B join Student ON B.studentnummer = S.studentnummer "
+                    + "FROM Buitenlands B join Student S ON B.studentnummer = S.studentnummer "
                     + "left join Opleiding O on B.opleiding_id = O.opleiding_id ";
         } else {
             columnName = columnName.toLowerCase();
