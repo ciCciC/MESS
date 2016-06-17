@@ -80,7 +80,7 @@ public class Opleiding implements Entiteit{
         } else {
             SQL = "SELECT O.naam, C.naam as contactpersoon, C.emailadres as contactemail, C.telefoonnummer as Contactnummer " 
                     + "FROM Opleiding O join Contactpersoon C on O.contact_id = C.contact_id " 
-                    + "WHERE " + columnName + " LIKE ?";
+                    + "WHERE O." + columnName + " LIKE ?";
         }
         return SQL;
     }
