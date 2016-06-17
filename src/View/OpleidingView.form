@@ -125,8 +125,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DatabaseManager dm = new DatabaseManager();"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    for(int i = 0; i &lt; dm.getContactpersoonNamen().size(); i++){&#xa;        jComboBox_contactpersonen.addItem(dm.getContactpersoonNamen().get(i));&#xa;    }&#xa;}catch(SQLException e){&#xa;    e.printStackTrace();&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    ArrayList&lt;String&gt; contactNamen = new ArrayList&lt;String&gt;(dm.getContactpersoonNamen());&#xa;    String [] namen = new String[contactNamen.size()];&#xa;    namen = contactNamen.toArray(namen);&#xa;    for(int i = 0; i &lt; namen.length; i++){&#xa;        jComboBox_contactpersonen.addItem(namen[i]);&#xa;    }&#xa;    jComboBox_contactpersonen.setSelectedIndex(0);&#xa;}catch(SQLException e){&#xa;    e.printStackTrace();&#xa;}"/>
       </AuxValues>
     </Component>
   </SubComponents>

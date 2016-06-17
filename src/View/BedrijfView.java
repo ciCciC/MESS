@@ -164,13 +164,15 @@ public class BedrijfView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_toevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_toevoegenActionPerformed
+        Entiteit bedrijf;
         if(!wijzigen){
             if(alleVakkenControleren()){
                 JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
             }else{
-                Entiteit bedrijfToevoegen = new Bedrijf(0, bedrijfsnaam.getText(), adres.getText(), stad.getText(), land.getText());
+                
                 try {
-                    dm.insertEntity(bedrijfToevoegen);
+                    bedrijf = new Bedrijf(0, bedrijfsnaam.getText(), adres.getText(), stad.getText(), land.getText());
+                    dm.insertEntity(bedrijf);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -181,10 +183,10 @@ public class BedrijfView extends javax.swing.JFrame {
             if(alleVakkenControleren()){
                 JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
             }else{
-                Entiteit bedrijfWijzigen = new Bedrijf(Integer.parseInt(bedrijfsId), bedrijfsnaam.getText(), stad.getText(), adres.getText(), land.getText());
+                bedrijf = new Bedrijf(Integer.parseInt(bedrijfsId), bedrijfsnaam.getText(), adres.getText(), stad.getText(), land.getText());
                 
                 try {
-                    dm.updateEntity(bedrijfWijzigen);
+                    dm.updateEntity(bedrijf);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

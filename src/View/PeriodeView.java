@@ -31,11 +31,13 @@ public class PeriodeView extends javax.swing.JFrame {
     
     /**
      * Creates new form PeriodeView
+     * @param hv
      */
     public PeriodeView(HoofdView hv) {
         super("Nieuwe periode");
         this.beginDatum = "";
         this.eindDatum = "";
+        this.periodeId = 0;
         this.huidigeDatum = new Date();
         cal = Calendar.getInstance();
         cal.setTime(this.huidigeDatum);
@@ -118,7 +120,6 @@ public class PeriodeView extends javax.swing.JFrame {
         for(int i = 1; i < 13; i++){
             jComboBox1_maand.addItem(i);
         }
-
         jComboBox1_maand.setSelectedIndex(cal.get(Calendar.MONTH));
 
         for(int i = 1; i < 13; i++){
@@ -126,29 +127,13 @@ public class PeriodeView extends javax.swing.JFrame {
         }
         jComboBox2_maand.setSelectedIndex(cal.get(Calendar.MONTH));
 
-        int index1 = 0;
-        for(int i = 2016; i < 2026; i++){
+        for(int i = cal.get(Calendar.YEAR); i < cal.get(Calendar.YEAR)+10; i++){
             jComboBox1_jaar.addItem(i);
-            int jaar = cal.get(Calendar.YEAR);
-            if(jaar == i)
-            {
-                jComboBox1_jaar.setSelectedIndex(index1);
-            }
-            index1++;
         }
-        //jComboBox1_jaar.setSelectedIndex(cal.get(Calendar.YEAR));
 
-        int index2 = 0;
-        for(int i = 2016; i < 2026; i++){
+        for(int i = cal.get(Calendar.YEAR); i < cal.get(Calendar.YEAR)+10; i++){
             jComboBox2_jaar.addItem(i);
-            int jaar = cal.get(Calendar.YEAR);
-            if(jaar == i)
-            {
-                jComboBox2_jaar.setSelectedIndex(index2);
-            }
-            index2++;
         }
-        //jComboBox2_jaar.setSelectedIndex(cal.get(Calendar.YEAR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,10 +226,9 @@ public class PeriodeView extends javax.swing.JFrame {
         eindDatum = jComboBox2_jaar.getSelectedItem() + "-" + jComboBox2_maand.getSelectedItem() + "-" + jComboBox2_dag.getSelectedItem();
         
         Entiteit periode;
-        // Get insert methode bestaat nog niet vandaar dat dit nog niet werkt!!!
         try {
             if(!wijzigen){
-                periode = new Periode(0, beginDatum, eindDatum);
+                periode = new Periode(periodeId, beginDatum, eindDatum);
                 dm.insertEntity(periode);//toevoegen nieuwe periode
                 JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
             }else{
@@ -271,14 +255,13 @@ public class PeriodeView extends javax.swing.JFrame {
         for (int i = 0; i < col.length; i++) {
             col[i] = "" + table.getValueAt(table.getSelectedRow(), i);
         }
-        //filterData(col);
         periodeId = Integer.parseInt(col[0]);
+        filterData(col);
     }
     
-    public void filterData(){
-        String [] colTest = {"2", "2022-06-05", "2016-20-04"}; //test Zodra periodemodel klaar is moet deze statement weg!!
-        String [] beginD = colTest[1].split("-");
-        String [] eindD = colTest[2].split("-");
+    public void filterData(String [] col){
+        String [] beginD = col[1].split("-");
+        String [] eindD = col[2].split("-");
         
         for (int i = 1; i < beginD.length; i++) {
             if(beginD[i].charAt(0) == '0'){
@@ -302,7 +285,7 @@ public class PeriodeView extends javax.swing.JFrame {
                 if(jComboBox2_maand.getItemAt(i).toString().equals(eindD[1])){jComboBox2_maand.setSelectedIndex(i);}
                 if(jComboBox2_jaar.getItemAt(i).toString().equals(eindD[0])){jComboBox2_jaar.setSelectedIndex(i);}
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Index is te groot voor de loop index van maand en jaar. Maar dat weten we.");
         }
     } 

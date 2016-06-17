@@ -10,6 +10,8 @@ import Controller.DatabaseManager;
 import Model.Opleiding;
 import Model.Entiteit;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JTable;
 
 /**
  *
@@ -18,15 +20,22 @@ import java.sql.SQLException;
 public class OpleidingView extends javax.swing.JFrame {
     
     private DatabaseManager dm;
+    private HoofdView hv;
     private int contactpersoonId;
+    private int opleidingId;
+    private boolean wijzigen;
+    
     
     /**
      * Creates new form OpleidingView
      */
-    public OpleidingView() {
+    public OpleidingView(HoofdView hv) {
         super("Nieuwe opleiding");
         this.contactpersoonId = 0;
+        this.hv = hv;
         dm = new DatabaseManager();
+        this.wijzigen = false;
+        this.opleidingId = 0;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -46,7 +55,6 @@ public class OpleidingView extends javax.swing.JFrame {
         toevoegenKnop = new javax.swing.JButton();
         annulerenKnop = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        DatabaseManager dm = new DatabaseManager();
         jComboBox_contactpersonen = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -73,9 +81,13 @@ public class OpleidingView extends javax.swing.JFrame {
         jLabel2.setText("Contactpersoon");
 
         try{
-            for(int i = 0; i < dm.getContactpersoonNamen().size(); i++){
-                jComboBox_contactpersonen.addItem(dm.getContactpersoonNamen().get(i));
+            ArrayList<String> contactNamen = new ArrayList<String>(dm.getContactpersoonNamen());
+            String [] namen = new String[contactNamen.size()];
+            namen = contactNamen.toArray(namen);
+            for(int i = 0; i < namen.length; i++){
+                jComboBox_contactpersonen.addItem(namen[i]);
             }
+            jComboBox_contactpersonen.setSelectedIndex(0);
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -137,7 +149,7 @@ public class OpleidingView extends javax.swing.JFrame {
     private void toevoegenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegenKnopActionPerformed
         try {
             contactpersoonId = dm.getContactpersoonID("" + jComboBox_contactpersonen.getSelectedItem());
-            System.out.println("ContactId: " +contactpersoonId);
+            System.out.println("ContactId: " + contactpersoonId);
         } catch (SQLException e) {
             System.out.println("Check rij 141.");
             e.printStackTrace();
@@ -146,17 +158,23 @@ public class OpleidingView extends javax.swing.JFrame {
         if(alleVakkenControleren()){
             JOptionPane.showMessageDialog(null, "Alle vakken moeten ingevuld worden.");
         }else{
-            System.out.println(naamOpleiding.getText());
-            Entiteit opleidingToevoegen = new Opleiding(0, contactpersoonId, naamOpleiding.getText());
+            Entiteit opleiding = new Opleiding(opleidingId, contactpersoonId, naamOpleiding.getText());
             try {
-                dm.insertEntity(opleidingToevoegen);
-                JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
-                this.dispose();
+                if(!wijzigen){
+                    dm.insertEntity(opleiding);
+                    JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
+                }else if(wijzigen){
+                    dm.updateEntity(opleiding);
+                    JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
+                }
             } catch (SQLException e) {
                 System.out.println("Fout bij toevoegen opleiding, zie opleidingView");
                 e.printStackTrace();
+            } finally{
+                this.dispose();
             }
         }
+        hv.getRefreshJTable();
     }//GEN-LAST:event_toevoegenKnopActionPerformed
 
     /**
@@ -164,6 +182,28 @@ public class OpleidingView extends javax.swing.JFrame {
      */
     private boolean alleVakkenControleren(){
         return this.naamOpleiding.getText().isEmpty();
+    }
+    
+    public void opleidingWijzigen(boolean wijzigen, JTable table){
+        this.wijzigen = wijzigen;
+        this.toevoegenKnop.setText("Wijzigen");
+        this.setTitle("Wijzigen opleiding");
+        try {
+            String naam = "" + table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
+            
+            for (int i = 0; i < table.getColumnCount(); i++) {
+                String contactNaam = "" + table.getValueAt(table.getSelectedRow(), i);
+                if(contactNaam.equals("" + jComboBox_contactpersonen.getItemAt(i))){
+                    jComboBox_contactpersonen.setSelectedIndex(i);
+                }
+            }
+        
+            naamOpleiding.setText(naam);
+            opleidingId = dm.getOpleidingID(naam);
+        } catch (SQLException e) {
+            System.out.println("Zie opleidingWijzigen methode");
+            e.printStackTrace();
+        }
     }
     
     public static void main(String args[]) {
@@ -194,7 +234,7 @@ public class OpleidingView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new OpleidingView().setVisible(true);
+                //new OpleidingView().setVisible(true);
             }
         });
     }

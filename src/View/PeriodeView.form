@@ -213,7 +213,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 13; i++){&#xa;    jComboBox1_maand.addItem(i);&#xa;}&#xa;&#xa;jComboBox1_maand.setSelectedIndex(cal.get(Calendar.MONTH));"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = 1; i &lt; 13; i++){&#xa;    jComboBox1_maand.addItem(i);&#xa;}&#xa;jComboBox1_maand.setSelectedIndex(cal.get(Calendar.MONTH));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox2_maand">
@@ -233,7 +233,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="int index1 = 0;&#xa;for(int i = 2016; i &lt; 2026; i++){&#xa;    jComboBox1_jaar.addItem(i);&#xa;    int jaar = cal.get(Calendar.YEAR);&#xa;    if(jaar == i)&#xa;    {&#xa;        jComboBox1_jaar.setSelectedIndex(index1);&#xa;    }&#xa;    index1++;&#xa;}&#xa;//jComboBox1_jaar.setSelectedIndex(cal.get(Calendar.YEAR));"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = cal.get(Calendar.YEAR); i &lt; cal.get(Calendar.YEAR)+10; i++){&#xa;    jComboBox1_jaar.addItem(i);&#xa;}"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox2_jaar">
@@ -243,7 +243,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="int index2 = 0;&#xa;for(int i = 2016; i &lt; 2026; i++){&#xa;    jComboBox2_jaar.addItem(i);&#xa;    int jaar = cal.get(Calendar.YEAR);&#xa;    if(jaar == i)&#xa;    {&#xa;        jComboBox2_jaar.setSelectedIndex(index2);&#xa;    }&#xa;    index2++;&#xa;}&#xa;//jComboBox2_jaar.setSelectedIndex(cal.get(Calendar.YEAR));"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="for(int i = cal.get(Calendar.YEAR); i &lt; cal.get(Calendar.YEAR)+10; i++){&#xa;    jComboBox2_jaar.addItem(i);&#xa;}"/>
       </AuxValues>
     </Component>
   </SubComponents>

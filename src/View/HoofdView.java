@@ -163,6 +163,11 @@ public class HoofdView extends javax.swing.JFrame {
         jLabel_inschrijven.setText("Inschrijven:");
 
         jButton_inschrijven.setText("Inschrijven");
+        jButton_inschrijven.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_inschrijvenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -318,16 +323,20 @@ public class HoofdView extends javax.swing.JFrame {
                 bedrijf.setVisible(true);
                 break;
             case "Periode":
-                PeriodeView periode = new PeriodeView(this);//Hier komt this!!
+                PeriodeView periode = new PeriodeView(this);
                 periode.setVisible(true);
                 break;
             case "Opleiding":
-                OpleidingView opleiding = new OpleidingView();
+                OpleidingView opleiding = new OpleidingView(this);
                 opleiding.setVisible(true);
                 break;
             case "Contactpersoon":
-                ContactpersoonView Contactpersoon = new ContactpersoonView(this);
-                Contactpersoon.setVisible(true);
+                ContactpersoonView contactpersoon = new ContactpersoonView(this);
+                contactpersoon.setVisible(true);
+                break;
+            case "Onderwijseenheid":
+                OnderwijseenheidView onderwijseenheid = new OnderwijseenheidView();
+                onderwijseenheid.setVisible(true);
                 break;
         }
     }//GEN-LAST:event_jButton_nieuwActionPerformed
@@ -338,36 +347,41 @@ public class HoofdView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Graag eerst een vak selecteren.");
         }else{
             switch (gekozenTabel) {
-                case "Buitenlands":
-                    {
-                        StudentView buitenandse_student = new StudentView(gekozenTabel, this);
-                        buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat, true);
-                        buitenandse_student.setVisible(true);
-                        break;
-                    }
                 case "Binnenlands":
-                    {
-                        StudentView buitenandse_student = new StudentView(this);
-                        buitenandse_student.studentWijzigen(gekozenTabel, jTable_resultaat, true);
+                        StudentView binnenlands_student = new StudentView(this);
+                        binnenlands_student.studentWijzigen(true, jTable_resultaat, true);
+                        binnenlands_student.setVisible(true);
+                        break;
+                case "Buitenlands":
+                        StudentView buitenandse_student = new StudentView(gekozenTabel, this);
+                        buitenandse_student.studentWijzigen(false, jTable_resultaat, true);
                         buitenandse_student.setVisible(true);
                         break;
-                    }
                 case "Bedrijf":
-                    {
                         BedrijfView bedrijf = new BedrijfView(this);
                         bedrijf.bedrijfWijzigen(true, jTable_resultaat);
-                    }
+                        bedrijf.setVisible(true);
+                        break;
                 case "Contactpersoon":
-                    {
                         ContactpersoonView contact = new ContactpersoonView(this);
                         contact.contactWijzigen(true, jTable_resultaat);
                         contact.setVisible(true);
-                    }
+                        break;
+                case "Opleiding":
+                        OpleidingView opleiding = new OpleidingView(this);
+                        opleiding.opleidingWijzigen(true, jTable_resultaat);
+                        opleiding.setVisible(true);
+                        break;
                 case "Periode":
-                    {
-                        PeriodeView periode = new PeriodeView(this);//Hier komt this!!
+                        PeriodeView periode = new PeriodeView(this);
                         periode.periodeWijzigen(true, jTable_resultaat);
-                    }
+                        periode.setVisible(true);
+                        break;
+                case "Onderwijseenheid":
+                        OnderwijseenheidView onderwijseenheid = new OnderwijseenheidView();
+                        //Hier komt wijzigen functie!!!
+                        onderwijseenheid.setVisible(true);
+                        break;
             }
         }
     }//GEN-LAST:event_jButton_wijzigenActionPerformed
@@ -382,25 +396,65 @@ public class HoofdView extends javax.swing.JFrame {
                 if(keuze == 1){
                     System.out.println("Niet verwijderd");
                 }else{
-                    System.out.println("verwijderd");
-                    dm.deleteEntity(gekozenTabel, Integer.parseInt(geselecteerdeVak));
-                    JOptionPane.showMessageDialog(this, "Met succes verwijderd.");
-                    getRefreshJTable();
+                    if(filterSelectie(geselecteerdeVak)){
+                        dm.deleteEntity(gekozenTabel, Integer.parseInt(geselecteerdeVak));
+                        JOptionPane.showMessageDialog(this, "Met succes verwijderd.");
+                    }else{
+                        int id = getTabelId(geselecteerdeVak);
+                        dm.deleteEntity(gekozenTabel, id);
+                        JOptionPane.showMessageDialog(this, "Met succes verwijderd.");
+                        System.out.println("verwijderd");
+                    }
                 }    
             }
         } catch (SQLException | ArrayIndexOutOfBoundsException e) {           
             e.printStackTrace();
+        } finally{
+            getRefreshJTable();
         }
     }//GEN-LAST:event_jButton_verwijderenActionPerformed
 
+    private boolean filterSelectie(String selectie){
+        try {
+            Integer.parseInt(selectie);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private int getTabelId(String row){
+        int id = 0;
+        try {
+            switch(gekozenTabel){
+                case "Bedrijf":
+                    id = dm.getBedrijfID(row);
+                    break;
+                case "Opleiding":
+                    id = dm.getOpleidingID(row);
+                    break;
+                case "Contactpersoon":
+                    id = dm.getContactpersoonID(row);
+                    break;
+            }
+        } catch (SQLException e) {
+            System.out.println("getTabelId: " + e.getMessage());
+        }
+        return id;
+    }
+    
     private void jTable_resultaatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_resultaatMousePressed
         selectie = (JTable) evt.getSource();
         geselecteerdeVak = "" + selectie.getValueAt(selectie.getSelectedRow(), selectie.getSelectedColumn());
         System.out.println("Je hebt geselecteerd: " + geselecteerdeVak);
     }//GEN-LAST:event_jTable_resultaatMousePressed
 
+    private void jButton_inschrijvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inschrijvenActionPerformed
+        //HIER KOMT INSCHRIJVEN!!!!
+    }//GEN-LAST:event_jButton_inschrijvenActionPerformed
+    
     private void genereerTabelNamenInComboBox(){
-        String tabellen [] = {"Binnenlands", "Buitenlands", "Bedrijf", "Periode", "Opleiding", "Onderwijseenheid", "Contactpersoon"}; // Dit is een voorbeeld.
+        String tabellen [] = {"Binnenlands", "Buitenlands", "Bedrijf", "Periode", "Opleiding", "Onderwijseenheid", "Contactpersoon"};
 
         for (String tabellen1 : tabellen) {
             jComboBox_tabel.addItem(tabellen1);
