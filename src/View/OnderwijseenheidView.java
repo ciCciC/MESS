@@ -26,11 +26,12 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
     private String type_ond;
     private DatabaseManager dm = new DatabaseManager();
     private boolean wijzigen;
+    private HoofdView hv;
     
     /**
      * Creates new form OnderwijseenheidView2
      */
-    public OnderwijseenheidView() {
+    public OnderwijseenheidView(HoofdView hv) {
         super("Onderwijseenheid");
         this.ond_id = 0;
         this.periode_id = 0;
@@ -39,6 +40,7 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
         this.studie_soort = "";
         this.type_ond = "";
         this.wijzigen = false;
+        this.hv = hv;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -366,12 +368,17 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
                         dm.insertEntity(onderwijseenheid);
                         JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");
                     }else{
-                        onderwijseenheid = new Onderwijseenheid(ond_id, Integer.parseInt(studiepunten.getText()), studie_soort,
-                                    bedrijf_id, type_ond, land.getText(), stad.getText(), opleiding_id, periode_id);
+                        JTable viewTable = hv.getTable();
+                        onderwijseenheid = new Onderwijseenheid((int) viewTable.getValueAt(viewTable.getSelectedRow(), 0), Integer.parseInt(studiepunten.getText()), 
+                                "" +jComboBox1_soort_studie.getSelectedItem(), dm.getBedrijfID(jComboBox1_bedrijf.getSelectedItem().toString()), 
+                                jComboBox1_type.getSelectedItem().toString(), land.getText(), stad.getText(), 
+                                dm.getOpleidingID(jComboBox1_opleiding.getSelectedItem().toString()), dm.getPeriodeID("" + jComboBox1_periode.getSelectedItem()));
 
                         dm.updateEntity(onderwijseenheid);
+                        
                         JOptionPane.showMessageDialog(null, "Met succes gewijzigd.");
                     }
+                   
                 } catch (SQLException ex) {
                     System.out.println("Onderwijseenheid is niet gewijzigd of toegevoegd in database!");
                     ex.printStackTrace();
@@ -412,41 +419,7 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1_periodeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OnderwijseenheidView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OnderwijseenheidView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OnderwijseenheidView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OnderwijseenheidView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OnderwijseenheidView().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_annuleren;

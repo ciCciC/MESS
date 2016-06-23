@@ -101,7 +101,7 @@ public class Onderwijseenheid implements Entiteit{
     }
     
     public String getDeleteSQL() {
-        return "DELETE FROM Onderwijseenheid WHERFE ond_id = ?";
+        return "DELETE FROM Onderwijseenheid WHERE ond_id = ?";
     }
 
     public PreparedStatement getDeleteStatement(PreparedStatement stmt, Connection con, int keyValue) throws SQLException {
