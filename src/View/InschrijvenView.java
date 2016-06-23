@@ -46,6 +46,7 @@ public class InschrijvenView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel3.setText("Inschrijven gegevens");
 
         jLabel_studentnummer.setText("Studentnummer");

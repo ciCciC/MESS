@@ -7,11 +7,14 @@ package View;
 
 import Controller.DatabaseManager;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -26,6 +29,7 @@ public class HoofdView extends javax.swing.JFrame {
     private String gekozenTabel;
     private String gekozenAttribuut;
     private JTable selectie;
+    private javax.swing.JButton calamiteitKnop;
     
     /**
      * Creates new form HoofdView
@@ -69,6 +73,9 @@ public class HoofdView extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel_inschrijven = new javax.swing.JLabel();
         jButton_inschrijven = new javax.swing.JButton();
+        jLabel_calamiteit = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jButton_calamiteit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1600, 804));
@@ -77,7 +84,6 @@ public class HoofdView extends javax.swing.JFrame {
         /*
         jPanel1.setPreferredSize(new java.awt.Dimension(1096, 804));
         */
-        jPanel1.setSize(new java.awt.Dimension(100, 100));
         //jPanel1.setSize(1096, 804);
 
         jLabel_selecteer_tabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -148,7 +154,7 @@ public class HoofdView extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setAutoscrolls(true);
+        jScrollPane1.setAutoscrolls(false);
         jScrollPane1.setColumnHeaderView(null);
         /*
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1100, 400));
@@ -188,6 +194,17 @@ public class HoofdView extends javax.swing.JFrame {
             }
         });
 
+        jLabel_calamiteit.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel_calamiteit.setText("Calamiteit:");
+
+        jButton_calamiteit.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jButton_calamiteit.setText("Calamiteit");
+        jButton_calamiteit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_calamiteitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -197,26 +214,34 @@ public class HoofdView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_titel)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1415, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(zoekveld, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_zoeken, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_verwijderen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_wijzigen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_nieuw, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox_tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox_attribuut, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_inschrijven, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_selecteer_tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_zoekveld, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_toevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_inschrijven, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_selecteer_attribuut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(zoekveld, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton_zoeken, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton_verwijderen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton_wijzigen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton_nieuw, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBox_tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBox_attribuut, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBox_nieuw, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton_inschrijven, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel_selecteer_tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel_zoekveld, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel_toevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel_inschrijven, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel_selecteer_attribuut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel_calamiteit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton_calamiteit, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -260,7 +285,13 @@ public class HoofdView extends javax.swing.JFrame {
                         .addComponent(jLabel_inschrijven)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_inschrijven)
-                        .addGap(0, 252, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_calamiteit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_calamiteit)
+                        .addGap(0, 170, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -472,6 +503,11 @@ public class HoofdView extends javax.swing.JFrame {
             inschrijven.setVisible(true);
         }      
     }//GEN-LAST:event_jButton_inschrijvenActionPerformed
+
+    private void jButton_calamiteitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_calamiteitActionPerformed
+        CalamiteitView calamiteit = new CalamiteitView(this);
+        calamiteit.setVisible(true);
+    }//GEN-LAST:event_jButton_calamiteitActionPerformed
     
     private void genereerTabelNamenInComboBox(){
         String tabellen [] = {"Binnenlands", "Buitenlands", "Bedrijf", "Periode", "Opleiding", "Onderwijseenheid", "Contactpersoon"};
@@ -497,6 +533,10 @@ public class HoofdView extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         } 
+    }
+    
+    public void setModel(DefaultTableModel model){
+        jTable_resultaat.setModel(model);
     }
     
     /**
@@ -536,6 +576,7 @@ public class HoofdView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_calamiteit;
     private javax.swing.JButton jButton_inschrijven;
     private javax.swing.JButton jButton_nieuw;
     private javax.swing.JButton jButton_verwijderen;
@@ -544,6 +585,7 @@ public class HoofdView extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox_attribuut;
     private javax.swing.JComboBox jComboBox_nieuw;
     private javax.swing.JComboBox jComboBox_tabel;
+    private javax.swing.JLabel jLabel_calamiteit;
     private javax.swing.JLabel jLabel_inschrijven;
     private javax.swing.JLabel jLabel_selecteer_attribuut;
     private javax.swing.JLabel jLabel_selecteer_tabel;
@@ -555,6 +597,7 @@ public class HoofdView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable_resultaat;
     private javax.swing.JTextField zoekveld;
     // End of variables declaration//GEN-END:variables
