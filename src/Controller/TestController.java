@@ -41,7 +41,7 @@ public class TestController {
         
         try {         
             
-            DBM.schrijfIn("15132353", 8);
+            System.out.println(DBM.getPopulairsteUitgaansland());
             //System.out.println(DBM.getPeriodeID(list.get(1)));
             
         } catch(Exception e) {

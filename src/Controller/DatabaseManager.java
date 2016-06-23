@@ -183,8 +183,8 @@ public class DatabaseManager {
         PreparedStatement stmt = con.prepareStatement(SQL);
         stmt.setString(1, dateStr);
         stmt.setString(2, dateStr);
-        stmt.setString(3, landOfStad);
-        stmt.setString(4, landOfStad);
+        stmt.setString(3, "%" + landOfStad + "%");
+        stmt.setString(4, "5" + landOfStad + "%");
         
         ResultSet rs = stmt.executeQuery();      
         stmt.execute();
@@ -216,6 +216,32 @@ public class DatabaseManager {
         
         return herkomstLand;
     }
+    
+    public String getPopulairsteUitgaansland() throws SQLException {
+        String herkomstLand = "";        
+        Connection con = this.getConnection();
+        String SQL = "SELECT OE.land FROM " +
+                        "Schrijft_in SI JOIN Onderwijseenheid OE ON SI.ond_id = OE.ond_id " +
+                        "JOIN Student S on SI.studentnummer = S.studentnummer " +
+                        "HAVING count(OE.land) = (SELECT MAX(landen.aantal) " +
+                        "FROM (SELECT OE.land, count(OE.land) as aantal " +
+                        "FROM Schrijft_in SI JOIN Onderwijseenheid OE ON SI.ond_id = OE.ond_id " +
+                        "JOIN Student S on SI.studentnummer = S.studentnummer) landen)";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        System.out.println(stmt.toString());
+        ResultSet rs = stmt.executeQuery();      
+        
+        while(rs.next()) {
+            herkomstLand = rs.getString("land");
+        }
+        
+        con.close();
+        stmt.close();
+        rs.close();
+        
+        return herkomstLand;
+    }
+    
     
     public ArrayList<String> getOpleidingNamen() throws SQLException{
         ArrayList<String> opleidingNamen = new ArrayList<String>();
