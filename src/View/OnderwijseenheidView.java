@@ -358,8 +358,10 @@ public class OnderwijseenheidView extends javax.swing.JFrame {
                 try {
 
                     if(!wijzigen){
-                        onderwijseenheid = new Onderwijseenheid(ond_id, Integer.parseInt(studiepunten.getText()), studie_soort, 
-                                bedrijf_id, type_ond, land.getText(), stad.getText(), opleiding_id, periode_id);
+                        onderwijseenheid = new Onderwijseenheid(dm.getOnderwijseenheidID(), Integer.parseInt(studiepunten.getText()), 
+                                "" +jComboBox1_soort_studie.getSelectedItem(), dm.getBedrijfID(jComboBox1_bedrijf.getSelectedItem().toString()), 
+                                jComboBox1_type.getSelectedItem().toString(), land.getText(), stad.getText(), 
+                                dm.getOpleidingID(jComboBox1_opleiding.getSelectedItem().toString()), dm.getPeriodeID("" + jComboBox1_periode.getSelectedItem()));
 
                         dm.insertEntity(onderwijseenheid);
                         JOptionPane.showMessageDialog(null, "Met succes toegevoegd.");

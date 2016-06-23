@@ -41,7 +41,7 @@ public class TestController {
         
         try {         
             
-            System.out.println(DBM.getPopulairsteUitgaansland());
+            System.out.println(DBM.getOnderwijseenheidID());
             //System.out.println(DBM.getPeriodeID(list.get(1)));
             
         } catch(Exception e) {

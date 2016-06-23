@@ -81,7 +81,7 @@ public class Onderwijseenheid implements Entiteit{
         } else if(this.bedrijf_id > 0) {
             SQL += "bedrijf_id = ?, ";
         }
-        SQL += "typeonderwijseenheid= ?, land = ?, stad = ?, opleiding = ?, WHERE ond_id = ?";
+        SQL += "typeonderwijseenheid= ?, land = ?, stad = ?, opleiding = ? WHERE ond_id = ?";
         return SQL;
     }              
         

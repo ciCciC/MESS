@@ -104,25 +104,26 @@ public class BuitenlandseStudent extends Student implements Entiteit{
                     + "FROM Buitenlands B join Student S ON B.studentnummer = S.studentnummer "
                     + "left join Opleiding O on B.opleiding_id = O.opleiding_id ";
         } else {
+            System.out.println(columnName);
             columnName = columnName.toLowerCase();
             if(columnName.equals("naam") || columnName.equals("geslacht") || columnName.equals("adres") || 
-                    columnName.equals("vasttel") || columnName.equals("mobieltel")) {
+                    columnName.equals("emailadres") || columnName.equals("vasttel") || columnName.equals("mobieltel")) {
                 SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
                         "S.vasttel, S.mobieltel, B.adres, B.land, B.herkomst_uni, " 
                         + "O.naam as opleiding FROM Buitenlands B join Student S ON B.studentnummer = S.studentnummer "
                         + "left join Opleiding O on B.opleiding_id = O.opleiding_id "
                         + "WHERE S." + columnName + " LIKE ?";
-            } else if(columnName.equals("opleiding")) {
+            } else if(columnName.equals("opleiding")) {                
                 SQL =   "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
                         "S.vasttel, S.mobieltel, B.adres, B.land, B.herkomst_uni, " 
                         + "O.naam as opleiding FROM Buitenlands B join Student S ON B.studentnummer = S.studentnummer "
                         + "left join Opleiding O on B.opleiding_id = O.opleiding_id "
-                        + "WHERE O.opleiding_id = B.opleiding_id ";
+                        + "WHERE O.naam LIKE ? ";
             }
             else 
             {
             SQL = "SELECT S.studentnummer, S.naam, S.geslacht, S.emailadres, " +
-                        "S.vasttel, S.mobieltel, B.adres, B.land, B.herkomst_uni O.naam as opleiding "
+                        "S.vasttel, S.mobieltel, B.adres, B.land, B.herkomst_uni, O.naam as opleiding "
                         + "FROM Buitenlands B join Student S ON B.studentnummer = S.studentnummer "
                         + "left join Opleiding O on B.opleiding_id = O.opleiding_id  " 
                         + "WHERE B." + columnName + " LIKE ?";

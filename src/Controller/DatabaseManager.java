@@ -57,6 +57,7 @@ public class DatabaseManager {
     
     public void updateEntity(Entiteit entiteit) throws SQLException { 
         Connection con = this.getConnection();
+        System.out.println(entiteit.getUpdateSQL());
         PreparedStatement stmt = con.prepareStatement(entiteit.getUpdateSQL());
         stmt = entiteit.getUpdateStatement(stmt, con);
         System.out.println(stmt.toString());
@@ -387,6 +388,23 @@ public class DatabaseManager {
             periodeID = rs.getInt("per_id");
         }        
         return periodeID;
+        
+    }
+    
+    public int getOnderwijseenheidID() throws SQLException{
+        int onderwijseenheidID = 0;
+        Connection con = this.getConnection();
+        
+        String sql = "SELECT max(ond_id) FROM Onderwijseenheid";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        
+        
+        System.out.println(stmt.toString());
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()) {
+            onderwijseenheidID = rs.getInt("max(ond_id)");
+        }        
+        return onderwijseenheidID + 1;
         
     }
     
