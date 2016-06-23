@@ -121,7 +121,7 @@ public class CalamiteitView extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally{
-            hv.getRefreshJTable();
+            this.dispose();
         }
         
     }//GEN-LAST:event_jButton_selecteerActionPerformed
